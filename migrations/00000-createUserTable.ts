@@ -6,9 +6,21 @@ export type Users = {
   lastName: string;
   email: string;
   passwordHash: string;
-  createdAt: Date;
-  updatedAt: Date;
+  isExpert: boolean;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 };
+
+// {
+//   id: number;
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   passwordHash: string;
+//   isExpert: boolean | null;
+//   createdAt: Date | null;
+//   updatedAt: Date | null;
+// }
 
 export async function up(sql: Sql) {
   await sql`
@@ -18,8 +30,9 @@ export async function up(sql: Sql) {
       last_name varchar(20) NOT NULL,
       email varchar(50) NOT NULL,
       password_hash varchar(50) NOT NULL,
-      created_at timestamptz DEFAULT CURRENT_TIMESTAMP,
-      updated_at timestamptz DEFAULT CURRENT_TIMESTAMP
+      is_expert boolean NOT NULL DEFAULT FALSE,
+      created_at timestamptz DEFAULT NOW,
+      updated_at timestamptz DEFAULT NOW
     );
   `;
 }

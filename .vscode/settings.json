@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["tailwindcss", "timestamptz"]
+  "cSpell.words": [
+    "libpg",
+    "safeql",
+    "stylelint",
+    "tailwindcss",
+    "timestamptz",
+    "upleveled"
+  ]
 }
