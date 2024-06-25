@@ -1,6 +1,6 @@
 import { Sql } from 'postgres';
 
-export type Users = {
+export type User = {
   id: number;
   firstName: string;
   lastName: string;
@@ -11,17 +11,6 @@ export type Users = {
   updatedAt: Date | null;
 };
 
-// {
-//   id: number;
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-//   passwordHash: string;
-//   isExpert: boolean | null;
-//   createdAt: Date | null;
-//   updatedAt: Date | null;
-// }
-
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE users (
@@ -31,8 +20,8 @@ export async function up(sql: Sql) {
       email varchar(50) NOT NULL,
       password_hash varchar(50) NOT NULL,
       is_expert boolean NOT NULL DEFAULT FALSE,
-      created_at timestamptz DEFAULT NOW,
-      updated_at timestamptz DEFAULT NOW
+      created_at timestamptz DEFAULT CURRENT_TIMESTAMP,
+      updated_at timestamptz DEFAULT CURRENT_TIMESTAMP
     );
   `;
 }

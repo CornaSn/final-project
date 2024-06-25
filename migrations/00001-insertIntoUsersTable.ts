@@ -1,8 +1,8 @@
 import { Sql } from 'postgres';
+import { User } from './00000-createUserTable';
 
 const users = [
   {
-    id: 1,
     firstName: 'John',
     lastName: 'Doe',
     email: 'john.doe@example.com',
@@ -13,7 +13,6 @@ const users = [
   },
 
   {
-    id: 2,
     firstName: 'Jane',
     lastName: 'Smith',
     email: 'jane.smith@example.com',
@@ -23,7 +22,6 @@ const users = [
     updatedAt: '',
   },
   {
-    id: 3,
     firstName: 'Alice',
     lastName: 'Johnson',
     email: 'alice.j@example.com',
@@ -33,7 +31,6 @@ const users = [
     updatedAt: '',
   },
   {
-    id: 4,
     firstName: 'Bob',
     lastName: 'Brown',
     email: 'bob.brown@example.com',
@@ -43,7 +40,6 @@ const users = [
     updatedAt: '',
   },
   {
-    id: 5,
     firstName: 'Carol',
     lastName: 'Williams',
     email: 'carol.w@example.com',
@@ -53,7 +49,6 @@ const users = [
     updatedAt: '',
   },
   {
-    id: 6,
     firstName: 'David',
     lastName: 'Jones',
     email: 'david.j@example.com',
@@ -63,7 +58,6 @@ const users = [
     updatedAt: '',
   },
   {
-    id: 7,
     firstName: 'Eva',
     lastName: 'Davis',
     email: 'eva.davis@example.com',
