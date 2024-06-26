@@ -1,8 +1,9 @@
 import { Sql } from 'postgres';
 import { Expert } from './00002-createExpertTable';
 
-const experts = [
+const experts: Expert[] = [
   {
+    id: 1,
     age: '30',
     city: 'Vienna',
     bio: 'Here comes the text',
@@ -14,6 +15,7 @@ const experts = [
   },
 
   {
+    id: 2,
     age: '25',
     city: 'New York',
     bio: 'Another Bio text should be here - up to 200 characters',

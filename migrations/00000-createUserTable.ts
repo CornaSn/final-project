@@ -7,8 +7,8 @@ export type User = {
   email: string;
   passwordHash: string;
   isExpert: boolean;
-  createdAt: Date | null;
-  updatedAt: Date | null;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
 };
 
 export async function up(sql: Sql) {
