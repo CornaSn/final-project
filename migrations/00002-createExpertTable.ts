@@ -2,7 +2,7 @@ import { Sql } from 'postgres';
 
 export type Expert = {
   id: number;
-  age: string | null;
+  age: string;
   city: string;
   bio: string;
   pictureUrl: string;
@@ -14,10 +14,10 @@ export async function up(sql: Sql) {
   await sql`
     CREATE TABLE experts (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      age varchar(3),
-      city varchar(20),
-      bio varchar(200),
-      picture_url varchar(100),
+      age varchar(3) NOT NULL,
+      city varchar(20) NOT NULL,
+      bio varchar(200) NOT NULL,
+      picture_url varchar(100) NOT NULL,
       video_url varchar(100),
       travel_blog_url varchar(100)
     )
