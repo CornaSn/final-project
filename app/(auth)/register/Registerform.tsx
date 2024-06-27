@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { RegisterResponseBodyPost } from '../api/register/route';
 
 export default function RegisterForm() {
   const [role, setRole] = useState('Member');
@@ -28,7 +29,7 @@ export default function RegisterForm() {
         'Content-Type': 'application/json',
       },
     });
-    const data = await response.json();
+    const data: RegisterResponseBodyPost = await response.json();
 
     console.log('data', data);
   }

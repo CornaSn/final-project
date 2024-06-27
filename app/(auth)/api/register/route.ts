@@ -7,7 +7,7 @@ import {
 } from '../../../../database/users';
 import { User } from '../../../../migrations/00000-createUsersTable';
 
-type RegisterResponseBodyPost =
+export type RegisterResponseBodyPost =
   | {
       user: User;
     }
@@ -18,6 +18,7 @@ type RegisterResponseBodyPost =
     };
 
 export const userSchema = z.object({
+  role: z.string(),
   firstName: z.string().min(3),
   lastName: z.string().min(3),
   email: z
@@ -87,6 +88,7 @@ export async function POST(
     result.data.firstName,
     result.data.lastName,
     result.data.email,
+    result.data.role,
     passwordHash,
   );
 
@@ -99,7 +101,13 @@ export async function POST(
     );
   }
 
-  console.log('User', newUser);
+  console.log('New User', newUser);
+  // New User {
+  //   firstName: 'test2',
+  //   lastName: 'test2',
+  //   id: 16,
+  //   email: 'test22@gmail.com'
+  // }
 
   return NextResponse.json({ user: newUser });
 }
