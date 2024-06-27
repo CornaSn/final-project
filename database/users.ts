@@ -2,7 +2,7 @@ import { cache } from 'react';
 import { sql } from '../database/connect';
 import {
   User,
-  UserWithPaswordHash,
+  UserWithPasswordHash,
 } from '../migrations/00000-createUsersTable';
 
 // Get whole database information
@@ -19,7 +19,7 @@ export const getUsersInsecure = cache(async (email: string) => {
     FROM
       users
     WHERE
-      email = ${email.toLocaleLowerCase()}
+      email = ${email}
   `;
 
   return user;
@@ -32,7 +32,7 @@ export const createUserInsecure = cache(
         users (email, password_hash)
       VALUES
         (
-          ${email.toLowerCase()},
+          ${email},
           ${passwordHash}
         )
       RETURNING
@@ -44,7 +44,7 @@ export const createUserInsecure = cache(
 );
 
 export const getUserWithPasswordHashInsecure = cache(async (email: string) => {
-  const [user] = await sql<UserWithPaswordHash[]>`
+  const [user] = await sql<UserWithPasswordHash[]>`
     SELECT
       *
     FROM
