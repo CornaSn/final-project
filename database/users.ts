@@ -1,6 +1,9 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
-import { User, UserWithPaswordHash } from '../migrations/00000-createUserTable';
+import {
+  User,
+  UserWithPaswordHash,
+} from '../migrations/00000-createUsersTable';
 
 // Get whole database information
 export const getUsersInsecure = cache(async (email: string) => {

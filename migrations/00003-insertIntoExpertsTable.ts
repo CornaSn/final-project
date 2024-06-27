@@ -1,5 +1,5 @@
 import { Sql } from 'postgres';
-import { Expert } from './00002-createExpertTable';
+import { Expert } from './00002-createExpertsTable';
 
 const experts: Expert[] = [
   {

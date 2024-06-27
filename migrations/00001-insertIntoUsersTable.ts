@@ -1,5 +1,5 @@
 import { Sql } from 'postgres';
-import { User } from './00000-createUserTable';
+import { User } from './00000-createUsersTable';
 
 const users: User[] = [
   {

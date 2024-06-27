@@ -1,6 +1,6 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
-import { Expert } from '../migrations/00002-createExpertTable';
+import { Expert } from '../migrations/00002-createExpertsTable';
 
 // Get whole database information
 export const getExpertsInsecure = cache(async () => {
