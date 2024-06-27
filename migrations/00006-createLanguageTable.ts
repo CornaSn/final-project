@@ -1,6 +1,7 @@
 import { Sql } from 'postgres';
 
 export type Language = {
+  id: number;
   language: string;
 };
 

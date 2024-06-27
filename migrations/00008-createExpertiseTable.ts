@@ -1,6 +1,7 @@
 import { Sql } from 'postgres';
 
 export type Expertise = {
+  id: number;
   expertiseName: string;
 };
 

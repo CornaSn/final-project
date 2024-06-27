@@ -1,6 +1,7 @@
 import { Sql } from 'postgres';
 
 export type Country = {
+  id: number;
   countryName: string;
 };
 
