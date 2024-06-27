@@ -1,5 +1,5 @@
 import { Sql } from 'postgres';
-import { Language } from './00006-createLanguageTable';
+import { Language } from './00006-createLanguagesTable';
 
 const languages: Language[] = [
   { id: 1, language: 'Arabic' },
