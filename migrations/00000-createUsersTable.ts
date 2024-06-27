@@ -11,14 +11,19 @@ export type User = {
   updatedAt?: Date | null;
 };
 
-export const userSchema = z.object({
-  username: z.string().min(3),
-  password: z.string().min(3),
-});
-
 export type UserWithPasswordHash = User & {
   passwordHash: string;
 };
+
+export const userSchema = z.object({
+  firstName: z.string().min(3),
+  lastName: z.string().min(3),
+  email: z
+    .string()
+    .email()
+    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
+  password: z.string().min(6),
+});
 
 export async function up(sql: Sql) {
   await sql`
@@ -27,7 +32,7 @@ export async function up(sql: Sql) {
       first_name varchar(20) NOT NULL,
       last_name varchar(20) NOT NULL,
       email varchar(80) NOT NULL UNIQUE,
-      password_hash varchar(80) NOT NULL,
+      password_hash varchar(150) NOT NULL,
       is_expert boolean NOT NULL DEFAULT FALSE,
       created_at timestamptz DEFAULT CURRENT_TIMESTAMP,
       updated_at timestamptz DEFAULT CURRENT_TIMESTAMP

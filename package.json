@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@upleveled/ley": "^0.8.6",
+    "bcrypt": "^5.1.1",
     "cloudinary": "^2.2.0",
     "dotenv-safe": "^9.1.0",
     "next": "15.0.0-canary.42",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@ts-safeql/eslint-plugin": "^3.3.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/dotenv-safe": "^8.1.6",
     "@types/node": "^20.14.8",
     "@types/react": "^18.3.3",

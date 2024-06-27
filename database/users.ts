@@ -5,33 +5,43 @@ import {
   UserWithPasswordHash,
 } from '../migrations/00000-createUsersTable';
 
-// Get whole database information
-export const getUsersInsecure = cache(async (email: string) => {
+export const getUserInsecure = cache(async (email: string) => {
   const [user] = await sql<User[]>`
     SELECT
-      id,
-      first_name,
-      last_name,
-      email,
-      is_expert,
-      created_at,
-      updated_at
+      users.id,
+      users.first_name,
+      users.last_name,
+      users.email,
+      users.is_expert,
+      users.created_at,
+      users.updated_at
     FROM
       users
     WHERE
       email = ${email}
   `;
-
   return user;
 });
 
 export const createUserInsecure = cache(
-  async (email: string, passwordHash: string) => {
+  async (
+    firstName: string,
+    lastName: string,
+    email: string,
+    passwordHash: string,
+  ) => {
     const [user] = await sql<User[]>`
       INSERT INTO
-        users (email, password_hash)
+        users (
+          first_name,
+          last_name,
+          email,
+          password_hash
+        )
       VALUES
         (
+          ${firstName},
+          ${lastName},
           ${email},
           ${passwordHash}
         )
@@ -43,14 +53,14 @@ export const createUserInsecure = cache(
   },
 );
 
-export const getUserWithPasswordHashInsecure = cache(async (email: string) => {
-  const [user] = await sql<UserWithPasswordHash[]>`
-    SELECT
-      *
-    FROM
-      users
-    WHERE
-      email = ${email.toLowerCase()}
-  `;
-  return user;
-});
+// export const createUserInsecure = cache(async (email: string, passwordHash: string) => {
+//   const [user] = await sql<UserWithPasswordHash[]>`
+//     SELECT
+//       *
+//     FROM
+//       users
+//     WHERE
+//       email = ${email}
+//   `;
+//   return user;
+// });

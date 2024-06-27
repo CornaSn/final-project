@@ -1,12 +1,12 @@
-import { getUsersInsecure } from '../../database/users';
+import { getUserInsecure } from '../../database/users';
 
 export const metadata = {
   title: 'All_users',
   description: 'users',
 };
 
-export default async function Users() {
-  const users = await getUsersInsecure();
+export default async function User() {
+  const users = await getUserInsecure();
 
   console.log(users);
 

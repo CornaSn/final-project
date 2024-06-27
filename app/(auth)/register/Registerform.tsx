@@ -3,11 +3,11 @@
 import { useState } from 'react';
 
 export default function RegisterForm() {
+  const [role, setRole] = useState('Member');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('Member');
 
   const expert = 'expert';
   const member = 'member';
