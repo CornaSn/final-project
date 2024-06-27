@@ -56,10 +56,10 @@ export async function POST(
 
   if (!result.success) {
     return NextResponse.json(
+      { errors: result.error.issues },
       {
-        errors: result.error.issues,
+        status: 400,
       },
-      { status: 400 },
     );
   }
 

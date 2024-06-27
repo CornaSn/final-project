@@ -1,6 +1,8 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import ErrorMessage from '../../../app/ErrorMessage';
 import { RegisterResponseBodyPost } from '../api/register/route';
 
 export default function RegisterForm() {
@@ -9,9 +11,11 @@ export default function RegisterForm() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState<{ message: string }[]>([]);
 
   const expert = 'expert';
   const member = 'member';
+  const router = useRouter();
 
   async function handleRegister(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -30,8 +34,15 @@ export default function RegisterForm() {
       },
     });
     const data: RegisterResponseBodyPost = await response.json();
+    // console.log('data', data);
 
-    console.log('data', data);
+    if ('errors' in data) {
+      setErrors(data.errors);
+      return;
+    }
+
+    // router.push(`/profile/${data.user.firstName}`);
+    router.refresh();
   }
 
   return (
@@ -53,6 +64,7 @@ export default function RegisterForm() {
         First name
         <input
           value={firstName}
+          placeholder="First name"
           onChange={(event) => setFirstName(event.currentTarget.value)}
         />
       </label>
@@ -61,6 +73,7 @@ export default function RegisterForm() {
         Last name
         <input
           value={lastName}
+          placeholder="Last name"
           onChange={(event) => setLastName(event.currentTarget.value)}
         />
       </label>
@@ -69,6 +82,8 @@ export default function RegisterForm() {
         E-mail
         <input
           value={email}
+          type="email"
+          placeholder="your@email.com"
           onChange={(event) => setEmail(event.currentTarget.value)}
         />
       </label>
@@ -77,10 +92,19 @@ export default function RegisterForm() {
         Password
         <input
           value={password}
+          type="password"
+          placeholder="Password"
           onChange={(event) => setPassword(event.currentTarget.value)}
         />
       </label>
       <button>Register</button>
+      {errors.map((error) => (
+        <div className="error" key={`error-${error.message}`}>
+          <div className="text-lg text-red-600">
+            <ErrorMessage>{error.message}</ErrorMessage>
+          </div>
+        </div>
+      ))}
     </form>
   );
 }
