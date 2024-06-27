@@ -5,10 +5,13 @@ export type User = {
   firstName: string;
   lastName: string;
   email: string;
-  passwordHash: string;
   isExpert: boolean;
   createdAt?: Date | null;
   updatedAt?: Date | null;
+};
+
+export type UserWithPaswordHash = User & {
+  passwordHash: string;
 };
 
 export async function up(sql: Sql) {

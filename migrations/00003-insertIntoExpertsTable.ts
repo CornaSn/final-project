@@ -25,6 +25,39 @@ const experts: Expert[] = [
       'https://res.cloudinary.com/dmntpv6mf/video/upload/v1719325112/samples/sea-turtle.mp4',
     travelBlogUrl: '',
   },
+  {
+    id: 3,
+    age: '42',
+    city: 'Salzburg',
+    bio: 'Another Bio text should be here - up to 200 characters',
+    pictureUrl:
+      'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325124/samples/smile.jpg',
+    videoUrl:
+      'https://res.cloudinary.com/dmntpv6mf/video/upload/v1719325112/samples/sea-turtle.mp4',
+    travelBlogUrl: '',
+  },
+  {
+    id: 4,
+    age: '37',
+    city: 'Vienna',
+    bio: 'Another Bio text should be here - up to 200 characters',
+    pictureUrl:
+      'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325124/samples/smile.jpg',
+    videoUrl:
+      'https://res.cloudinary.com/dmntpv6mf/video/upload/v1719325112/samples/sea-turtle.mp4',
+    travelBlogUrl: '',
+  },
+  {
+    id: 5,
+    age: '24',
+    city: 'St. Poelten',
+    bio: 'Another Bio text should be here - up to 200 characters',
+    pictureUrl:
+      'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325124/samples/smile.jpg',
+    videoUrl:
+      'https://res.cloudinary.com/dmntpv6mf/video/upload/v1719325112/samples/sea-turtle.mp4',
+    travelBlogUrl: '',
+  },
 ];
 
 export async function up(sql: Sql) {
