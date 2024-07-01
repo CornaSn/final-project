@@ -1,13 +1,29 @@
 import Image from 'next/image';
 
+// TODO: Add Titel and Description
+export const metadata = {
+  title: { default: 'Home | travel genius', template: '%s | travel genius' },
+  description: 'Travel matching platform',
+};
+
 export default function Home() {
   return (
-    <div className="container mx-auto">
-      <h1 className="text-4xl font-bold">Final Project</h1>
-      <p className="mt-4">
-        This is a sample text with the cupcake theme applied.
-      </p>
-      <button className="btn btn-accent">click me</button>
+    <div className="hero bg-base-200 min-h-screen">
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <img
+          src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
+          className="max-w-sm rounded-lg shadow-2xl"
+        />
+        <div>
+          <h1 className="text-5xl font-bold">Box Office News!</h1>
+          <p className="py-6">
+            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
+            a id nisi.
+          </p>
+          <button className="btn btn-primary">Get Started</button>
+        </div>
+      </div>
     </div>
   );
 }

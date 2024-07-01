@@ -47,64 +47,76 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={async (event) => await handleRegister(event)}>
-      <h1>Registration Form </h1>
-      <label>
-        Please choose:
-        <select
-          id="role"
-          value={role}
-          onChange={(event) => setRole(event.currentTarget.value)}
-        >
-          <option value={member}>I am looking for an expert</option>
-          <option value={expert}>I am an expert</option>
-        </select>
-      </label>
-
-      <label>
-        First name
-        <input
-          value={firstName}
-          placeholder="First name"
-          onChange={(event) => setFirstName(event.currentTarget.value)}
-        />
-      </label>
-
-      <label>
-        Last name
-        <input
-          value={lastName}
-          placeholder="Last name"
-          onChange={(event) => setLastName(event.currentTarget.value)}
-        />
-      </label>
-
-      <label>
-        E-mail
-        <input
-          value={email}
-          type="email"
-          placeholder="your@email.com"
-          onChange={(event) => setEmail(event.currentTarget.value)}
-        />
-      </label>
-
-      <label>
-        Password
-        <input
-          value={password}
-          type="password"
-          placeholder="Password"
-          onChange={(event) => setPassword(event.currentTarget.value)}
-        />
-      </label>
-      <button>Register</button>
-      {errors.map((error) => (
-        <div className="error" key={`error-${error.message}`}>
-          <div className="text-lg text-red-600">
-            <ErrorMessage>{error.message}</ErrorMessage>
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="w-full max-w-md p-6 bg-white rounded shadow-md space-y-4">
+          <h1 className="text-2xl font-bold text-center mb-6">Registration</h1>
+          <label htmlFor="shotFirst" className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-gray-700">
+              Please choose:
+            </span>
+            <select
+              id="shotFirst"
+              className="select select-bordered grow"
+              value={role}
+              onChange={(event) => setRole(event.currentTarget.value)}
+            >
+              <option disabled selected>
+                Select
+              </option>
+              <option value={expert}>I am NOT an expert</option>
+              <option value={member}>I am an expert</option>
+            </select>
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-gray-700">Email:</span>
+            <input
+              className="input input-bordered grow"
+              placeholder="Email"
+              onChange={(event) => setEmail(event.currentTarget.value)}
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-gray-700">
+              First name:
+            </span>
+            <input
+              className="input input-bordered grow"
+              placeholder="First name"
+              onChange={(event) => setFirstName(event.currentTarget.value)}
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-gray-700">
+              Last name:
+            </span>
+            <input
+              className="input input-bordered grow"
+              placeholder="Last name"
+              onChange={(event) => setLastName(event.currentTarget.value)}
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-gray-700">Password:</span>
+            <input
+              className="input input-bordered grow"
+              placeholder="Password"
+              type="password"
+              onChange={(event) => setPassword(event.currentTarget.value)}
+            />
+          </label>
+          <div className="flex flex-col gap-1">
+            {' '}
+            <button className="btn">Register</button>
+            {errors.map((error) => (
+              <div className="error" key={`error-${error.message}`}>
+                <div className="text-lg text-red-600">
+                  <ErrorMessage>{error.message}</ErrorMessage>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
+      </div>
     </form>
   );
 }
