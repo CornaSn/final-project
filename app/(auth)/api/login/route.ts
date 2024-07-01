@@ -30,7 +30,7 @@ export async function POST(
 
   // 2. Validate the user data with zod Schema
   const result = userSchema.safeParse(body);
-  console.log('result', result);
+  // console.log('result', result);
 
   if (!result.success) {
     return NextResponse.json(
