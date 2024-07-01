@@ -1,4 +1,5 @@
 import './globals.css';
+import Link from 'next/link';
 
 // TODO: Add Titel and Description
 export const metadata = {
@@ -34,7 +35,7 @@ export default function RootLayout({ children }) {
                     />
                   </svg>
                 </div>
-                <ul
+                {/* <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
                 >
@@ -55,15 +56,15 @@ export default function RootLayout({ children }) {
                   <li>
                     <a>Item 3</a>
                   </li>
-                </ul>
+                </ul> */}
               </div>
-              <a className="btn btn-ghost text-xl">
+              <Link className="btn btn-ghost text-xl" href="/">
                 travel
                 <br /> genius
-              </a>
+              </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal px-1">
+              {/* <ul className="menu menu-horizontal px-1">
                 <li>
                   <a>Item 1</a>
                 </li>
@@ -83,11 +84,15 @@ export default function RootLayout({ children }) {
                 <li>
                   <a>Item 3</a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
             <div className="navbar-end">
-              <a className="btn mr-2">Login</a>
-              <a className="btn">Register</a>
+              <Link href="/login" className="btn mr-2">
+                Login
+              </Link>
+              <Link href="/register" className="btn">
+                Register
+              </Link>
             </div>
           </div>
         </header>

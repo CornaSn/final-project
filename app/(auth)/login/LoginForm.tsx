@@ -35,7 +35,7 @@ export default function LoginForm() {
       return;
     }
 
-    // router.push(`/profile/${data.user.firstName}`);
+    router.push(`/`);
     router.refresh();
   }
 
