@@ -33,26 +33,27 @@ export async function POST(
 ): Promise<NextResponse<RegisterResponseBodyPost>> {
   // 1. Get the user data from the request
   const body = await request.json();
-  console.log('body', body);
+  // console.log('body', body);
   // body {
-  //   role: 'Member',
-  //   firstName: 'Cornelia',
-  //   lastName: 'Snap',
-  //   email: 'test@gmail.com',
-  //   password: 'abcdef'
+  // role: 'Member',
+  // firstName: 'corn',
+  // lastName: 'corn',
+  // email: 'corn@gmail.com',
+  // password: 'corn12345'
   // }
 
   // 2. Validate the user data with zod Schema
   const result = userSchema.safeParse(body);
-  console.log('result', result);
+  // console.log('result', result);
   // result {
   //   success: true,
   //   data: {
-  //     firstName: 'Cornelia',
-  //     lastName: 'Snap',
-  //     email: 'test@gmail.com',
-  //     password: 'abcdef'
+  //     firstName: 'corn',
+  //     lastName: 'corn',
+  //     email: 'corn@gmail.com',
+  //     password: 'corn12345'
   //   }
+  // }
 
   if (!result.success) {
     return NextResponse.json(
@@ -73,7 +74,7 @@ export async function POST(
       { status: 400 },
     );
   }
-  console.log('user', user);
+  // console.log('user', user);
   // user undefined if it doesn't exists yet
 
   // Confirm password
@@ -81,7 +82,7 @@ export async function POST(
   // 4. Hash the plain password from the user
   const passwordHash = await bcrypt.hash(result.data.password, 12);
   // At this stage we don't want to know anymore the users password, only the hashpassword will be saved in the database
-  console.log('Information', result.data.password, passwordHash);
+  // console.log('Information', result.data.password, passwordHash);
 
   // 5. Save the user information with the hashed password in the database
   const newUser = await createUserInsecure(
@@ -101,7 +102,7 @@ export async function POST(
     );
   }
 
-  console.log('New User', newUser);
+  // console.log('New User', newUser);
   // New User {
   //   firstName: 'test2',
   //   lastName: 'test2',

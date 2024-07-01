@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import ErrorMessage from '../../../app/ErrorMessage';
+import ErrorMessage from '../../ErrorMessage';
 import { RegisterResponseBodyPost } from '../api/register/route';
 
 export default function RegisterForm() {
@@ -34,7 +34,7 @@ export default function RegisterForm() {
       },
     });
     const data: RegisterResponseBodyPost = await response.json();
-    // console.log('data', data);
+    console.log('RegisterResponseData', data);
 
     if ('errors' in data) {
       setErrors(data.errors);

@@ -1,6 +1,9 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
-import { User } from '../migrations/00000-createUsersTable';
+import {
+  User,
+  UserWithPasswordHash,
+} from '../migrations/00000-createUsersTable';
 
 export const getUserInsecure = cache(async (email: string) => {
   const [user] = await sql<User[]>`
@@ -59,14 +62,14 @@ export const createUserInsecure = cache(
   },
 );
 
-// export const createUserInsecure = cache(async (email: string, passwordHash: string) => {
-//   const [user] = await sql<UserWithPasswordHash[]>`
-//     SELECT
-//       *
-//     FROM
-//       users
-//     WHERE
-//       email = ${email}
-//   `;
-//   return user;
-// });
+export const getUserWithPasswordHashInsecure = cache(async (email: string) => {
+  const [user] = await sql<UserWithPasswordHash[]>`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      email = ${email}
+  `;
+  return user;
+});
