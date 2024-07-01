@@ -1,3 +1,4 @@
+import { FORMERR } from 'dns';
 import { cache } from 'react';
 import { sql } from '../database/connect';
 import {
@@ -18,7 +19,7 @@ export const getUserInsecure = cache(async (email: string) => {
     FROM
       users
     WHERE
-      email = ${email}
+      email = ${email.toLowerCase()}
   `;
   return user;
 });
@@ -69,7 +70,7 @@ export const getUserWithPasswordHashInsecure = cache(async (email: string) => {
     FROM
       users
     WHERE
-      email = ${email}
+      email = ${email.toLowerCase()}
   `;
   return user;
 });

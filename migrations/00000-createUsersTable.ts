@@ -25,6 +25,8 @@ export const userSchema = z.object({
   password: z.string().min(6),
 });
 
+
+
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE users (

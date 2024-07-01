@@ -5,7 +5,10 @@ import {
   createUserInsecure,
   getUserInsecure,
 } from '../../../../database/users';
-import { User } from '../../../../migrations/00000-createUsersTable';
+import {
+  User,
+  userSchema,
+} from '../../../../migrations/00000-createUsersTable';
 
 export type RegisterResponseBodyPost =
   | {
@@ -16,17 +19,6 @@ export type RegisterResponseBodyPost =
         message: string;
       }[];
     };
-
-export const userSchema = z.object({
-  role: z.string(),
-  firstName: z.string().min(3),
-  lastName: z.string().min(3),
-  email: z
-    .string()
-    .email()
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
-  password: z.string().min(6),
-});
 
 export async function POST(
   request: NextRequest,

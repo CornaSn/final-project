@@ -35,7 +35,7 @@ export default function LoginForm() {
       return;
     }
 
-    router.push(`/`);
+    router.push(`/profile/${data.user.email}`);
     router.refresh();
   }
 

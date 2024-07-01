@@ -41,7 +41,7 @@ export default function RegisterForm() {
       return;
     }
 
-    // router.push(`/profile/${data.user.firstName}`);
+    router.push(`/profile/${data.user.email}`);
     router.refresh();
   }
 
