@@ -1,5 +1,5 @@
 import { Sql } from 'postgres';
-import { z } from 'zod';
+import { string, z } from 'zod';
 
 export type User = {
   id: number;
@@ -15,17 +15,21 @@ export type UserWithPasswordHash = User & {
   passwordHash: string;
 };
 
-export const userSchema = z.object({
-  firstName: z.string().min(3),
-  lastName: z.string().min(3),
-  email: z
-    .string()
-    .email()
-    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
-  password: z.string().min(6),
-});
-
-
+export const userSchema = z
+  .object({
+    firstName: z.string().min(3),
+    lastName: z.string().min(3),
+    email: z
+      .string()
+      .email()
+      .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
+    password: z.string().min(6),
+    confirmPassword: z.string().min(6),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'], // path of error
+  });
 
 export async function up(sql: Sql) {
   await sql`

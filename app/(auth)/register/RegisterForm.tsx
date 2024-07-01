@@ -11,6 +11,7 @@ export default function RegisterForm() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState<{ message: string }[]>([]);
 
   const expert = 'expert';
@@ -28,6 +29,7 @@ export default function RegisterForm() {
         lastName,
         email,
         password,
+        confirmPassword,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -102,6 +104,19 @@ export default function RegisterForm() {
               placeholder="Password"
               type="password"
               onChange={(event) => setPassword(event.currentTarget.value)}
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-gray-700">
+              Retype your password:
+            </span>
+            <input
+              className="input input-bordered grow"
+              placeholder="Retype your password"
+              type="password"
+              onChange={(event) =>
+                setConfirmPassword(event.currentTarget.value)
+              }
             />
           </label>
           <div className="flex flex-col gap-1">

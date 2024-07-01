@@ -1,8 +1,12 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { createSessionInsecure } from '../../../../database/sessions';
 import {
   createUserInsecure,
   getUserInsecure,
+  getUserWithPasswordHashInsecure,
 } from '../../../../database/users';
 import {
   User,
@@ -92,7 +96,6 @@ export async function POST(
       },
     );
   }
-
   // console.log('New User', newUser);
   // New User {
   //   firstName: 'test2',
@@ -100,6 +103,33 @@ export async function POST(
   //   id: 16,
   //   email: 'test22@gmail.com'
   // }
+
+  // 6. Create a token
+  const token = crypto.randomBytes(100).toString('base64');
+  // console.log('token', token);
+
+  // 7. Create Session record
+  const session = await createSessionInsecure(token, newUser.id);
+  if (!session) {
+    return NextResponse.json(
+      { errors: [{ message: 'Session creation failed' }] },
+      {
+        status: 401,
+      },
+    );
+  }
+  console.log('session', session);
+
+  //  8. Send new cookie to the header
+  cookies().set({
+    name: 'sessionToken',
+    value: session.token,
+    httpOnly: true,
+    path: '/',
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 60 * 60 * 24,
+    sameSite: 'lax',
+  });
 
   return NextResponse.json({ user: newUser });
 }
