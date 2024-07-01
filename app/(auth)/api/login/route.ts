@@ -8,6 +8,7 @@ import {
   User,
   userSchema,
 } from '../../../../migrations/00000-createUsersTable';
+import { secureCookieOptions } from '../../../../util/cookies';
 
 export type LoginResponseBodyPost =
   | {
@@ -93,11 +94,7 @@ export async function POST(
   cookies().set({
     name: 'sessionToken',
     value: session.token,
-    httpOnly: true,
-    path: '/',
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 60 * 60 * 24,
-    sameSite: 'lax',
+    ...secureCookieOptions,
   });
 
   return NextResponse.json({

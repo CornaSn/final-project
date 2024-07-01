@@ -12,6 +12,7 @@ import {
   User,
   userSchema,
 } from '../../../../migrations/00000-createUsersTable';
+import { secureCookieOptions } from '../../../../util/cookies';
 
 export type RegisterResponseBodyPost =
   | {
@@ -118,17 +119,13 @@ export async function POST(
       },
     );
   }
-  console.log('session', session);
+  // console.log('session', session);
 
   //  8. Send new cookie to the header
   cookies().set({
     name: 'sessionToken',
     value: session.token,
-    httpOnly: true,
-    path: '/',
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: 60 * 60 * 24,
-    sameSite: 'lax',
+    ...secureCookieOptions,
   });
 
   return NextResponse.json({ user: newUser });

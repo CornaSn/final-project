@@ -8,6 +8,7 @@ import { LoginResponseBodyPost } from '../api/login/route';
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState<{ message: string }[]>([]);
 
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function LoginForm() {
       body: JSON.stringify({
         email,
         password,
+        confirmPassword,
         firstName: 'not necessary',
         lastName: 'not necessary',
       }),
@@ -61,6 +63,19 @@ export default function LoginForm() {
               placeholder="Password"
               type="password"
               onChange={(event) => setPassword(event.currentTarget.value)}
+            />
+          </label>
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-gray-700">
+              Retyype your password:
+            </span>
+            <input
+              className="input input-bordered grow"
+              placeholder="Retype your password"
+              type="password"
+              onChange={(event) =>
+                setConfirmPassword(event.currentTarget.value)
+              }
             />
           </label>
           <div className="flex flex-col gap-1">
