@@ -12,7 +12,7 @@ import { secureCookieOptions } from '../../../../util/cookies';
 
 export type LoginResponseBodyPost =
   | {
-      user: Pick<User, 'email'>;
+      user: Pick<User, 'id'>;
     }
   | {
       errors: {
@@ -99,7 +99,7 @@ export async function POST(
 
   return NextResponse.json({
     user: {
-      email: userWithPasswordHash.email,
+      email: userWithPasswordHash.id,
     },
   });
 }

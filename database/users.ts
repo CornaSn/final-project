@@ -32,7 +32,7 @@ export const createUserInsecure = cache(
     passwordHash: string,
   ) => {
     // Convert isExpert from text to boolean
-    const isExpert = role !== 'Member';
+    const isExpert = role !== 'member';
 
     const [user] = await sql<User[]>`
       INSERT INTO
@@ -58,6 +58,23 @@ export const createUserInsecure = cache(
         users.email,
         users.is_expert
     `;
+    if (!user) {
+      throw new Error('User creation failed');
+    }
+
+    if (isExpert) {
+      await sql`
+        INSERT INTO
+          experts (user_id)
+        VALUES
+          (
+            ${user.id}
+          )
+        RETURNING
+          id
+      `;
+    }
+
     return user;
   },
 );

@@ -1,5 +1,5 @@
 import { Sql } from 'postgres';
-import { string, z } from 'zod';
+import { z } from 'zod';
 
 export type User = {
   id: number;

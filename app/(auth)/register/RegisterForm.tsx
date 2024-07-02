@@ -6,7 +6,7 @@ import ErrorMessage from '../../ErrorMessage';
 import { RegisterResponseBodyPost } from '../api/register/route';
 
 export default function RegisterForm() {
-  const [role, setRole] = useState('Member');
+  const [role, setRole] = useState('member');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -43,7 +43,7 @@ export default function RegisterForm() {
       return;
     }
 
-    router.push(`/profile/${data.user.email}`);
+    router.push(`/profile/${data.user.id}`);
     router.refresh();
   }
 
@@ -62,9 +62,7 @@ export default function RegisterForm() {
               value={role}
               onChange={(event) => setRole(event.currentTarget.value)}
             >
-              <option disabled selected>
-                Select
-              </option>
+              <option>Select</option>
               <option value={expert}>I am NOT an expert</option>
               <option value={member}>I am an expert</option>
             </select>

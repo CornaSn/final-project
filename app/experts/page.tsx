@@ -1,15 +1,21 @@
 import Image from 'next/image';
-import { getExpertsInsecure } from '../../database/experts';
+import {
+  getAllExpertsWithUserInfoInsecure,
+  getExpertsInsecure,
+} from '../../database/experts';
 
 export const metadata = {
   title: 'All_experts',
   description: 'experts',
 };
 
-export default async function Users() {
-  const experts = await getExpertsInsecure();
+// export default async function Users() {
+//   const experts = await getExpertsInsecure();
+//   console.log('Experts:', experts);
 
-  console.log('Experts:', experts);
+export default async function Experts() {
+  const experts = await getAllExpertsWithUserInfoInsecure();
+  console.log('experts with user info', experts);
 
   return (
     <div className="card m-4 w-100 shadow">

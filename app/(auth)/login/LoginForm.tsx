@@ -2,13 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { getSafeReturnToPath } from '../../../util/validation';
 import ErrorMessage from '../../ErrorMessage';
 import { LoginResponseBodyPost } from '../api/login/route';
 
-type Props = { returnTo?: string | string[] };
-
-export default function LoginForm(props: Props) {
+export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -40,10 +37,7 @@ export default function LoginForm(props: Props) {
       return;
     }
 
-    router.push(
-      getSafeReturnToPath(props.returnTo) || `/profile/${data.user.email}`,
-    );
-
+    router.push(`/profile/${data.user.id}`);
     router.refresh();
   }
 

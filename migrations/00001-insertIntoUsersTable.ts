@@ -25,7 +25,7 @@ const users: User[] = [
     lastName: 'Johnson',
     email: 'alice.j@example.com',
     passwordHash: '2c1743a391305fbf367df8e4f069f9f9',
-    isExpert: false,
+    isExpert: true,
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const users: User[] = [
     lastName: 'Williams',
     email: 'carol.w@example.com',
     passwordHash: 'd41d8cd98f00b204e9800998ecf8427e',
-    isExpert: false,
+    isExpert: true,
   },
   {
     id: 6,
@@ -49,7 +49,7 @@ const users: User[] = [
     lastName: 'Jones',
     email: 'david.j@example.com',
     passwordHash: 'a87ff679a2f3e71d9181a67b7542122c',
-    isExpert: false,
+    isExpert: true,
   },
   {
     id: 7,
@@ -69,14 +69,16 @@ export async function up(sql: Sql) {
           first_name,
           last_name,
           email,
-          password_hash
+          password_hash,
+          is_expert
         )
       VALUES
         (
           ${user.firstName},
           ${user.lastName},
           ${user.email},
-          ${user.passwordHash}
+          ${user.passwordHash},
+          ${user.isExpert}
         )
     `;
   }
