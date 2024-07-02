@@ -2,16 +2,47 @@
 
 import { useState } from 'react';
 
-export default function CreateExpertProfileForm() {
+type Props = {
+  userId: number;
+};
+
+export default function CreateExpertProfileForm(props: Props) {
   const [age, setAge] = useState('');
   const [city, setCity] = useState('');
   const [bio, setBio] = useState('');
   const [pictureUrl, setPictureUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
-  const [ptravelBlogUrl, setTravelBlogUrl] = useState('');
+  const [travelBlogUrl, setTravelBlogUrl] = useState('');
+
+  async function handleProfileCreation(
+    event: React.FormEvent<HTMLFormElement>,
+  ) {
+    event.preventDefault();
+    try {
+      const response = await fetch('/api/expertProfile', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: props.userId,
+          age,
+          city,
+          bio,
+          pictureUrl,
+          videoUrl,
+          travelBlogUrl,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      console.log('data', data);
+    } catch (error) {
+      console.error('An error occurred during profile creation:', error);
+    }
+  }
 
   return (
-    <form>
+    <form onSubmit={handleProfileCreation}>
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="w-full max-w-md p-6 bg-white rounded shadow-md space-y-4">
           <h1 className="text-2xl font-bold text-center mb-6">Registration</h1>
@@ -35,28 +66,14 @@ export default function CreateExpertProfileForm() {
             <span className="text-sm font-medium text-gray-700">
               Short Bio:
             </span>
-            <input
-              className="input input-bordered grow"
-              placeholder="Last name"
+            <textarea
+              className="input input-bordered grow h-40 resize-y"
+              placeholder="Bio"
+              maxLength={200}
               onChange={(event) => setBio(event.currentTarget.value)}
             />
           </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-gray-700">Picture:</span>
-            <input
-              className="input input-bordered grow"
-              placeholder="Upload a picture"
-              onChange={(event) => setPictureUrl(event.currentTarget.value)}
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-gray-700">Video: </span>
-            <input
-              className="input input-bordered grow"
-              placeholder="Upload a video"
-              onChange={(event) => setVideoUrl(event.currentTarget.value)}
-            />
-          </label>
+
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium text-gray-700">
               Travel Blog:{' '}
@@ -67,6 +84,27 @@ export default function CreateExpertProfileForm() {
               onChange={(event) => setTravelBlogUrl(event.currentTarget.value)}
             />
           </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-gray-700">Picture:</span>
+            <input
+              type="file"
+              className="file-input file-input-bordered w-full max-w-xs"
+              placeholder="Upload a picture"
+              onChange={(event) => setPictureUrl(event.currentTarget.value)}
+            />
+          </label>
+
+          <label className="flex flex-col gap-1">
+            <span className="text-sm font-medium text-gray-700">Video: </span>
+            <input
+              type="file"
+              className="file-input file-input-bordered w-full max-w-xs"
+              placeholder="Upload a video"
+              onChange={(event) => setVideoUrl(event.currentTarget.value)}
+            />
+          </label>
+
           <div className="flex flex-col gap-1">
             {' '}
             <button className="btn">Upload</button>
