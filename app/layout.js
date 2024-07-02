@@ -1,5 +1,6 @@
 import './globals.css';
 import Link from 'next/link';
+import LogoutButton from './(auth)/logout/LogoutButton';
 
 // TODO: Add Titel and Description
 export const metadata = {
@@ -80,6 +81,7 @@ export default function RootLayout({ children }) {
               </ul>
             </div>
             <div className="navbar-end">
+              <LogoutButton />
               <Link href="/login" className="btn mr-2">
                 Login
               </Link>
