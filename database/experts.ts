@@ -133,19 +133,19 @@ export const createExpert = cache(
     newExpert: Omit<Expert, 'id'>,
   ) => {
     try {
-      // // Check if an entry with the same user_id already exists
-      // const existingExpert = await sql<Expert[]>`
-      //   SELECT
-      //     *
-      //   FROM
-      //     experts
-      //   WHERE
-      //     user_id = ${userId}
-      // `;
+      // Check if an entry with the same user_id already exists
+      const existingExpert = await sql<Expert[]>`
+        SELECT
+          *
+        FROM
+          experts
+        WHERE
+          user_id = ${userId}
+      `;
 
-      // if (existingExpert.length > 0) {
-      //   throw new Error('An entry with this user_id already exists');
-      // }
+      if (existingExpert.length > 0) {
+        throw new Error('An entry with this user_id already exists');
+      }
 
       // Proceed with inserting the new expert profile
       const [expert] = await sql<Expert[]>`
@@ -180,7 +180,7 @@ export const createExpert = cache(
 
       return expert;
     } catch (error) {
-      console.error('Error creating expert:', 'expertProfil already exist');
+      console.error('Error creating expert:', 'expert profile already exist');
       throw error; // Rethrow the error for further handling
     }
   },

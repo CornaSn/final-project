@@ -5,6 +5,24 @@ import {
   UserWithPasswordHash,
 } from '../migrations/00000-createUsersTable';
 
+export const getUser = cache(async (sessionToken: string) => {
+  const [user] = await sql<
+    { firstName: string; lastName: string; isExpert: boolean }[]
+  >`
+    SELECT
+      users.first_name,
+      users.last_name,
+      users.is_expert
+    FROM
+      users
+      INNER JOIN sessions ON (
+        sessions.token = ${sessionToken}
+        AND expiry_timestamp > now()
+      )
+  `;
+  return user;
+});
+
 export const getUserInsecure = cache(async (email: string) => {
   const [user] = await sql<User[]>`
     SELECT
