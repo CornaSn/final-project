@@ -53,3 +53,18 @@ export const getValidSession = cache(async (sessionToken: string) => {
   `;
   return session;
 });
+
+export const getValidSessionById = cache(async (sessionToken: string) => {
+  const [session] = await sql<Pick<Sessions, 'id' | 'token' | 'userId'>[]>`
+    SELECT
+      sessions.id,
+      sessions.token,
+      sessions.user_id
+    FROM
+      sessions
+    WHERE
+      sessions.token = ${sessionToken}
+      AND expiry_timestamp > now()
+  `;
+  return session;
+});

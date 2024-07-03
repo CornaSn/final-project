@@ -1,4 +1,14 @@
 import { Sql } from 'postgres';
+import { z } from 'zod';
+
+export const expertSchema = z.object({
+  age: z.string().optional(),
+  city: z.string().optional(),
+  bio: z.string().optional(),
+  pictureUrl: z.string().optional(),
+  videoUrl: z.string().optional(),
+  travelBlogUrl: z.string().optional(),
+});
 
 export type Expert = {
   id: number | null;
