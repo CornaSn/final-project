@@ -5,24 +5,6 @@ import {
   UserWithPasswordHash,
 } from '../migrations/00000-createUsersTable';
 
-export const getUser = cache(async (sessionToken: string) => {
-  const [user] = await sql<
-    { firstName: string; lastName: string; isExpert: boolean }[]
-  >`
-    SELECT
-      users.first_name,
-      users.last_name,
-      users.is_expert
-    FROM
-      users
-      INNER JOIN sessions ON (
-        sessions.token = ${sessionToken}
-        AND expiry_timestamp > now()
-      )
-  `;
-  return user;
-});
-
 export const getUserInsecure = cache(async (email: string) => {
   const [user] = await sql<User[]>`
     SELECT
@@ -143,6 +125,18 @@ export const getUserWithPasswordHashInsecure = cache(async (email: string) => {
       users
     WHERE
       email = ${email.toLowerCase()}
+  `;
+  return user;
+});
+
+export const getUserByIdInsecure = cache(async (userId: number) => {
+  const [user] = await sql<User[]>`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      id = ${userId}
   `;
   return user;
 });

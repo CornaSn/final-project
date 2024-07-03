@@ -24,6 +24,7 @@ export default function LoginForm() {
         confirmPassword,
         firstName: 'not necessary',
         lastName: 'not necessary',
+        role: '',
       }),
       headers: {
         'Content-Type': 'application/json',
