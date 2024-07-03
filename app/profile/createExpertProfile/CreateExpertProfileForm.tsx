@@ -1,10 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Select from 'react-select';
 
 type Props = {
   userId: number | undefined;
 };
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+];
 
 export default function CreateExpertProfileForm(props: Props) {
   const [age, setAge] = useState('');
@@ -13,6 +20,11 @@ export default function CreateExpertProfileForm(props: Props) {
   const [pictureUrl, setPictureUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
+  const maxOptions = 6;
+
+  const [selectedSpecializations, setSelectedSpecializations] = useState<
+    { value: string; label: string }[]
+  >([]);
 
   async function handleProfileCreation(
     event: React.FormEvent<HTMLFormElement>,
@@ -29,6 +41,9 @@ export default function CreateExpertProfileForm(props: Props) {
           pictureUrl,
           videoUrl,
           travelBlogUrl,
+          selectedSpecializations: selectedSpecializations.map(
+            (option) => option.value,
+          ),
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -40,6 +55,12 @@ export default function CreateExpertProfileForm(props: Props) {
       console.error('An error occurred during profile creation:', error);
     }
   }
+
+  const handleTypeSelect = (
+    selectedOptions: { value: string; label: string }[],
+  ) => {
+    setSelectedSpecializations(selectedOptions);
+  };
 
   return (
     <form onSubmit={handleProfileCreation}>
@@ -107,6 +128,16 @@ export default function CreateExpertProfileForm(props: Props) {
             />
           </label>
 
+          <span className="text-sm font-medium text-gray-700">
+            Favorite Flavor:
+          </span>
+          <Select
+            onChange={handleTypeSelect}
+            isMulti
+            options={
+              selectedSpecializations.length === maxOptions ? [] : options
+            }
+          />
           <div className="flex flex-col gap-1">
             {' '}
             <button className="btn">Upload</button>
