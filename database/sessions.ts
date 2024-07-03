@@ -59,7 +59,7 @@ export const getValidSessionById = cache(async (sessionToken: string) => {
     SELECT
       sessions.id,
       sessions.token,
-      sessions.user_id
+      sessions.user_id AS "userId"
     FROM
       sessions
     WHERE

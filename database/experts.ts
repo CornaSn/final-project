@@ -125,41 +125,67 @@ export const getExpertWithUserById = cache(
         AND users.is_expert = TRUE
         AND users.id = ${userId}
     `;
-    console.log('Query result ExpertbyId:', expert);
+    // console.log('Query result ExpertbyId:', expert);
     return expert;
   },
 );
 
 export const createExpert = cache(
-  async (sessionToken: string, newExpert: Omit<Expert, 'id'>) => {
-    const [expert] = await sql<Expert[]>`
-      INSERT INTO
-        experts (
-          age,
-          city,
-          picture_url,
-          video_url,
-          travel_blog_url,
-          user_id
-        )
-      SELECT
-        ${newExpert.age},
-        ${newExpert.city},
-        ${newExpert.pictureUrl},
-        ${newExpert.videoUrl},
-        ${newExpert.travelBlogUrl},
-        sessions.user_id
-      FROM
-        sessions
-      WHERE
-        token = ${sessionToken}
-        AND sessions.expiry_timestamp > now()
-      RETURNING
-        experts.*
-    `;
+  async (
+    sessionToken: string,
+    userId: number,
+    newExpert: Omit<Expert, 'id'>,
+  ) => {
+    try {
+      // Check if an entry with the same user_id already exists
+      const existingExpert = await sql<Expert[]>`
+        SELECT
+          *
+        FROM
+          experts
+        WHERE
+          user_id = ${userId}
+      `;
 
-    console.log('createExpert', createExpert);
+      if (existingExpert.length > 0) {
+        throw new Error('An entry with this user_id already exists');
+      }
 
-    return expert;
+      // Proceed with inserting the new expert profile
+      const [expert] = await sql<Expert[]>`
+        INSERT INTO
+          experts (
+            age,
+            city,
+            bio,
+            picture_url,
+            video_url,
+            travel_blog_url,
+            user_id
+          )
+        SELECT
+          ${newExpert.age},
+          ${newExpert.city},
+          ${newExpert.bio},
+          ${newExpert.pictureUrl},
+          ${newExpert.videoUrl},
+          ${newExpert.travelBlogUrl},
+          ${userId}
+        FROM
+          sessions
+        WHERE
+          token = ${sessionToken}
+          AND sessions.expiry_timestamp > now()
+        RETURNING
+          experts.*
+      `;
+
+      console.log('New Expert Created:', expert);
+
+      return expert;
+    } catch (error) {
+      console.error('Error creating expert:', 'expertProfil already exist');
+      throw error; // Rethrow the error for further handling
+    }
   },
 );

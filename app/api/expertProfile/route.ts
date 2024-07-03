@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
 import { createExpert } from '../../../database/experts';
+import { getValidSessionById } from '../../../database/sessions';
 import {
   Expert,
   expertSchema,
@@ -57,9 +57,23 @@ export async function POST(
         { status: 401 },
       );
     }
+    // console.log('sessionCookie', sessionCookie);
+
+    const sessionToken = sessionCookie.value;
+    // console.log('sessionToken', sessionToken);
+    const session = await getValidSessionById(sessionToken);
+    // console.log('session', session);
+
+    if (!session) {
+      // Handle case where session is invalid or expired
+      return NextResponse.json(
+        { errors: [{ message: 'Invalid session token' }] },
+        { status: 401 }, // Unauthorized status
+      );
+    }
 
     // 4. Create new expert profile
-    const newExpert = await createExpert(sessionCookie.value, {
+    const newExpert = await createExpert(sessionCookie.value, session.userId, {
       age: result.data.age || null,
       city: result.data.city || null,
       bio: result.data.bio || null,
@@ -89,7 +103,7 @@ export async function POST(
       {
         errors: [
           {
-            message: 'Internal server error',
+            message: 'Expert Profile already exists',
           },
         ],
       },
