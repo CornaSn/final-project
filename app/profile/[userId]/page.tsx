@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getValidSessionById } from '../../../database/sessions';
 import { getUserByIdInsecure } from '../../../database/users';
+import CreateExpertProfileForm from '../createExpertProfile/CreateExpertProfileForm';
 
 export default async function UserProfil() {
   // 1. Checking if the sessionToken cookie exists
@@ -12,9 +13,15 @@ export default async function UserProfil() {
   const token =
     sessionCookie && (await getValidSessionById(sessionCookie.value));
 
-  const user_id = token?.userId;
-  const user = await getUserByIdInsecure(user_id);
-  console.log('user', user);
+  const userId = token?.userId;
+  let user = null;
+
+  if (userId !== undefined) {
+    user = await getUserByIdInsecure(userId);
+    console.log('user', user);
+  } else {
+    console.error('userId is undefined');
+  }
 
   // 3️ If user doesn't exist, redirect to login page
   if (!user) {
@@ -22,7 +29,7 @@ export default async function UserProfil() {
   }
 
   if (user.isExpert) {
-    return <p> Expert </p>;
+    return <CreateExpertProfileForm userId={userId} />;
   } else {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">

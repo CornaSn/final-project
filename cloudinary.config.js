@@ -10,4 +10,4 @@ cloudinary.config({
 export default cloudinary;
 
 // API environment variable
-// CLOUDINARY_URL=cloudinary://275495128522211:0NEpXhYMxSxRSenVVVFchFlFnVw@dmntpv6mf
+// CLOUDINARY_URL=cloudinary://<your_api_key>:<your_api_secret>@dmntpv6mf

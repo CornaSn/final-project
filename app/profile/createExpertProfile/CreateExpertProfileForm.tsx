@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 type Props = {
-  userId: number;
+  userId: number | undefined;
 };
 
 export default function CreateExpertProfileForm(props: Props) {
@@ -45,7 +45,9 @@ export default function CreateExpertProfileForm(props: Props) {
     <form onSubmit={handleProfileCreation}>
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="w-full max-w-md p-6 bg-white rounded shadow-md space-y-4">
-          <h1 className="text-2xl font-bold text-center mb-6">Registration</h1>
+          <h1 className="text-2xl font-bold text-center mb-6">
+            Create Expert Profile
+          </h1>
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium text-gray-700">Age:</span>
             <input
