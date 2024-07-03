@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import ErrorMessage from '../../ErrorMessage';
@@ -66,6 +67,7 @@ export default function LoginForm() {
               onChange={(event) => setPassword(event.currentTarget.value)}
             />
           </label>
+
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium text-gray-700">
               Retyype your password:
@@ -79,6 +81,9 @@ export default function LoginForm() {
               }
             />
           </label>
+          <Link href="/login" className="label label-text-alt link link-hover">
+            Forgot password?
+          </Link>
           <div className="flex flex-col gap-1">
             {' '}
             <button className="btn">Login</button>
