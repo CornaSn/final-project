@@ -14,8 +14,8 @@ export const metadata = {
 //   console.log('Experts:', experts);
 
 export default async function Experts() {
-  const experts = await getAllExpertsWithUserInfoInsecure();
-  console.log('experts with user info', experts);
+  const experts = await getExpertsInsecure();
+  // console.log('experts with user info', experts);
 
   return (
     <div className="card m-4 w-100 shadow">
@@ -23,8 +23,8 @@ export default async function Experts() {
         <h1>Experts:</h1>
         {experts.map((expert) => (
           <a key={`experts-${expert.id}`}>
-            <div>{expert.age}</div>
-            <div>{expert.bio}</div>
+            <div>{expert.id}</div>
+            {/* <div>{expert.bio}</div>
             <div>
               <Image
                 src={expert.pictureUrl}
@@ -32,7 +32,7 @@ export default async function Experts() {
                 height="200"
                 width="200"
               />
-            </div>
+            </div> */}
           </a>
         ))}
       </div>

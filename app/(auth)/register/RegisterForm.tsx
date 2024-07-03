@@ -36,7 +36,7 @@ export default function RegisterForm() {
       },
     });
     const data: RegisterResponseBodyPost = await response.json();
-    console.log('RegisterResponseData', data);
+    // console.log('RegisterResponseData', data);
 
     if ('errors' in data) {
       setErrors(data.errors);
@@ -63,8 +63,8 @@ export default function RegisterForm() {
               onChange={(event) => setRole(event.currentTarget.value)}
             >
               <option>Select</option>
-              <option value={expert}>I am NOT an expert</option>
-              <option value={member}>I am an expert</option>
+              <option value={member}>I am NOT an expert</option>
+              <option value={expert}>I am an expert</option>
             </select>
           </label>
           <label className="flex flex-col gap-1">

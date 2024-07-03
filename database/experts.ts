@@ -28,12 +28,7 @@ export const getExpertInsecure = cache(async (id: number) => {
   return user;
 });
 
-console.log(getExpertsInsecure());
-
-// SELECT users.first_name, users.last_name, users.email, users.is_expert
-// FROM users
-// JOIN experts ON (users.id = experts.user_id AND users.is_expert = TRUE);
-// --WHERE users.email = 'david.j@example.com';
+// console.log(getExpertsInsecure());
 
 // Function to get all experts with user information
 export const getAllExpertsWithUserInfoInsecure = cache(async () => {
@@ -51,11 +46,11 @@ export const getAllExpertsWithUserInfoInsecure = cache(async () => {
         AND users.is_expert = TRUE
       )
   `;
-  // console.log('Query result:', experts);
+  console.log('Query result:', experts);
   return experts;
 });
 
-console.log('getAllExpertWithUserInfo', getAllExpertsWithUserInfoInsecure());
+// console.log('getAllExpertWithUserInfo', getAllExpertsWithUserInfoInsecure());
 
 // Function to get a single expert with user information by ID
 export const getExpertByIdWithUserInfoInsecure = cache(async (id: number) => {
@@ -76,6 +71,7 @@ export const getExpertByIdWithUserInfoInsecure = cache(async (id: number) => {
       experts.id = ${id}
   `;
 
+  console.log('expert', expert);
   return expert;
 });
 
@@ -137,19 +133,19 @@ export const createExpert = cache(
     newExpert: Omit<Expert, 'id'>,
   ) => {
     try {
-      // Check if an entry with the same user_id already exists
-      const existingExpert = await sql<Expert[]>`
-        SELECT
-          *
-        FROM
-          experts
-        WHERE
-          user_id = ${userId}
-      `;
+      // // Check if an entry with the same user_id already exists
+      // const existingExpert = await sql<Expert[]>`
+      //   SELECT
+      //     *
+      //   FROM
+      //     experts
+      //   WHERE
+      //     user_id = ${userId}
+      // `;
 
-      if (existingExpert.length > 0) {
-        throw new Error('An entry with this user_id already exists');
-      }
+      // if (existingExpert.length > 0) {
+      //   throw new Error('An entry with this user_id already exists');
+      // }
 
       // Proceed with inserting the new expert profile
       const [expert] = await sql<Expert[]>`

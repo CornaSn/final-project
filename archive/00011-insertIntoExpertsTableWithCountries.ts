@@ -15,7 +15,7 @@ export async function up(sql: Sql) {
         expert_countries (expert_id, country_id)
       VALUES
         (
-          ${expertCountry.expertId},
+          NULL,
           ${expertCountry.countryId}
         )
     `;

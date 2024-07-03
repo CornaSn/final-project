@@ -2,11 +2,11 @@ import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { sql } from '../../../../database/connect';
 import { createSessionInsecure } from '../../../../database/sessions';
 import {
   createUserInsecure,
   getUserInsecure,
-  getUserWithPasswordHashInsecure,
 } from '../../../../database/users';
 import {
   User,
@@ -85,8 +85,8 @@ export async function POST(
     result.data.firstName,
     result.data.lastName,
     result.data.email,
-    result.data.role,
     passwordHash,
+    result.data.role !== 'member',
   );
 
   if (!newUser) {
@@ -105,11 +105,28 @@ export async function POST(
   //   email: 'test22@gmail.com'
   // }
 
-  // 6. Create a token
+  // // 6. Determine if the user is an expert
+  // const isExpert = result.data.role !== 'member';
+  // console.log('isExpert', isExpert);
+
+  // if (isExpert) {
+  //   await sql<{ id: number }[]>`
+  //     INSERT INTO
+  //       experts (user_id)
+  //     VALUES
+  //       (
+  //         ${newUser.id}
+  //       )
+  //     RETURNING
+  //       id
+  //   `;
+  // }
+
+  // 7. Create a token
   const token = crypto.randomBytes(100).toString('base64');
   // console.log('token', token);
 
-  // 7. Create Session record
+  // 8. Create Session record
   const session = await createSessionInsecure(token, newUser.id);
   if (!session) {
     return NextResponse.json(
@@ -121,12 +138,13 @@ export async function POST(
   }
   // console.log('session', session);
 
-  //  8. Send new cookie to the header
+  //  9. Send new cookie to the header
   cookies().set({
     name: 'sessionToken',
     value: session.token,
     ...secureCookieOptions,
   });
 
+  // console.log('newUser', newUser);
   return NextResponse.json({ user: newUser });
 }

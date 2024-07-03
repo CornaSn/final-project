@@ -25,6 +25,7 @@ export const userSchema = z
       .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
     password: z.string().min(6),
     confirmPassword: z.string().min(6),
+    role: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
