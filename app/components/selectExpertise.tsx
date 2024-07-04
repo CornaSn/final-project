@@ -6,14 +6,11 @@ type Props = {
 };
 
 export default function SelectExpertise(props: Props) {
-  // console.log('sind das die props mit expertAreas', props);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const expertAreas = props.expertAreas;
-  // console.log('expertAreas', expertAreas);
 
   const expertiseName = expertAreas.map((area) => area.expertiseName);
-  // console.log('expertiseName', expertiseName);
 
   const toggleSelection = (item: string) => {
     if (selectedItems.includes(item)) {
@@ -45,7 +42,7 @@ export default function SelectExpertise(props: Props) {
       <div className="flex flex-wrap gap-2 mb-4">
         {expertiseName.map((area) => (
           <button
-            key={`item-${area}`}
+            key={`area-${area}`}
             type="button"
             className={`bg-gray-300 text-gray-700 px-3 py-1 rounded-full ${selectedItems.includes(area) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
             onClick={() => toggleSelection(area)}

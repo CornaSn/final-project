@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
-import { Language } from '../../migrations/00006-createLanguagesTable';
+import { Country } from '../../migrations/00004-createCountriesTable';
 
 type Props = {
-  expertLanguages: Language[];
+  expertCountries: Country[];
 };
 
-export default function SelectLanguage(props: Props) {
-  // console.log('sind das die props mit Languages', props);
+export default function SelectCountry(props: Props) {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
-  const expertLanguages = props.expertLanguages;
-  // console.log('expertLanguages', expertLanguages);
+  const expertCountries = props.expertCountries;
 
-  const languages = expertLanguages.map(
-    (languageName) => languageName.language,
-  );
-
-  console.log('languageName', languages);
+  const countries = expertCountries.map((country) => country.countryName);
 
   const toggleSelection = (item: string) => {
     if (selectedItems.includes(item)) {
@@ -30,7 +24,9 @@ export default function SelectLanguage(props: Props) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Select languages you speak</h1>
+      <h1 className="text-2xl font-bold mb-4">
+        Select countries you have visited
+      </h1>
 
       <div className="flex flex-wrap gap-2 mb-4">
         {selectedItems.map((item) => (
@@ -46,15 +42,15 @@ export default function SelectLanguage(props: Props) {
       </div>
 
       <div className="flex flex-wrap gap-2 mb-4">
-        {languages.map((language) => (
+        {countries.map((country) => (
           <button
-            key={`language-${language}`}
+            key={`country-${country}`}
             type="button"
-            className={`bg-gray-300 text-gray-700 px-3 py-1 rounded-full ${selectedItems.includes(language) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-            onClick={() => toggleSelection(language)}
-            disabled={selectedItems.includes(language)}
+            className={`bg-gray-300 text-gray-700 px-3 py-1 rounded-full ${selectedItems.includes(country) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+            onClick={() => toggleSelection(country)}
+            disabled={selectedItems.includes(country)}
           >
-            {language.charAt(0).toUpperCase() + language.slice(1)}
+            {country.charAt(0).toUpperCase() + country.slice(1)}
           </button>
         ))}
       </div>

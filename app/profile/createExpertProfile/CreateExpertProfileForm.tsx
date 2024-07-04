@@ -2,9 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { Country } from '../../../migrations/00004-createCountriesTable';
 import { Language } from '../../../migrations/00006-createLanguagesTable';
 import { Expertise } from '../../../migrations/00008-createExpertiseTable';
 import { CreateExpertProfileRequestBody } from '../../api/expertProfile/route';
+import SelectCountry from '../../components/selectCountries';
 import ExpertiseList from '../../components/selectExpertise';
 import SelectLanguage from '../../components/selectLanguages';
 
@@ -12,6 +14,7 @@ type Props = {
   userId: number | undefined;
   expertAreas: Expertise[];
   expertLanguages: Language[];
+  expertCountries: Country[];
 };
 
 export default function CreateExpertProfileForm(props: Props) {
@@ -114,6 +117,7 @@ export default function CreateExpertProfileForm(props: Props) {
               />
             </label>
             <SelectLanguage expertLanguages={props.expertLanguages} />
+            <SelectCountry expertCountries={props.expertCountries} />
           </div>
 
           <div className="space-y-4">

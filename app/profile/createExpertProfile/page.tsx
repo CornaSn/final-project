@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { getCountriesListInsecure } from '../../../database/countriesList';
 import { getExpertiseListInsecure } from '../../../database/expertiseList';
 import { getExpertWithUserById } from '../../../database/experts';
 import { getLanguageListInsecure } from '../../../database/languageList';
@@ -16,7 +17,7 @@ export default async function CreateExpertProfilePage() {
     sessionCookie && (await getValidSessionById(sessionCookie.value));
   console.log('session', session);
 
-  // 3. If sessionToken cookie is invalid of doesn't exist, redirect to login with rerutnTo
+  // 3. If sessionToken cookie is invalid of doesn't exist, redirect to login with returnTo
   if (!session) {
     return redirect('/login?returnTo=/profile/createExpertProfile');
   }
@@ -25,18 +26,18 @@ export default async function CreateExpertProfilePage() {
 
   // Fetch expert details for the logged-in user
   const expert = await getExpertWithUserById(session.token, userId);
-  // console.log('hallo expert', expert);
 
+  // Fetch select fields for user profile
   const expertAreas = await getExpertiseListInsecure();
-  // console.log('expertAreasPage', expertAreas);
   const expertLanguages = await getLanguageListInsecure();
-  // console.log('expertLanguages', expertLanguages);
+  const expertCountries = await getCountriesListInsecure();
 
   return (
     <CreateExpertProfileForm
       userId={userId}
       expertAreas={expertAreas}
       expertLanguages={expertLanguages}
+      expertCountries={expertCountries}
     />
   );
 }
