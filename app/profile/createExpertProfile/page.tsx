@@ -1,5 +1,5 @@
-import { redirect } from 'next/dist/server/api-utils';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { getExpertiseListInsecure } from '../../../database/expertiseList';
 import { getExpertWithUserById } from '../../../database/experts';
 import { getValidSessionById } from '../../../database/sessions';
@@ -17,7 +17,7 @@ export default async function CreateExpertProfilePage() {
 
   // 3. If sessionToken cookie is invalid of doesn't exist, redirect to login with rerutnTo
   if (!session) {
-    return redirect(307, '/login?returnTo=/profile/createExpertProfile');
+    return redirect('/login?returnTo=/profile/createExpertProfile');
   }
 
   // Ensure user_Id is defined, here assuming it is part of the session data
@@ -28,14 +28,8 @@ export default async function CreateExpertProfilePage() {
   const expert = await getExpertWithUserById(session.token, userId);
   // console.log('hallo expert', expert);
 
-  // Check if the expert data was fetched successfully
-  // if (!expert) {
-  //   // Handle case where expert details are not found
-  //   return <div>Error: Expert details not found.</div>;
-  // }
-
   const expertAreas = await getExpertiseListInsecure();
-  console.log('expertAreasPage', expertAreas);
+  // console.log('expertAreasPage', expertAreas);
 
   return <CreateExpertProfileForm userId={userId} expertAreas={expertAreas} />;
 }

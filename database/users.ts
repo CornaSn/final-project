@@ -45,6 +45,7 @@ export const createUserInsecure = cache(
 export const getUser = cache(async (sessionToken: string) => {
   const [user] = await sql<User[]>`
     SELECT
+      users.id AS userid,
       users.first_name AS firstname,
       users.last_name AS lastname,
       users.is_expert AS isexpert

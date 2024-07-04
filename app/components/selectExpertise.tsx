@@ -9,6 +9,11 @@ export default function SelectExpertise(props: Props) {
   // console.log('sind das die props mit expertAreas', props);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
+  const expertAreas = props.expertAreas;
+  console.log('expertAreas', expertAreas);
+  const expertiseName = expertAreas.map((area) => area.expertiseName);
+  console.log('expertiseName', expertiseName);
+
   const toggleSelection = (item: string) => {
     if (selectedItems.includes(item)) {
       setSelectedItems(
@@ -18,12 +23,6 @@ export default function SelectExpertise(props: Props) {
       setSelectedItems([...selectedItems, item]);
     }
   };
-
-  const expertAreas = props.expertAreas;
-  const expertiseName = expertAreas.map((area) => area.expertiseName);
-  console.log('expertiseName', expertiseName);
-
-  const sandwichContents = ['cheese', 'lettuce', 'tomato', 'bacon'];
 
   return (
     <div>
@@ -43,15 +42,15 @@ export default function SelectExpertise(props: Props) {
       </div>
 
       <div className="flex flex-wrap gap-2 mb-4">
-        {expertiseName.map((item) => (
+        {expertiseName.map((area) => (
           <button
-            key={`item-${item}`}
+            key={`item-${area}`}
             type="button"
-            className={`bg-gray-300 text-gray-700 px-3 py-1 rounded-full ${selectedItems.includes(item) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-            onClick={() => toggleSelection(item)}
-            disabled={selectedItems.includes(item)}
+            className={`bg-gray-300 text-gray-700 px-3 py-1 rounded-full ${selectedItems.includes(area) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+            onClick={() => toggleSelection(area)}
+            disabled={selectedItems.includes(area)}
           >
-            {item.charAt(0).toUpperCase() + item.slice(1)}
+            {area.charAt(0).toUpperCase() + area.slice(1)}
           </button>
         ))}
       </div>

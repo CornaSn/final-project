@@ -7,7 +7,7 @@ import CreateExpertProfileForm from '../createExpertProfile/CreateExpertProfileF
 export default async function UserProfil() {
   // 1. Checking if the sessionToken cookie exists
   const sessionCookie = cookies().get('sessionToken');
-  console.log('sessionCookie', sessionCookie);
+  // console.log('sessionCookie', sessionCookie);
 
   // 2. Query the current user with the sessionToken
   const token =
