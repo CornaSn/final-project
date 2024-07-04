@@ -1,7 +1,9 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Select from 'react-select';
+import { CreateExpertProfileRequestBody } from '../../api/expertProfile/route';
 
 type Props = {
   userId: number | undefined;
@@ -26,6 +28,8 @@ export default function CreateExpertProfileForm(props: Props) {
     { value: string; label: string }[]
   >([]);
 
+  const router = useRouter();
+
   async function handleProfileCreation(
     event: React.FormEvent<HTMLFormElement>,
   ) {
@@ -49,11 +53,13 @@ export default function CreateExpertProfileForm(props: Props) {
           'Content-Type': 'application/json',
         },
       });
-      const data = await response.json();
+      const data: CreateExpertProfileRequestBody = await response.json();
       console.log('data', data);
     } catch (error) {
       console.error('An error occurred during profile creation:', error);
     }
+    router.push(`/profile/}`);
+    router.refresh();
   }
 
   const handleTypeSelect = (

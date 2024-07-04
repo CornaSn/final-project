@@ -20,6 +20,22 @@ export type Expert = {
   travelBlogUrl: string | null;
 };
 
+export type ExpertUser = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  isExpert: boolean;
+  createdAt?: Date | null | undefined;
+  updatedAt?: Date | null | undefined;
+  id: number | null;
+  age: string | null;
+  city: string | null;
+  bio: string | null;
+  pictureUrl: string | null;
+  videoUrl: string | null;
+  travelBlogUrl: string | null;
+  userId: number;
+};
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE experts (

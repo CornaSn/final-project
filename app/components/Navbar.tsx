@@ -17,7 +17,9 @@ export default async function Navbar() {
           <br /> genius
         </Link>
       </div>
-
+      <Link className="flex-1 text-center" href="/experts">
+        Search Experts
+      </Link>{' '}
       <div className="flex-none gap-2">
         {user ? (
           <>
