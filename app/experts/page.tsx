@@ -1,17 +1,9 @@
-import Image from 'next/image';
-import {
-  getAllExpertsWithUserInfoInsecure,
-  getExpertsInsecure,
-} from '../../database/experts';
+import { getAllExpertsWithUserInfoInsecure } from '../../database/experts';
 
 export const metadata = {
   title: 'All_experts',
   description: 'experts',
 };
-
-// export default async function ExpertsOverview() {
-//   const experts = await getExpertsInsecure();
-//   console.log('Experts:', experts);
 
 export default async function Experts() {
   const experts = await getAllExpertsWithUserInfoInsecure();

@@ -1,6 +1,6 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
-import { Expert } from '../migrations/00002-createExpertsTable';
+import { Expert, ExpertUser } from '../migrations/00002-createExpertsTable';
 
 // Get whole database information
 export const getExpertsInsecure = cache(async () => {
@@ -32,7 +32,7 @@ export const getExpertInsecure = cache(async (id: number) => {
 
 // Function to get all experts with user information
 export const getAllExpertsWithUserInfoInsecure = cache(async () => {
-  const experts = await sql<Expert[]>`
+  const experts = await sql<ExpertUser[]>`
     SELECT
       users.first_name,
       users.last_name,

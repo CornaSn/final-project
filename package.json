@@ -11,6 +11,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@react-aria/listbox": "^3.12.1",
+    "@react-stately/collections": "^3.10.7",
+    "@react-stately/list": "^3.10.5",
     "@upleveled/ley": "^0.8.6",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.2.0",
@@ -20,6 +23,7 @@
     "next-cloudinary": "^6.6.2",
     "postgres": "^3.4.4",
     "react": "19.0.0-rc.0",
+    "react-aria-components": "^1.2.1",
     "react-dom": "19.0.0-rc.0",
     "react-select": "^5.8.0",
     "server-only": "^0.0.1",
