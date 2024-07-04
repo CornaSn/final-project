@@ -35,7 +35,7 @@ export default async function CreateExpertProfilePage() {
   // }
 
   const expertAreas = await getExpertiseListInsecure();
-  console.log('expertAreas', expertAreas);
+  console.log('expertAreasPage', expertAreas);
 
   return <CreateExpertProfileForm userId={userId} expertAreas={expertAreas} />;
 }

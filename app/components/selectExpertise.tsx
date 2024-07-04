@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function SelectExpertise(props: Props) {
-  console.log('sind das die props mit expertAreas', props);
+  // console.log('sind das die props mit expertAreas', props);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const toggleSelection = (item: string) => {
@@ -18,6 +18,10 @@ export default function SelectExpertise(props: Props) {
       setSelectedItems([...selectedItems, item]);
     }
   };
+
+  const expertAreas = props.expertAreas;
+  const expertiseName = expertAreas.map((area) => area.expertiseName);
+  console.log('expertiseName', expertiseName);
 
   const sandwichContents = ['cheese', 'lettuce', 'tomato', 'bacon'];
 
@@ -39,7 +43,7 @@ export default function SelectExpertise(props: Props) {
       </div>
 
       <div className="flex flex-wrap gap-2 mb-4">
-        {sandwichContents.map((item) => (
+        {expertiseName.map((item) => (
           <button
             key={`item-${item}`}
             type="button"
