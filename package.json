@@ -25,6 +25,7 @@
     "react": "19.0.0-rc.0",
     "react-aria-components": "^1.2.1",
     "react-dom": "19.0.0-rc.0",
+    "react-dropdown-select": "^4.11.2",
     "react-select": "^5.8.0",
     "server-only": "^0.0.1",
     "tsx": "^4.15.7",

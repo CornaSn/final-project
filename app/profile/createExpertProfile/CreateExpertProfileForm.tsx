@@ -2,13 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { Language } from '../../../migrations/00006-createLanguagesTable';
 import { Expertise } from '../../../migrations/00008-createExpertiseTable';
 import { CreateExpertProfileRequestBody } from '../../api/expertProfile/route';
 import ExpertiseList from '../../components/selectExpertise';
+import SelectLanguage from '../../components/selectLanguages';
 
 type Props = {
   userId: number | undefined;
   expertAreas: Expertise[];
+  expertLanguages: Language[];
 };
 
 export default function CreateExpertProfileForm(props: Props) {
@@ -61,9 +64,11 @@ export default function CreateExpertProfileForm(props: Props) {
     >
       <div className="w-full max-w-4xl p-8 bg-white rounded shadow-md space-y-6">
         <h1 className="text-3xl font-bold text-center mb-8">
-          Welcome, to travel genius!{' '}
+          Welcome, to travel genius!
         </h1>
-
+        <h3 className="text-s font-bold text-center mb-8">
+          Let's create your profile.
+        </h3>
         <div className="grid grid-cols-2 gap-8">
           <div className="space-y-4">
             <label className="flex flex-col space-y-2">
@@ -108,6 +113,7 @@ export default function CreateExpertProfileForm(props: Props) {
                 }
               />
             </label>
+            <SelectLanguage expertLanguages={props.expertLanguages} />
           </div>
 
           <div className="space-y-4">

@@ -13,7 +13,7 @@ export default function SelectExpertise(props: Props) {
   // console.log('expertAreas', expertAreas);
 
   const expertiseName = expertAreas.map((area) => area.expertiseName);
-  console.log('expertiseName', expertiseName);
+  // console.log('expertiseName', expertiseName);
 
   const toggleSelection = (item: string) => {
     if (selectedItems.includes(item)) {

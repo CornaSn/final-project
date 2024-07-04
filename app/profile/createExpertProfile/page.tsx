@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getExpertiseListInsecure } from '../../../database/expertiseList';
 import { getExpertWithUserById } from '../../../database/experts';
+import { getLanguageListInsecure } from '../../../database/languageList';
 import { getValidSessionById } from '../../../database/sessions';
 import CreateExpertProfileForm from './CreateExpertProfileForm';
 
@@ -28,6 +29,14 @@ export default async function CreateExpertProfilePage() {
 
   const expertAreas = await getExpertiseListInsecure();
   // console.log('expertAreasPage', expertAreas);
+  const expertLanguages = await getLanguageListInsecure();
+  // console.log('expertLanguages', expertLanguages);
 
-  return <CreateExpertProfileForm userId={userId} expertAreas={expertAreas} />;
+  return (
+    <CreateExpertProfileForm
+      userId={userId}
+      expertAreas={expertAreas}
+      expertLanguages={expertLanguages}
+    />
+  );
 }
