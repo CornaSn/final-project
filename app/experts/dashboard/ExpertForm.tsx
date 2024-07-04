@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function ExpertsForm(props: Props) {
-  console.log('all Props', props);
+  // console.log('all Props', props);
   const [region, setRegion] = useState('');
   const [interests, setInterests] = useState('');
 

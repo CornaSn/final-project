@@ -11,6 +11,7 @@ export default function LogoutButton() {
       <button
         formAction={async () => {
           await logout();
+          router.push('/');
           router.refresh();
         }}
       >

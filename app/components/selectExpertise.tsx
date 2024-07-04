@@ -10,7 +10,8 @@ export default function SelectExpertise(props: Props) {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const expertAreas = props.expertAreas;
-  console.log('expertAreas', expertAreas);
+  // console.log('expertAreas', expertAreas);
+
   const expertiseName = expertAreas.map((area) => area.expertiseName);
   console.log('expertiseName', expertiseName);
 
