@@ -56,7 +56,7 @@ export const getUser = cache(async (sessionToken: string) => {
         AND expiry_timestamp > now()
       )
   `;
-  console.log('User', user);
+  // console.log('User', user);
   return user;
 });
 

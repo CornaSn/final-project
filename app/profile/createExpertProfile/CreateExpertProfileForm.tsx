@@ -1,28 +1,27 @@
 'use client';
 
-import { useListBox, useListBoxSection, useOption } from '@react-aria/listbox';
-import { Item, Section } from '@react-stately/collections';
-import { useListState } from '@react-stately/list';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import Select from 'react-select';
+import { Expertise } from '../../../migrations/00008-createExpertiseTable';
 import { CreateExpertProfileRequestBody } from '../../api/expertProfile/route';
-import Example from '../../components/spezialisations';
-import Experts from '../../experts/page';
+import ExpertiseList from '../../components/selectExpertise';
 
 type Props = {
   userId: number | undefined;
+  expertAreas: Expertise[];
 };
+
 export default function CreateExpertProfileForm(props: Props) {
+  // console.log('alle props', props);
   const [age, setAge] = useState('');
   const [city, setCity] = useState('');
   const [bio, setBio] = useState('');
   const [pictureUrl, setPictureUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
-  const maxOptions = 6;
-  const [selectedSpecializations, setSelectedSpecializations] = useState();
+
   const router = useRouter();
+
   async function handleProfileCreation(
     event: React.FormEvent<HTMLFormElement>,
   ) {
@@ -118,8 +117,7 @@ export default function CreateExpertProfileForm(props: Props) {
               </span>
               <input
                 type="file"
-                className="file-input file-input-bordered w-full max-w-xs py-3 px-4"
-                placeholder="Upload a picture"
+                className="file-input file-input-bordered w-full max-w-s py-3 px-4"
                 onChange={(event) => setPictureUrl(event.currentTarget.value)}
               />
             </label>
@@ -128,13 +126,12 @@ export default function CreateExpertProfileForm(props: Props) {
               <span className="text-lg font-medium text-gray-700">Video:</span>
               <input
                 type="file"
-                className="file-input file-input-bordered w-full max-w-xs py-3 px-4"
-                placeholder="Upload a video"
+                className="file-input file-input-bordered w-full max-w-s py-3 px-4"
                 onChange={(event) => setVideoUrl(event.currentTarget.value)}
               />
             </label>
 
-            <Example />
+            <ExpertiseList expertAreas={props.expertAreas} />
           </div>
         </div>
 

@@ -1,5 +1,6 @@
 import { redirect } from 'next/dist/server/api-utils';
 import { cookies } from 'next/headers';
+import { getExpertiseListInsecure } from '../../../database/expertiseList';
 import { getExpertWithUserById } from '../../../database/experts';
 import { getValidSessionById } from '../../../database/sessions';
 import CreateExpertProfileForm from './CreateExpertProfileForm';
@@ -25,6 +26,7 @@ export default async function CreateExpertProfilePage() {
 
   // Fetch expert details for the logged-in user
   const expert = await getExpertWithUserById(session.token, userId);
+  // console.log('hallo expert', expert);
 
   // Check if the expert data was fetched successfully
   // if (!expert) {
@@ -32,5 +34,8 @@ export default async function CreateExpertProfilePage() {
   //   return <div>Error: Expert details not found.</div>;
   // }
 
-  return <CreateExpertProfileForm userId={userId} />;
+  const expertAreas = await getExpertiseListInsecure();
+  console.log('expertAreas', expertAreas);
+
+  return <CreateExpertProfileForm userId={userId} expertAreas={expertAreas} />;
 }

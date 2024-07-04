@@ -46,7 +46,7 @@ export const getAllExpertsWithUserInfoInsecure = cache(async () => {
         AND users.is_expert = TRUE
       )
   `;
-  console.log('Query result:', experts);
+  // console.log('Query result:', experts);
   return experts;
 });
 

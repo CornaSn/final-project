@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+import { Expertise } from '../../migrations/00008-createExpertiseTable';
 
-export default function Example() {
+type Props = {
+  expertAreas: Expertise[];
+};
+
+export default function SelectExpertise(props: Props) {
+  console.log('sind das die props mit expertAreas', props);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const toggleSelection = (item: string) => {
