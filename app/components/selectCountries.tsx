@@ -4,9 +4,8 @@ import { Country } from '../../migrations/00004-createCountriesTable';
 type Props = {
   expertCountries: Country[];
   // setSelectedItems: (data: string[]) => void;
-  setSelectedItems: Dispatch<SetStateAction<string[] | never[]>>;
-
-  selectedItems: string[];
+  setSelectedItemsCountries: Dispatch<SetStateAction<string[] | never[]>>;
+  selectedItemsCountries: string[];
 };
 
 export default function SelectCountry(props: Props) {
@@ -18,12 +17,14 @@ export default function SelectCountry(props: Props) {
   const countries = expertCountries.map((country) => country.countryName);
 
   const toggleSelection = (item: string) => {
-    if (props.selectedItems.includes(item)) {
-      props.setSelectedItems(
-        props.selectedItems.filter((selectedItem) => selectedItem !== item),
+    if (props.selectedItemsCountries.includes(item)) {
+      props.setSelectedItemsCountries(
+        props.selectedItemsCountries.filter(
+          (selectedItem) => selectedItem !== item,
+        ),
       );
     } else {
-      props.setSelectedItems([...props.selectedItems, item]);
+      props.setSelectedItemsCountries([...props.selectedItemsCountries, item]);
     }
   };
 
@@ -41,7 +42,7 @@ export default function SelectCountry(props: Props) {
         Select countries you have visited
       </h1>
       <div className="flex flex-wrap gap-2 mb-4">
-        {props.selectedItems.map((item) => (
+        {props.selectedItemsCountries.map((item) => (
           <button
             key={`item-${item}`}
             type="button"
@@ -65,7 +66,7 @@ export default function SelectCountry(props: Props) {
             <option
               key={`country-${country}`}
               value={country}
-              disabled={props.selectedItems.includes(country)}
+              disabled={props.selectedItemsCountries.includes(country)}
             >
               {country.charAt(0).toUpperCase() + country.slice(1)}
             </option>

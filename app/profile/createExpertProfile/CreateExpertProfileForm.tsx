@@ -25,8 +25,10 @@ export default function CreateExpertProfileForm(props: Props) {
   const [pictureUrl, setPictureUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
-  const [selectedItems, setSelectedItems] = useState([]);
-  console.log('selectedItems', selectedItems);
+  const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
+  console.log('selectedItemsCountries', selectedItemsCountries);
+  const [selectedItemsLanguages, setSelectedItemsLanguages] = useState([]);
+  console.log('selectedItemsLanguages', selectedItemsLanguages);
 
   const router = useRouter();
 
@@ -118,8 +120,10 @@ export default function CreateExpertProfileForm(props: Props) {
             </label>{' '}
             <SelectCountry
               expertCountries={props.expertCountries}
-              setSelectedItems={setSelectedItems as never}
-              selectedItems={selectedItems}
+              // TODO****
+              // Change this as never part - THIS IS NOT allowed!
+              setSelectedItemsCountries={setSelectedItemsCountries as never}
+              selectedItemsCountries={selectedItemsCountries}
             />
             <ExpertiseList expertAreas={props.expertAreas} />
           </div>
@@ -144,7 +148,13 @@ export default function CreateExpertProfileForm(props: Props) {
                 onChange={(event) => setVideoUrl(event.currentTarget.value)}
               />
             </label>
-            <SelectLanguage expertLanguages={props.expertLanguages} />
+            <SelectLanguage
+              expertLanguages={props.expertLanguages}
+              // TODO****
+              // Change this as never part - THIS IS NOT allowed!
+              setSelectedItemsLanguages={setSelectedItemsLanguages as never}
+              selectedItemsLanguages={selectedItemsLanguages}
+            />
           </div>
         </div>
 

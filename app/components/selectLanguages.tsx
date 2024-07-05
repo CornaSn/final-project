@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Language } from '../../migrations/00006-createLanguagesTable';
 
 type Props = {
   expertLanguages: Language[];
+  setSelectedItemsLanguages: Dispatch<SetStateAction<string[] | never[]>>;
+  selectedItemsLanguages: string[];
 };
 
 export default function SelectLanguage(props: Props) {
   // console.log('sind das die props mit Languages', props);
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [selectedItemsLanguages, setSelectedItemsLanguages] = useState<
+    string[]
+  >([]);
 
   const expertLanguages = props.expertLanguages;
   // console.log('expertLanguages', expertLanguages);
@@ -16,15 +20,17 @@ export default function SelectLanguage(props: Props) {
     (languageName) => languageName.language,
   );
 
-  console.log('languageName', languages);
+  // console.log('languageName', languages);
 
   const toggleSelection = (item: string) => {
-    if (selectedItems.includes(item)) {
-      setSelectedItems(
-        selectedItems.filter((selectedItem) => selectedItem !== item),
+    if (props.selectedItemsLanguages.includes(item)) {
+      props.setSelectedItemsLanguages(
+        props.selectedItemsLanguages.filter(
+          (selectedItem) => selectedItem !== item,
+        ),
       );
     } else {
-      setSelectedItems([...selectedItems, item]);
+      props.setSelectedItemsLanguages([...props.selectedItemsLanguages, item]);
     }
   };
 
@@ -33,7 +39,7 @@ export default function SelectLanguage(props: Props) {
       <h1 className="text-2xl font-bold mb-4">Select languages you speak</h1>
 
       <div className="flex flex-wrap gap-2 mb-4">
-        {selectedItems.map((item) => (
+        {props.selectedItemsLanguages.map((item) => (
           <button
             key={`item-${item}`}
             type="button"
@@ -50,9 +56,9 @@ export default function SelectLanguage(props: Props) {
           <button
             key={`language-${language}`}
             type="button"
-            className={`bg-gray-300 text-gray-700 px-3 py-1 rounded-full ${selectedItems.includes(language) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+            className={`bg-gray-300 text-gray-700 px-3 py-1 rounded-full ${selectedItemsLanguages.includes(language) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
             onClick={() => toggleSelection(language)}
-            disabled={selectedItems.includes(language)}
+            disabled={selectedItemsLanguages.includes(language)}
           >
             {language.charAt(0).toUpperCase() + language.slice(1)}
           </button>
