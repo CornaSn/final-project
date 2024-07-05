@@ -25,7 +25,7 @@ export default function SelectExpertise(props: Props) {
     }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: { target: { value: any } }) => {
     const expertise = event.target.value;
     setSelectedExpertise(expertise);
     toggleSelection(expertise);

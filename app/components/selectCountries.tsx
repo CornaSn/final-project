@@ -23,7 +23,7 @@ export default function SelectCountry(props: Props) {
     }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: { target: { value: any } }) => {
     const country = event.target.value;
     setSelectedCountry(country);
     toggleSelection(country);
