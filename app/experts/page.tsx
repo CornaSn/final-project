@@ -7,7 +7,7 @@ export const metadata = {
 
 export default async function Experts() {
   const experts = await getAllExpertsWithUserInfoInsecure();
-  console.log('experts with user info', experts);
+  // console.log('experts with user info', experts);
 
   return (
     <div className="flex justify-center p-4">

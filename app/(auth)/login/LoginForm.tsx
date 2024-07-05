@@ -32,7 +32,7 @@ export default function LoginForm() {
       },
     });
     const data: LoginResponseBodyPost = await response.json();
-    console.log('LoginResponseBodyDATA', data);
+    // console.log('LoginResponseBodyDATA', data);
 
     if ('errors' in data) {
       setErrors(data.errors);

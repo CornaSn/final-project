@@ -23,7 +23,7 @@ export async function POST(
   try {
     // 1. Get the user data from the request
     const body = await request.json();
-    console.log('body', body);
+    // console.log('body', body);
 
     // 2. Validation schema for request body
     const result = expertSchema.safeParse(body);
@@ -80,8 +80,27 @@ export async function POST(
       pictureUrl: result.data.pictureUrl || null,
       videoUrl: result.data.videoUrl || null,
       travelBlogUrl: result.data.travelBlogUrl || null,
+      userId: session.userId,
     });
     console.log('newExpert', newExpert);
+
+    console.log(
+      'result.data.selectedItemsCountries',
+      result.data.selectedItemsCountries,
+    );
+
+    // 5.
+    // selectedItemsCountries,
+    // hier wollen wir result.selectedItemsCountries mit session.userId in -> experts_country-datenbank einfügen
+    //instertAllCountriesInExpertsCountryDB(results.selectedItemsCountries, userID)
+
+    // insertAllCountriesInExpertsCountryDB(coutries, userId){
+    //        for country in countries:
+    //             insertOneCountryInDB(country, userId)
+    //
+    // Der selbe spaß auch noch hier mit languages und experts area
+    // selectedItemsLanguages,
+    // selectedItemsExpertise,
     if (!newExpert) {
       return NextResponse.json(
         {

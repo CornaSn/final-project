@@ -8,6 +8,9 @@ export const expertSchema = z.object({
   pictureUrl: z.string().optional(),
   videoUrl: z.string().optional(),
   travelBlogUrl: z.string().optional(),
+  selectedItemsCountries: z.array(z.string()),
+  selectedItemsLanguages: z.array(z.string()),
+  selectedItemsExpertise: z.array(z.string()),
 });
 
 export type Expert = {

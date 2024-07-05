@@ -10,12 +10,12 @@ import CreateExpertProfileForm from './CreateExpertProfileForm';
 export default async function CreateExpertProfilePage() {
   // 1. Checking if the sessionToken cookie exists
   const sessionCookie = cookies().get('sessionToken');
-  console.log('sessionCookie', sessionCookie);
+  // console.log('sessionCookie', sessionCookie);
 
   // 2. Check if the sessionToken cookie is still valid
   const session =
     sessionCookie && (await getValidSessionById(sessionCookie.value));
-  console.log('session', session);
+  // console.log('session', session);
 
   // 3. If sessionToken cookie is invalid of doesn't exist, redirect to login with returnTo
   if (!session) {

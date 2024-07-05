@@ -44,6 +44,7 @@ export const createUserInsecure = cache(
   },
 );
 
+//  TS Error because of Date!!!
 export const getUser = cache(async (sessionToken: string) => {
   const [user] = await sql<User[]>`
     SELECT
@@ -62,7 +63,6 @@ export const getUser = cache(async (sessionToken: string) => {
         AND expiry_timestamp > now()
       )
   `;
-  // console.log('User', user);
   return user;
 });
 

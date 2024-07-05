@@ -27,21 +27,24 @@ export default function CreateExpertProfileForm(props: Props) {
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
 
   const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
-  console.log('selectedItemsCountries', selectedItemsCountries);
+  // console.log('selectedItemsCountries', selectedItemsCountries);
 
   const [selectedItemsLanguages, setSelectedItemsLanguages] = useState([]);
-  console.log('selectedItemsLanguages', selectedItemsLanguages);
+  // console.log('selectedItemsLanguages', selectedItemsLanguages);
 
   const [selectedItemsExpertise, setSelectedItemsExpertise] = useState<
     string[]
   >([]);
-  console.log('selectedItemsExpertise', selectedItemsExpertise);
+  // console.log('selectedItemsExpertise', selectedItemsExpertise);
 
   const router = useRouter();
 
   async function handleProfileCreation(
     event: React.FormEvent<HTMLFormElement>,
   ) {
+    console.log(
+      'Start of handleProfileCreation <-------------------------------------------------------',
+    );
     event.preventDefault();
     try {
       const response = await fetch('/api/expertProfile', {
@@ -54,10 +57,9 @@ export default function CreateExpertProfileForm(props: Props) {
           pictureUrl,
           videoUrl,
           travelBlogUrl,
-
-          // selectedSpecializations: selectedSpecializations.map(
-          //   (option) => option.value,
-          // ),
+          selectedItemsCountries,
+          selectedItemsLanguages,
+          selectedItemsExpertise,
         }),
         headers: {
           'Content-Type': 'application/json',

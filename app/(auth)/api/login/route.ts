@@ -25,17 +25,17 @@ export async function POST(
 ): Promise<NextResponse<LoginResponseBodyPost>> {
   // 1. Get the user data from the request
   const body = await request.json();
-  console.log('body login', body);
+  // console.log('body login', body);
 
   // Convert email to lowercase if it's present in the body
   if (body && body.email) {
     body.email = body.email.toLowerCase();
   }
-  console.log('body', body);
+  // console.log('body', body);
 
   // 2. Validate the user data with zod Schema
   const result = userSchema.safeParse(body);
-  console.log('result', result);
+  // console.log('result', result);
 
   if (!result.success) {
     return NextResponse.json(

@@ -73,7 +73,7 @@ export const getExpertByIdWithUserInfoInsecure = cache(async (id: number) => {
       experts.id = ${id}
   `;
 
-  console.log('expert', expert);
+  // console.log('expert', expert);
   return expert;
 });
 
@@ -108,10 +108,6 @@ export const getExpertWithUserById = cache(
   async (sessionToken: string, userId: number) => {
     const expert = await sql<Expert[]>`
       SELECT
-        users.first_name,
-        users.last_name,
-        users.email,
-        users.is_expert,
         experts.*
       FROM
         users
@@ -178,7 +174,7 @@ export const createExpert = cache(
           experts.*
       `;
 
-      console.log('New Expert Created:', expert);
+      // console.log('New Expert Created:', expert);
 
       return expert;
     } catch (error) {

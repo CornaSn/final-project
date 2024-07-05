@@ -1,6 +1,8 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { getCountriesListInsecure } from '../../../database/countriesList';
 import { getExpertiseListInsecure } from '../../../database/expertiseList';
+import { getLanguageListInsecure } from '../../../database/languageList';
 import { getValidSessionById } from '../../../database/sessions';
 import { getUserByIdInsecure } from '../../../database/users';
 import CreateExpertProfileForm from '../createExpertProfile/CreateExpertProfileForm';
@@ -19,7 +21,7 @@ export default async function UserProfil() {
 
   if (userId !== undefined) {
     user = await getUserByIdInsecure(userId);
-    console.log('user', user);
+    console.log('userProfile:user', user);
   } else {
     console.error('userId is undefined');
   }
@@ -30,11 +32,22 @@ export default async function UserProfil() {
   }
 
   if (user.isExpert) {
+    // TODO: this should be removed
     redirect('/profile/createExpertProfile');
     // console.log('expertAreasPage', expertAreas);
 
+    // Fetch select fields for user profile
+    const expertAreas = await getExpertiseListInsecure();
+    const expertLanguages = await getLanguageListInsecure();
+    const expertCountries = await getCountriesListInsecure();
+
     return (
-      <CreateExpertProfileForm userId={userId} expertAreas={expertAreas} />
+      <CreateExpertProfileForm
+        userId={userId}
+        expertAreas={expertAreas}
+        expertLanguages={expertLanguages}
+        expertCountries={expertCountries}
+      />
     );
   } else {
     return (
