@@ -7,8 +7,8 @@ export type User = {
   lastName: string;
   email: string;
   isExpert: boolean;
-  createdAt?: Date | null | undefined;
-  updatedAt?: Date | null | undefined;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 };
 
 export type UserWithPasswordHash = User & {

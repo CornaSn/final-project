@@ -11,13 +11,14 @@ export const expertSchema = z.object({
 });
 
 export type Expert = {
-  id: number | null;
+  id: number;
   age: string | null;
   city: string | null;
   bio: string | null;
   pictureUrl: string | null;
   videoUrl: string | null;
   travelBlogUrl: string | null;
+  userId: number;
 };
 
 export type ExpertUser = {
@@ -25,9 +26,9 @@ export type ExpertUser = {
   lastName: string;
   email: string;
   isExpert: boolean;
-  createdAt?: Date | null | undefined;
-  updatedAt?: Date | null | undefined;
-  id: number | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  id: number;
   age: string | null;
   city: string | null;
   bio: string | null;
@@ -46,7 +47,7 @@ export async function up(sql: Sql) {
       picture_url varchar(100),
       video_url varchar(100),
       travel_blog_url varchar(100),
-      user_id integer REFERENCES users (id) ON DELETE cascade
+      user_id integer NOT NULL REFERENCES users (id) ON DELETE cascade
     )
   `;
 }

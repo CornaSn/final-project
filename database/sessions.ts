@@ -1,10 +1,10 @@
 import { cache } from 'react';
-import { Sessions } from '../migrations/00016-createSessionTable';
+import { Session } from '../migrations/00016-createSessionTable';
 import { sql } from './connect';
 
 export const createSessionInsecure = cache(
   async (token: string, userId: number) => {
-    const [session] = await sql<Sessions[]>`
+    const [session] = await sql<Session[]>`
       INSERT INTO
         sessions (token, user_id)
       VALUES
@@ -29,7 +29,7 @@ export const createSessionInsecure = cache(
 );
 
 export const deleteSession = cache(async (sessionToken: string) => {
-  const [session] = await sql<Pick<Sessions, 'id' | 'token'>[]>`
+  const [session] = await sql<Pick<Session, 'id' | 'token'>[]>`
     DELETE FROM sessions
     WHERE
       sessions.token = ${sessionToken}
@@ -41,7 +41,7 @@ export const deleteSession = cache(async (sessionToken: string) => {
 });
 
 export const getValidSession = cache(async (sessionToken: string) => {
-  const [session] = await sql<Pick<Sessions, 'id' | 'token'>[]>`
+  const [session] = await sql<Pick<Session, 'id' | 'token'>[]>`
     SELECT
       sessions.id,
       sessions.token
@@ -55,7 +55,7 @@ export const getValidSession = cache(async (sessionToken: string) => {
 });
 
 export const getValidSessionById = cache(async (sessionToken: string) => {
-  const [session] = await sql<Pick<Sessions, 'id' | 'token' | 'userId'>[]>`
+  const [session] = await sql<Pick<Session, 'id' | 'token' | 'userId'>[]>`
     SELECT
       sessions.id,
       sessions.token,

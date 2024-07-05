@@ -38,6 +38,8 @@ export const getAllExpertsWithUserInfoInsecure = cache(async () => {
       users.last_name,
       users.email,
       users.is_expert,
+      users.created_at,
+      users.updated_at,
       experts.*
     FROM
       users

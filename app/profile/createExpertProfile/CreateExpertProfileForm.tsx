@@ -63,6 +63,7 @@ export default function CreateExpertProfileForm(props: Props) {
           'Content-Type': 'application/json',
         },
       });
+      console.log('response', response);
       const data: CreateExpertProfileRequestBody = await response.json();
       console.log('data', data);
     } catch (error) {

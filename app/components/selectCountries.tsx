@@ -3,7 +3,6 @@ import { Country } from '../../migrations/00004-createCountriesTable';
 
 type Props = {
   expertCountries: Country[];
-  // setSelectedItems: (data: string[]) => void;
   setSelectedItemsCountries: Dispatch<SetStateAction<string[] | never[]>>;
   selectedItemsCountries: string[];
 };

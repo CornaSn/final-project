@@ -31,11 +31,13 @@ export const createUserInsecure = cache(
           ${isExpert}
         )
       RETURNING
+        users.id,
         users.first_name,
         users.last_name,
-        users.id,
         users.email,
-        users.is_expert
+        users.is_expert,
+        users.created_at,
+        users.updated_at
     `;
 
     return user;
@@ -45,10 +47,13 @@ export const createUserInsecure = cache(
 export const getUser = cache(async (sessionToken: string) => {
   const [user] = await sql<User[]>`
     SELECT
-      users.id AS userid,
+      users.id AS id,
       users.first_name AS firstname,
       users.last_name AS lastname,
-      users.is_expert AS isexpert
+      users.email AS email,
+      users.is_expert AS isexpert,
+      users.created_at AS created_at,
+      users.updated_at AS updated_at
     FROM
       users
       INNER JOIN sessions ON (
@@ -58,6 +63,21 @@ export const getUser = cache(async (sessionToken: string) => {
       )
   `;
   // console.log('User', user);
+  return user;
+});
+
+export const getUserSession = cache(async (sessionToken: string) => {
+  const [user] = await sql<Pick<User, 'email'>[]>`
+    SELECT
+      users.email
+    FROM
+      users
+      INNER JOIN sessions ON (
+        sessions.token = ${sessionToken}
+        AND users.id = sessions.user_id
+        AND expiry_timestamp > now()
+      )
+  `;
   return user;
 });
 
@@ -94,7 +114,13 @@ export const getUserWithPasswordHashInsecure = cache(async (email: string) => {
 export const getUserByIdInsecure = cache(async (userId: number) => {
   const [user] = await sql<User[]>`
     SELECT
-      *
+      id,
+      first_name,
+      last_name,
+      email,
+      is_expert,
+      created_at,
+      updated_at
     FROM
       users
     WHERE
