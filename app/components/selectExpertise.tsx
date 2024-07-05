@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Expertise } from '../../migrations/00008-createExpertiseTable';
 
 type Props = {
   expertAreas: Expertise[];
+  setSelectedItemsExpertise: Dispatch<SetStateAction<string[] | never[]>>;
+  selectedItemsExpertise: string[];
 };
 
 export default function SelectExpertise(props: Props) {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  // const [selectedItemsExpertise, setSelectedItemsExpertise] = useState<
+  //   string[]
+  // >([]);
   const [selectedExpertise, setSelectedExpertise] = useState('');
 
   const expertExpertise = props.expertAreas;
@@ -16,12 +20,14 @@ export default function SelectExpertise(props: Props) {
   );
 
   const toggleSelection = (item: string) => {
-    if (selectedItems.includes(item)) {
-      setSelectedItems(
-        selectedItems.filter((selectedItem) => selectedItem !== item),
+    if (props.selectedItemsExpertise.includes(item)) {
+      props.setSelectedItemsExpertise(
+        props.selectedItemsExpertise.filter(
+          (selectedItem) => selectedItem !== item,
+        ),
       );
     } else {
-      setSelectedItems([...selectedItems, item]);
+      props.setSelectedItemsExpertise([...props.selectedItemsExpertise, item]);
     }
   };
 
@@ -36,7 +42,7 @@ export default function SelectExpertise(props: Props) {
     <div>
       <h1 className="text-2xl font-bold mb-4">Select expert areas:</h1>
       <div className="flex flex-wrap gap-2 mb-4">
-        {selectedItems.map((item) => (
+        {props.selectedItemsExpertise.map((item) => (
           <button
             key={`item-${item}`}
             type="button"
@@ -60,7 +66,7 @@ export default function SelectExpertise(props: Props) {
             <option
               key={`expertise-${expertise}`}
               value={expertise}
-              disabled={selectedItems.includes(expertise)}
+              disabled={props.selectedItemsExpertise.includes(expertise)}
             >
               {expertise.charAt(0).toUpperCase() + expertise.slice(1)}
             </option>

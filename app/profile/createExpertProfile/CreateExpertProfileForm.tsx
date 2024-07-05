@@ -25,10 +25,17 @@ export default function CreateExpertProfileForm(props: Props) {
   const [pictureUrl, setPictureUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
+
   const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
   console.log('selectedItemsCountries', selectedItemsCountries);
+
   const [selectedItemsLanguages, setSelectedItemsLanguages] = useState([]);
   console.log('selectedItemsLanguages', selectedItemsLanguages);
+
+  const [selectedItemsExpertise, setSelectedItemsExpertise] = useState<
+    string[]
+  >([]);
+  console.log('selectedItemsExpertise', selectedItemsExpertise);
 
   const router = useRouter();
 
@@ -125,7 +132,11 @@ export default function CreateExpertProfileForm(props: Props) {
               setSelectedItemsCountries={setSelectedItemsCountries as never}
               selectedItemsCountries={selectedItemsCountries}
             />
-            <ExpertiseList expertAreas={props.expertAreas} />
+            <ExpertiseList
+              expertAreas={props.expertAreas}
+              setSelectedItemsExpertise={setSelectedItemsExpertise}
+              selectedItemsExpertise={selectedItemsExpertise}
+            />
           </div>
 
           <div className="space-y-4">
