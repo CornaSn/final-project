@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Country } from '../../migrations/00004-createCountriesTable';
 
 type Props = {
   expertCountries: Country[];
+  // setSelectedItems: (data: string[]) => void;
+  setSelectedItems: Dispatch<SetStateAction<string[] | never[]>>;
+
+  selectedItems: string[];
 };
 
 export default function SelectCountry(props: Props) {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  // const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [selectedCountry, setSelectedCountry] = useState('');
 
   const expertCountries = props.expertCountries;
@@ -14,17 +18,18 @@ export default function SelectCountry(props: Props) {
   const countries = expertCountries.map((country) => country.countryName);
 
   const toggleSelection = (item: string) => {
-    if (selectedItems.includes(item)) {
-      setSelectedItems(
-        selectedItems.filter((selectedItem) => selectedItem !== item),
+    if (props.selectedItems.includes(item)) {
+      props.setSelectedItems(
+        props.selectedItems.filter((selectedItem) => selectedItem !== item),
       );
     } else {
-      setSelectedItems([...selectedItems, item]);
+      props.setSelectedItems([...props.selectedItems, item]);
     }
   };
 
   const handleChange = (event: { target: { value: any } }) => {
     const country = event.target.value;
+
     setSelectedCountry(country);
     toggleSelection(country);
     setSelectedCountry('');
@@ -36,7 +41,7 @@ export default function SelectCountry(props: Props) {
         Select countries you have visited
       </h1>
       <div className="flex flex-wrap gap-2 mb-4">
-        {selectedItems.map((item) => (
+        {props.selectedItems.map((item) => (
           <button
             key={`item-${item}`}
             type="button"
@@ -51,7 +56,7 @@ export default function SelectCountry(props: Props) {
         <select
           value={selectedCountry}
           onChange={handleChange}
-          className="bg-gray-300 text-gray-700 px-3 py-1 rounded-full"
+          className="bg-gray-300 text-gray-700 px-5 py-2 rounded-full w-full text-center"
         >
           <option value="" disabled>
             Choose a country
@@ -60,7 +65,7 @@ export default function SelectCountry(props: Props) {
             <option
               key={`country-${country}`}
               value={country}
-              disabled={selectedItems.includes(country)}
+              disabled={props.selectedItems.includes(country)}
             >
               {country.charAt(0).toUpperCase() + country.slice(1)}
             </option>

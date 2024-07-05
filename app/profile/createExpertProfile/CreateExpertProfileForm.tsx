@@ -25,6 +25,8 @@ export default function CreateExpertProfileForm(props: Props) {
   const [pictureUrl, setPictureUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
+  const [selectedItems, setSelectedItems] = useState([]);
+  console.log('selectedItems', selectedItems);
 
   const router = useRouter();
 
@@ -43,6 +45,7 @@ export default function CreateExpertProfileForm(props: Props) {
           pictureUrl,
           videoUrl,
           travelBlogUrl,
+
           // selectedSpecializations: selectedSpecializations.map(
           //   (option) => option.value,
           // ),
@@ -82,7 +85,6 @@ export default function CreateExpertProfileForm(props: Props) {
                 onChange={(event) => setAge(event.currentTarget.value)}
               />
             </label>
-
             <label className="flex flex-col space-y-2">
               <span className="text-lg font-medium text-gray-700">City:</span>
               <input
@@ -91,7 +93,6 @@ export default function CreateExpertProfileForm(props: Props) {
                 onChange={(event) => setCity(event.currentTarget.value)}
               />
             </label>
-
             <label className="flex flex-col space-y-2">
               <span className="text-lg font-medium text-gray-700">
                 Short Bio:
@@ -103,7 +104,6 @@ export default function CreateExpertProfileForm(props: Props) {
                 onChange={(event) => setBio(event.currentTarget.value)}
               />
             </label>
-
             <label className="flex flex-col space-y-2">
               <span className="text-lg font-medium text-gray-700">
                 Travel Blog:
@@ -115,9 +115,13 @@ export default function CreateExpertProfileForm(props: Props) {
                   setTravelBlogUrl(event.currentTarget.value)
                 }
               />
-            </label>
-            <SelectLanguage expertLanguages={props.expertLanguages} />
-            <SelectCountry expertCountries={props.expertCountries} />
+            </label>{' '}
+            <SelectCountry
+              expertCountries={props.expertCountries}
+              setSelectedItems={setSelectedItems as never}
+              selectedItems={selectedItems}
+            />
+            <ExpertiseList expertAreas={props.expertAreas} />
           </div>
 
           <div className="space-y-4">
@@ -140,8 +144,7 @@ export default function CreateExpertProfileForm(props: Props) {
                 onChange={(event) => setVideoUrl(event.currentTarget.value)}
               />
             </label>
-
-            <ExpertiseList expertAreas={props.expertAreas} />
+            <SelectLanguage expertLanguages={props.expertLanguages} />
           </div>
         </div>
 

@@ -51,7 +51,7 @@ export default function SelectExpertise(props: Props) {
         <select
           value={selectedExpertise}
           onChange={handleChange}
-          className="bg-gray-300 text-gray-700 px-3 py-1 rounded-full"
+          className="bg-gray-300 text-gray-700 px-5 py-2 rounded-full w-full text-center"
         >
           <option value="" disabled>
             Choose an expert area
