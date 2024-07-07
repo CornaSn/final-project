@@ -1,5 +1,9 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import {
+  findCountryIdInsecure,
+  insertExpertCountryInsecure,
+} from '../../../database/countriesList';
 import { createExpert } from '../../../database/experts';
 import { getValidSessionById } from '../../../database/sessions';
 import {
@@ -23,7 +27,7 @@ export async function POST(
   try {
     // 1. Get the user data from the request
     const body = await request.json();
-    // console.log('body', body);
+    console.log('body', body);
 
     // 2. Validation schema for request body
     const result = expertSchema.safeParse(body);
@@ -89,18 +93,31 @@ export async function POST(
       result.data.selectedItemsCountries,
     );
 
-    // 5.
-    // selectedItemsCountries,
-    // hier wollen wir result.selectedItemsCountries mit session.userId in -> experts_country-datenbank einfügen
-    //instertAllCountriesInExpertsCountryDB(results.selectedItemsCountries, userID)
+    // 5. Create expert with Countries
 
-    // insertAllCountriesInExpertsCountryDB(coutries, userId){
-    //        for country in countries:
-    //             insertOneCountryInDB(country, userId)
-    //
-    // Der selbe spaß auch noch hier mit languages und experts area
+    await Promise.all(
+      result.data.selectedItemsCountries.map(async (country) => {
+        const countryId = await findCountryIdInsecure(country);
+        console.log('country: ', country);
+        console.log('countryId: ', countryId);
+
+        if (typeof countryId?.id === 'number') {
+          try {
+            const returnFromExpertCountryInsert =
+              await insertExpertCountryInsecure(countryId.id, session.userId);
+
+            console.log(returnFromExpertCountryInsert);
+          } catch (error) {
+            console.error('Error while inserting into DB', error);
+          }
+        }
+      }),
+    );
+
+    // Der selbe Spaß auch hier mit Languages und Experts area
     // selectedItemsLanguages,
     // selectedItemsExpertise,
+
     if (!newExpert) {
       return NextResponse.json(
         {

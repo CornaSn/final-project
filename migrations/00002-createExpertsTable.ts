@@ -25,20 +25,20 @@ export type Expert = {
 };
 
 export type ExpertUser = {
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
   isExpert: boolean;
   createdAt: Date | null;
   updatedAt: Date | null;
-  id: number;
+  userId: number;
   age: string | null;
   city: string | null;
   bio: string | null;
   pictureUrl: string | null;
   videoUrl: string | null;
   travelBlogUrl: string | null;
-  userId: number;
 };
 export async function up(sql: Sql) {
   await sql`
@@ -50,7 +50,7 @@ export async function up(sql: Sql) {
       picture_url varchar(100),
       video_url varchar(100),
       travel_blog_url varchar(100),
-      user_id integer NOT NULL REFERENCES users (id) ON DELETE cascade
+      user_id integer NOT NULL UNIQUE REFERENCES users (id) ON DELETE cascade
     )
   `;
 }

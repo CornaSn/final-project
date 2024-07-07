@@ -15,7 +15,7 @@ export const getExpertsInsecure = cache(async () => {
 });
 
 // Get single user information from database
-export const getExpertInsecure = cache(async (id: number) => {
+export const getExpertByIdInsecure = cache(async (id: number) => {
   const [user] = await sql<Expert[]>`
     SELECT
       *
@@ -56,13 +56,22 @@ export const getAllExpertsWithUserInfoInsecure = cache(async () => {
 
 // Function to get a single expert with user information by ID
 export const getExpertByIdWithUserInfoInsecure = cache(async (id: number) => {
-  const [expert] = await sql<Expert[]>`
+  const [expert] = await sql<ExpertUser[]>`
     SELECT
-      users.first_name,
-      users.last_name,
+      users.first_name AS "firstName",
+      users.last_name AS "lastName",
       users.email,
-      users.is_expert,
-      experts.*
+      users.is_expert AS "isExpert",
+      users.created_at AS "createdAt",
+      users.updated_at AS "updatedAt",
+      experts.id,
+      experts.age,
+      experts.city,
+      experts.bio,
+      experts.picture_url AS "pictureUrl",
+      experts.video_url AS "videoUrl",
+      experts.travel_blog_url AS "travelBlogUrl",
+      experts.user_id AS "userId"
     FROM
       users
       JOIN experts ON (
@@ -73,7 +82,7 @@ export const getExpertByIdWithUserInfoInsecure = cache(async (id: number) => {
       experts.id = ${id}
   `;
 
-  // console.log('expert', expert);
+  console.log('expert', expert);
   return expert;
 });
 
@@ -142,7 +151,7 @@ export const createExpert = cache(
       `;
 
       if (existingExpert.length > 0) {
-        throw new Error('An entry with this user_id already exists');
+        throw new Error('!!!=====> An entry with this user_id already exists');
       }
 
       // Proceed with inserting the new expert profile
@@ -177,8 +186,10 @@ export const createExpert = cache(
       // console.log('New Expert Created:', expert);
 
       return expert;
-    } catch (error) {
-      console.error('Error creating expert:', 'expert profile already exist');
+    } catch (error: any) {
+      // console.error(error.message);
+      // console.error(error);
+      // console.error('Error creating expert:', 'expert profile already exist');
       throw error; // Rethrow the error for further handling
     }
   },
