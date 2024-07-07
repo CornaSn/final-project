@@ -15,11 +15,8 @@ export const getCountriesListInsecure = cache(async () => {
   return countries;
 });
 
-// TODO?? I HAVE NO IDEA
-type CountryId = { id: number };
-
 export const findCountryIdInsecure = cache(async (countryName: string) => {
-  const [countryID] = await sql<CountryId[]>`
+  const [countryId] = await sql<Pick<Country, 'id'>[]>`
     SELECT
       id
     FROM
@@ -27,7 +24,7 @@ export const findCountryIdInsecure = cache(async (countryName: string) => {
     WHERE
       country_name = ${countryName}
   `;
-  return countryID;
+  return countryId;
 });
 
 export const insertExpertCountryInsecure = cache(
@@ -48,38 +45,3 @@ export const insertExpertCountryInsecure = cache(
     return c;
   },
 );
-
-// export const insertExpertCountries = cache(
-//   async (
-//     countries: string[],
-//     userId: number,
-//   ) => {
-
-//     INSERT INTO countries(
-//       userId,
-//       countries) VALUES ('Country1', 'country2'
-//              )
-//   }
-// )
-// export const insertExpertCountries = (CountryList: string, userId: number) => {
-//   // here insert in db
-//   console.log('Here should be inserting into db...');
-
-//   console.log('UserId: ', userId);
-//   console.log('CountryList: ', CountryList);
-//   return true;
-// };
-
-// export const createExpertWithCountry = () => {};
-// cache(
-// async (selectedItemsCountries, userId) => {
-//   const countries = await sql<Country[]>`
-//     SELECT
-//       *
-//     FROM
-//       countries
-//   `;
-
-//   return countries;
-// },
-// ){};

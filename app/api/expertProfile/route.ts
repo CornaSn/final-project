@@ -4,7 +4,15 @@ import {
   findCountryIdInsecure,
   insertExpertCountryInsecure,
 } from '../../../database/countriesList';
+import {
+  findExpertiseIdInsecure,
+  insertExpertExpertiseInsecure,
+} from '../../../database/expertiseList';
 import { createExpert } from '../../../database/experts';
+import {
+  findLanguageIdInsecure,
+  insertExpertLanguageInsecure,
+} from '../../../database/languageList';
 import { getValidSessionById } from '../../../database/sessions';
 import {
   Expert,
@@ -94,12 +102,9 @@ export async function POST(
     );
 
     // 5. Create expert with Countries
-
     await Promise.all(
       result.data.selectedItemsCountries.map(async (country) => {
         const countryId = await findCountryIdInsecure(country);
-        console.log('country: ', country);
-        console.log('countryId: ', countryId);
 
         if (typeof countryId?.id === 'number') {
           try {
@@ -114,9 +119,49 @@ export async function POST(
       }),
     );
 
-    // Der selbe Spaß auch hier mit Languages und Experts area
-    // selectedItemsLanguages,
-    // selectedItemsExpertise,
+    // 6. Create expert with Languages
+    await Promise.all(
+      result.data.selectedItemsLanguages.map(async (language) => {
+        const languageId = await findLanguageIdInsecure(language);
+        if (typeof languageId?.id === 'number') {
+          try {
+            const returnFromExpertLanguageInsert =
+              await insertExpertLanguageInsecure(languageId.id, session.userId);
+
+            console.log(returnFromExpertLanguageInsert);
+          } catch (error) {
+            console.error('Error while inserting into DB', error);
+          }
+        }
+      }),
+    );
+
+    console.log(
+      ' result.data.selectedItemsExpertise',
+      result.data.selectedItemsExpertise,
+    );
+
+    // 7. Create expert with Expertise
+    await Promise.all(
+      result.data.selectedItemsExpertise.map(async (expertise) => {
+        const expertiseId = await findExpertiseIdInsecure(expertise);
+        console.log('=======================================');
+        console.log('expertiseId', expertiseId);
+        if (typeof expertiseId?.id === 'number') {
+          try {
+            const returnFromExpertExpertiseInsert =
+              await insertExpertExpertiseInsecure(
+                expertiseId.id,
+                session.userId,
+              );
+
+            console.log(returnFromExpertExpertiseInsert);
+          } catch (error) {
+            console.error('Error while inserting into DB', error);
+          }
+        }
+      }),
+    );
 
     if (!newExpert) {
       return NextResponse.json(
