@@ -31,7 +31,7 @@ export const insertExpertLanguageInsecure = cache(
   async (languageId: number, userId: number) => {
     const [c] = await sql<ExpertWithLanguages[]>`
       INSERT INTO
-        expert_languages (expert_id, language_id)
+        expert_languages (expert_user_id, language_id)
       VALUES
         (
           ${userId},
@@ -39,7 +39,7 @@ export const insertExpertLanguageInsecure = cache(
         )
       RETURNING
         expert_languages.id,
-        expert_languages.expert_id,
+        expert_languages.expert_user_id,
         expert_languages.language_id
     `;
     return c;

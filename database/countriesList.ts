@@ -45,3 +45,5 @@ export const insertExpertCountryInsecure = cache(
     return c;
   },
 );
+
+// select expert_id from expert_countries where country_id in (1,15);

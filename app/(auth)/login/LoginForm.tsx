@@ -38,8 +38,7 @@ export default function LoginForm() {
       return;
     }
 
-    console.log('=============================DATA==========', data);
-    router.push(`/profile/${data.user.id}`);
+    router.push(`/profile/${data.user.email}`);
     router.refresh();
   }
 

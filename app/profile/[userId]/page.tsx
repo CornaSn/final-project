@@ -33,8 +33,7 @@ export default async function UserProfil() {
 
   if (user.isExpert) {
     // TODO: this should be removed
-    redirect('/profile/createExpertProfile');
-    // console.log('expertAreasPage', expertAreas);
+    redirect(`/profile/${userId}`);
 
     // Fetch select fields for user profile
     const expertAreas = await getExpertiseListInsecure();

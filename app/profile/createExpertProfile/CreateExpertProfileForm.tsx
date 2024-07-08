@@ -8,6 +8,7 @@ import { Expertise } from '../../../migrations/00008-createExpertiseTable';
 import { CreateExpertProfileRequestBody } from '../../api/expertProfile/route';
 import SelectCountry from '../../components/selectCountries';
 import ExpertiseList from '../../components/selectExpertise';
+import SelectExpertise from '../../components/selectExpertise';
 import SelectLanguage from '../../components/selectLanguages';
 import ErrorMessage from '../../ErrorMessage';
 
@@ -63,7 +64,7 @@ export default function CreateExpertProfileForm(props: Props) {
       return;
     }
 
-    router.push(`/profile/}`);
+    router.push(`/profile/${data.expert.userId}}`);
     router.refresh();
   }
 
@@ -127,7 +128,7 @@ export default function CreateExpertProfileForm(props: Props) {
               setSelectedItemsCountries={setSelectedItemsCountries as never}
               selectedItemsCountries={selectedItemsCountries}
             />
-            <ExpertiseList
+            <SelectExpertise
               expertAreas={props.expertAreas}
               setSelectedItemsExpertise={setSelectedItemsExpertise}
               selectedItemsExpertise={selectedItemsExpertise}

@@ -3,17 +3,22 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ExpertUser } from '../../../migrations/00002-createExpertsTable';
+import { Country } from '../../../migrations/00004-createCountriesTable';
+import { Expertise } from '../../../migrations/00008-createExpertiseTable';
 import SelectExpertise from '../../components/selectExpertise';
-import ErrorMessage from '../../ErrorMessage';
 
 type Props = {
-  experts: ExpertUser[];
+  userId: number | undefined;
+  expertAreas: Expertise[];
+  expertCountries: Country[];
 };
 
 export default function ExpertsForm(props: Props) {
-  // console.log('all Props', props);
-  const [region, setRegion] = useState('');
-  const [interests, setInterests] = useState('');
+  // // console.log('all Props', props);
+  // const [selectedCountry, setSelectedCountry] = useState([]);
+  // const [selectedItemsExpertise, setSelectedItemsExpertise] = useState<
+  //   string[]
+  // >([]);
 
   const router = useRouter();
 
@@ -49,7 +54,10 @@ export default function ExpertsForm(props: Props) {
           >
             Choose an expert area:
           </label>
-          <SelectExpertise />
+          {/* <SelectExpertise
+          // selectedExpertise={selectedExpertise}
+          // setSelectedExpertise={setSelectedExpertise}
+          /> */}
         </div>
       </div>
     </div>
