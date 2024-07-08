@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { getExpertCountryInsecure } from '../../../database/countriesList';
+import { getExpertExpertiseInsecure } from '../../../database/expertiseList';
 import { getExpertByIdWithUserInfoInsecure } from '../../../database/experts';
 import { getExpertLanguagesInsecure } from '../../../database/languageList';
 
@@ -31,37 +32,10 @@ export default async function ExpertPage(props: Props) {
   if (!singleExpert) {
     notFound();
   }
-
+  // Fetch experts selected choices form Country, Language and Expertise
   const expertCountries = await getExpertCountryInsecure(singleExpert.userId);
-  console.log('expertCountries**********************', expertCountries);
-
   const expertLanguages = await getExpertLanguagesInsecure(singleExpert.userId);
-  console.log('expertLanguages**********************', expertLanguages);
-
-  const singleExpertHardcoded = {
-    firstName: 'Cornelia',
-    lastName: 'S.',
-    age: 31,
-    city: 'Vienna',
-    languages: ['English', 'German'],
-    expertAreas: [
-      'Expert Area 1',
-      'Expert Area 2',
-      'Expert Area 3',
-      'Expert Area 4',
-    ],
-    bio: 'I love to travel',
-    countriesVisited: [
-      'Country 1',
-      'Country 2',
-      'Country 3',
-      'Country 4',
-      'Country 5',
-      'Country 6',
-      'Country 7',
-      'Country 8',
-    ],
-  };
+  const expertExpertise = await getExpertExpertiseInsecure(singleExpert.userId);
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -96,10 +70,11 @@ export default async function ExpertPage(props: Props) {
             <div className="mt-4">
               <h3 className="text-gray-600 font-semibold">Expert Areas:</h3>
               <ul className="text-gray-600">
-                {singleExpertHardcoded.expertAreas.map((area, index) => (
-                  <li key={index}>
-                    <i className="fas fa-star text-yellow-500" /> {area}
-                  </li>
+                {expertExpertise.map((expertiseArea) => (
+                  <div key={`expertiseArea-${expertiseArea.expertisename}`}>
+                    <i className="fas fa-star text-yellow-500" />{' '}
+                    {expertiseArea.expertisename}
+                  </div>
                 ))}
               </ul>
             </div>

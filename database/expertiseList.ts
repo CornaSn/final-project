@@ -1,7 +1,10 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
 import { Expertise } from '../migrations/00008-createExpertiseTable';
-import { ExpertWithExpertise } from '../migrations/00014-createExpertsTableWithExpertise';
+import {
+  ExpertWithExpertise,
+  ExpertWithExpertiseName,
+} from '../migrations/00014-createExpertsTableWithExpertise';
 
 // Get whole list of areas
 export const getExpertiseListInsecure = cache(async () => {
@@ -46,3 +49,22 @@ export const insertExpertExpertiseInsecure = cache(
     return c;
   },
 );
+
+export const getExpertExpertiseInsecure = cache(async (id: number) => {
+  const expertExpertise = await sql<ExpertWithExpertiseName[]>`
+    SELECT
+      expert_expertise.expertise_id AS expertiseid,
+      expertise.expertise_name AS expertisename
+    FROM
+      expert_expertise
+      INNER JOIN expertise ON expert_expertise.expertise_id = expertise.id
+    WHERE
+      expert_expertise.expert_user_id = ${id}
+  `;
+
+  console.log(
+    '========================================= expertExpertise',
+    expertExpertise,
+  );
+  return expertExpertise;
+});
