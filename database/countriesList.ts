@@ -31,7 +31,7 @@ export const insertExpertCountryInsecure = cache(
   async (countryId: number, userId: number) => {
     const [c] = await sql<ExpertWithCountries[]>`
       INSERT INTO
-        expert_countries (expert_id, country_id)
+        expert_countries (expert_user_id, country_id)
       VALUES
         (
           ${userId},
@@ -39,7 +39,7 @@ export const insertExpertCountryInsecure = cache(
         )
       RETURNING
         expert_countries.id,
-        expert_countries.expert_id,
+        expert_countries.expert_user_id,
         expert_countries.country_id
     `;
     return c;

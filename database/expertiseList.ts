@@ -29,18 +29,18 @@ export const findExpertiseIdInsecure = cache(async (expertiseName: string) => {
 });
 
 export const insertExpertExpertiseInsecure = cache(
-  async (expertiseId: number, userId: number) => {
+  async (expertiseId: number, expertUserId: number) => {
     const [c] = await sql<ExpertWithExpertise[]>`
       INSERT INTO
-        expert_expertise (expert_id, expertise_id)
+        expert_expertise (expert_user_id, expertise_id)
       VALUES
         (
-          ${userId},
+          ${expertUserId},
           ${expertiseId}
         )
       RETURNING
         expert_expertise.id,
-        expert_expertise.expert_id,
+        expert_expertise.expert_user_id,
         expert_expertise.expertise_id
     `;
     return c;

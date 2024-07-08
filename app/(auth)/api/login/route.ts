@@ -12,7 +12,7 @@ import { secureCookieOptions } from '../../../../util/cookies';
 
 export type LoginResponseBodyPost =
   | {
-      user: Pick<User, 'id'>;
+      user: Pick<User, 'email'>;
     }
   | {
       errors: {
@@ -91,6 +91,7 @@ export async function POST(
     ...secureCookieOptions,
   });
 
+  // 8. Return the new user information without the password hash
   return NextResponse.json({
     user: {
       email: 'Success',
