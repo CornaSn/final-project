@@ -9,6 +9,7 @@ import { CreateExpertProfileRequestBody } from '../../api/expertProfile/route';
 import SelectCountry from '../../components/selectCountries';
 import ExpertiseList from '../../components/selectExpertise';
 import SelectLanguage from '../../components/selectLanguages';
+import ErrorMessage from '../../ErrorMessage';
 
 type Props = {
   userId: number | undefined;
@@ -25,52 +26,43 @@ export default function CreateExpertProfileForm(props: Props) {
   const [pictureUrl, setPictureUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
-
   const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
-  // console.log('selectedItemsCountries', selectedItemsCountries);
-
   const [selectedItemsLanguages, setSelectedItemsLanguages] = useState([]);
-  // console.log('selectedItemsLanguages', selectedItemsLanguages);
-
   const [selectedItemsExpertise, setSelectedItemsExpertise] = useState<
     string[]
   >([]);
-  // console.log('selectedItemsExpertise', selectedItemsExpertise);
+  const [errors, setErrors] = useState<{ message: string }[]>([]);
 
   const router = useRouter();
 
   async function handleProfileCreation(
     event: React.FormEvent<HTMLFormElement>,
   ) {
-    console.log(
-      'Start of handleProfileCreation <-------------------------------------------------------',
-    );
     event.preventDefault();
-    try {
-      const response = await fetch('/api/expertProfile', {
-        method: 'POST',
-        body: JSON.stringify({
-          userId: props.userId,
-          age,
-          city,
-          bio,
-          pictureUrl,
-          videoUrl,
-          travelBlogUrl,
-          selectedItemsCountries,
-          selectedItemsLanguages,
-          selectedItemsExpertise,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log('response', response);
-      const data: CreateExpertProfileRequestBody = await response.json();
-      console.log('data', data);
-    } catch (error) {
-      console.error('An error occurred during profile creation:', error);
+    const response = await fetch('/api/expertProfile', {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: props.userId,
+        age,
+        city,
+        bio,
+        pictureUrl,
+        videoUrl,
+        travelBlogUrl,
+        selectedItemsCountries,
+        selectedItemsLanguages,
+        selectedItemsExpertise,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data: CreateExpertProfileRequestBody = await response.json();
+    if ('errors' in data) {
+      setErrors(data.errors);
+      return;
     }
+
     router.push(`/profile/}`);
     router.refresh();
   }

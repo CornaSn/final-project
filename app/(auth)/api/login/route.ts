@@ -25,17 +25,14 @@ export async function POST(
 ): Promise<NextResponse<LoginResponseBodyPost>> {
   // 1. Get the user data from the request
   const body = await request.json();
-  // console.log('body login', body);
 
   // Convert email to lowercase if it's present in the body
   if (body && body.email) {
     body.email = body.email.toLowerCase();
   }
-  // console.log('body', body);
 
   // 2. Validate the user data with zod Schema
   const result = userSchema.safeParse(body);
-  // console.log('result', result);
 
   if (!result.success) {
     return NextResponse.json(
@@ -50,7 +47,6 @@ export async function POST(
   const userWithPasswordHash = await getUserWithPasswordHashInsecure(
     result.data.email,
   );
-  // console.log('userWithPasswordHash', userWithPasswordHash);
 
   if (!userWithPasswordHash) {
     return NextResponse.json(
@@ -73,11 +69,9 @@ export async function POST(
       },
     );
   }
-  // console.log('passwordHash', passwordHash);
 
   // 5. Create a token
   const token = crypto.randomBytes(100).toString('base64');
-  // console.log('token', token);
 
   // 6. Create Session record
   const session = await createSessionInsecure(token, userWithPasswordHash.id);
@@ -89,7 +83,6 @@ export async function POST(
       },
     );
   }
-  // console.log('sessions', sessions);
 
   //  7. Send new cookie to the header
   cookies().set({

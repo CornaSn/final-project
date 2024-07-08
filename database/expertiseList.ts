@@ -11,8 +11,7 @@ export const getExpertiseListInsecure = cache(async () => {
     FROM
       expertise
   `;
-  console.log('=======================================');
-  console.log('expertise', expertise);
+
   return expertise;
 });
 
@@ -25,8 +24,7 @@ export const findExpertiseIdInsecure = cache(async (expertiseName: string) => {
     WHERE
       expertise_name = ${expertiseName}
   `;
-  console.log('=======================================');
-  console.log('expertiseId', expertiseId);
+
   return expertiseId;
 });
 
@@ -45,8 +43,6 @@ export const insertExpertExpertiseInsecure = cache(
         expert_expertise.expert_id,
         expert_expertise.expertise_id
     `;
-    console.log('=======================================');
-    console.log('c', c);
     return c;
   },
 );

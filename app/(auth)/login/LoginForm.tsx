@@ -32,13 +32,13 @@ export default function LoginForm() {
       },
     });
     const data: LoginResponseBodyPost = await response.json();
-    // console.log('LoginResponseBodyDATA', data);
 
     if ('errors' in data) {
       setErrors(data.errors);
       return;
     }
 
+    console.log('=============================DATA==========', data);
     router.push(`/profile/${data.user.id}`);
     router.refresh();
   }
@@ -70,7 +70,7 @@ export default function LoginForm() {
 
           <label className="flex flex-col gap-1">
             <span className="text-sm font-medium text-gray-700">
-              Retyype your password:
+              Retype your password:
             </span>
             <input
               className="input input-bordered grow"

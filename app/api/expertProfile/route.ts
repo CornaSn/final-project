@@ -35,11 +35,9 @@ export async function POST(
   try {
     // 1. Get the user data from the request
     const body = await request.json();
-    console.log('body', body);
 
     // 2. Validation schema for request body
     const result = expertSchema.safeParse(body);
-    console.log('result', result);
 
     if (!result.success) {
       return NextResponse.json(
@@ -69,12 +67,9 @@ export async function POST(
         { status: 401 },
       );
     }
-    // console.log('sessionCookie', sessionCookie);
 
     const sessionToken = sessionCookie.value;
-    // console.log('sessionToken', sessionToken);
     const session = await getValidSessionById(sessionToken);
-    // console.log('session', session);
 
     if (!session) {
       // Handle case where session is invalid or expired
@@ -94,12 +89,6 @@ export async function POST(
       travelBlogUrl: result.data.travelBlogUrl || null,
       userId: session.userId,
     });
-    console.log('newExpert', newExpert);
-
-    console.log(
-      'result.data.selectedItemsCountries',
-      result.data.selectedItemsCountries,
-    );
 
     // 5. Create expert with Countries
     await Promise.all(
@@ -136,17 +125,10 @@ export async function POST(
       }),
     );
 
-    console.log(
-      ' result.data.selectedItemsExpertise',
-      result.data.selectedItemsExpertise,
-    );
-
     // 7. Create expert with Expertise
     await Promise.all(
       result.data.selectedItemsExpertise.map(async (expertise) => {
         const expertiseId = await findExpertiseIdInsecure(expertise);
-        console.log('=======================================');
-        console.log('expertiseId', expertiseId);
         if (typeof expertiseId?.id === 'number') {
           try {
             const returnFromExpertExpertiseInsert =
