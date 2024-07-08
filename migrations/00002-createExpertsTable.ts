@@ -40,6 +40,23 @@ export type ExpertUser = {
   videoUrl: string | null;
   travelBlogUrl: string | null;
 };
+
+export type ExpertUserWithChoices = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  isExpert: boolean;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  bio: string | null;
+  countryId: number[] | null;
+  countryName: string[] | null;
+  languageId: number[] | null;
+  language: string[] | null;
+  expertiseId: number[] | null;
+  expertiseName: string[] | null;
+};
+
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE experts (

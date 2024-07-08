@@ -69,19 +69,19 @@ export default function Home() {
         </svg>
 
         <div>
-          <h1 className="text-5xl font-bold font-poppins text-left">
-            The most fun way to plan YOUR perfect getaway
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold font-poppins text-left mt-6 mb-6 whitespace-pre-wrap">
+            The most fun way to plan <strong>YOUR</strong> perfect getaway
           </h1>
-          <a className="text-3xl md:text-4xl lg:text-5xl font-bold font-amatic text-left">
+          <a className="text-1xl md:text-2xl lg:text-3xl xl:text-4xl font-bold font-amatic-sc text-left mt-4">
             Match with Travel Experts and make your dream vacation a reality!
           </a>
-          <p className="text-m font-light font-poppins text-left">
+          <p className="text-base md:text-lg font-light font-poppins text-left mt-4">
             Connect with professionals who can craft the perfect trip tailored
             to your desires. Whether you crave adventure or relaxation, discover
             amazing destinations and enjoy personalized planning for a
             stress-free, unforgettable travel experience.
           </p>
-          <Link className="btn btn-primary" href="/register">
+          <Link className="btn btn-primary mt-6" href="/register">
             Register
           </Link>
         </div>

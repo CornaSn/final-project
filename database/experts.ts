@@ -1,6 +1,10 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
-import { Expert, ExpertUser } from '../migrations/00002-createExpertsTable';
+import {
+  Expert,
+  ExpertUser,
+  ExpertUserWithChoices,
+} from '../migrations/00002-createExpertsTable';
 
 // Get whole database information
 export const getExpertsInsecure = cache(async () => {
@@ -162,5 +166,74 @@ export const createExpert = cache(
       // console.error('Error creating expert:', 'expert profile already exist');
       throw error; // Rethrow the error for further handling
     }
+  },
+);
+
+// export const getExpertWithUserInfoAndChoicesInsecure = cache(
+//   async (userId: number) => {
+//     const experts = await sql<ExpertUserWithChoices[]>`
+//       SELECT
+//         users.first_name,
+//         users.last_name,
+//         users.email,
+//         users.is_expert,
+//         users.created_at,
+//         users.updated_at,
+//         experts.bio,
+//         expert_countries.country_id,
+//         countries.country_name,
+//         expert_languages.language_id,
+//         languages.language,
+//         expert_expertise.expertise_id,
+//         expertise.expertise_name
+//       FROM
+//         users
+//         JOIN experts ON users.id = experts.user_id
+//         LEFT JOIN expert_countries ON experts.user_id = expert_countries.expert_user_id
+//         LEFT JOIN countries ON expert_countries.country_id = countries.id
+//         LEFT JOIN expert_languages ON experts.user_id = expert_languages.expert_user_id
+//         LEFT JOIN languages ON expert_languages.language_id = languages.id
+//         LEFT JOIN expert_expertise ON experts.user_id = expert_expertise.expert_user_id
+//         LEFT JOIN expertise ON expert_expertise.expertise_id = expertise.id
+//       WHERE
+//         users.id = ${userId}
+//         AND users.is_expert = TRUE
+//     `;
+//     console.log('========================================= experts', experts);
+//     return experts;
+//   },
+// );
+
+export const getAllExpertUserInformationByUserIdInsecure = cache(
+  async (id: number) => {
+    const [expert] = await sql<ExpertUserWithChoices[]>`
+      SELECT
+        USER.id AS user_id,
+        USER.first_name AS user_first_name,
+        USER.last_name AS USER.last_name
+        -- Return empty array instead of [null] if no country is found
+        coalesce(
+          json_agg(countries.*) FILTER (
+            WHERE
+              country.id IS NOT NULL
+          ),
+          '[]'
+        ) AS expert_countries
+      FROM
+        users
+        LEFT JOIN expert_countries ON experts.user_id = expert_countries.expert_user_id
+        LEFT JOIN countries ON expert_countries.country_id = countries.id
+      WHERE
+        users.id = ${id}
+      GROUP BY
+        users.first_name,
+        users.last_name,
+        users.id
+    `;
+    console.log(
+      '================================================EXPERT',
+      expert,
+    );
+    return expert;
   },
 );

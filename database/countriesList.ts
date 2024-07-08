@@ -45,7 +45,7 @@ export const insertExpertCountryInsecure = cache(
         expert_countries.expert_user_id,
         expert_countries.country_id
     `;
-      return expertWithCountries;
+    return expertWithCountries;
   },
 );
 

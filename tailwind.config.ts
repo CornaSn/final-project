@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         poppins: ['Poppins', 'sans - serif'],
+        'amatic-sc': ['Amatic SC', 'cursive'],
       },
     },
   },
