@@ -61,9 +61,9 @@ export const getExpertLanguagesInsecure = cache(async (id: number) => {
       expert_languages.expert_user_id = ${id}
   `;
 
-  console.log(
-    '========================================= expertLanguages',
-    expertLanguages,
-  );
+  // console.log(
+  //   '========================================= expertLanguages',
+  //   expertLanguages,
+  // );
   return expertLanguages;
 });

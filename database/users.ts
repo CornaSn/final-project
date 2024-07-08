@@ -49,8 +49,8 @@ export const getUser = cache(async (sessionToken: string) => {
   const [user] = await sql<User[]>`
     SELECT
       users.id AS id,
-      users.first_name AS firstname,
-      users.last_name AS lastname,
+      users.first_name AS first_name,
+      users.last_name AS last_name,
       users.email AS email,
       users.is_expert AS isexpert,
       users.created_at AS created_at,

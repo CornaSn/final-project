@@ -42,18 +42,14 @@ export type ExpertUser = {
 };
 
 export type ExpertUserWithChoices = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  isExpert: boolean;
-  createdAt: Date | null;
-  updatedAt: Date | null;
+  userId: number | null;
+  firstName: string | null;
+  lastName: string | null;
   bio: string | null;
-  countryId: number[] | null;
+  city: string | null;
+  age: string | null;
   countryName: string[] | null;
-  languageId: number[] | null;
-  language: string[] | null;
-  expertiseId: number[] | null;
+  languageName: string[] | null;
   expertiseName: string[] | null;
 };
 

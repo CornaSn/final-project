@@ -1,10 +1,15 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
+import { User } from '../migrations/00000-createUsersTable';
 import {
   Expert,
   ExpertUser,
   ExpertUserWithChoices,
 } from '../migrations/00002-createExpertsTable';
+import { getExpertCountryInsecure } from './countriesList';
+import { getExpertExpertiseInsecure } from './expertiseList';
+import { getExpertLanguagesInsecure } from './languageList';
+import { getUserByIdInsecure } from './users';
 
 // Get whole database information
 export const getExpertsInsecure = cache(async () => {
@@ -169,71 +174,66 @@ export const createExpert = cache(
   },
 );
 
-// export const getExpertWithUserInfoAndChoicesInsecure = cache(
-//   async (userId: number) => {
-//     const experts = await sql<ExpertUserWithChoices[]>`
-//       SELECT
-//         users.first_name,
-//         users.last_name,
-//         users.email,
-//         users.is_expert,
-//         users.created_at,
-//         users.updated_at,
-//         experts.bio,
-//         expert_countries.country_id,
-//         countries.country_name,
-//         expert_languages.language_id,
-//         languages.language,
-//         expert_expertise.expertise_id,
-//         expertise.expertise_name
-//       FROM
-//         users
-//         JOIN experts ON users.id = experts.user_id
-//         LEFT JOIN expert_countries ON experts.user_id = expert_countries.expert_user_id
-//         LEFT JOIN countries ON expert_countries.country_id = countries.id
-//         LEFT JOIN expert_languages ON experts.user_id = expert_languages.expert_user_id
-//         LEFT JOIN languages ON expert_languages.language_id = languages.id
-//         LEFT JOIN expert_expertise ON experts.user_id = expert_expertise.expert_user_id
-//         LEFT JOIN expertise ON expert_expertise.expertise_id = expertise.id
-//       WHERE
-//         users.id = ${userId}
-//         AND users.is_expert = TRUE
-//     `;
-//     console.log('========================================= experts', experts);
-//     return experts;
-//   },
-// );
+export const getExpertUserWithChoicesInsecure = cache(async (id: number) => {
+  const expertChoices = {} as ExpertUserWithChoices;
 
-export const getAllExpertUserInformationByUserIdInsecure = cache(
-  async (id: number) => {
-    const [expert] = await sql<ExpertUserWithChoices[]>`
-      SELECT
-        USER.id AS user_id,
-        USER.first_name AS user_first_name,
-        USER.last_name AS USER.last_name
-        -- Return empty array instead of [null] if no country is found
-        coalesce(
-          json_agg(countries.*) FILTER (
-            WHERE
-              country.id IS NOT NULL
-          ),
-          '[]'
-        ) AS expert_countries
-      FROM
-        users
-        LEFT JOIN expert_countries ON experts.user_id = expert_countries.expert_user_id
-        LEFT JOIN countries ON expert_countries.country_id = countries.id
-      WHERE
-        users.id = ${id}
-      GROUP BY
-        users.first_name,
-        users.last_name,
-        users.id
-    `;
-    console.log(
-      '================================================EXPERT',
-      expert,
-    );
-    return expert;
-  },
-);
+  const countryList = await getExpertCountryInsecure(id);
+  const countryNameList: string[] = countryList.map((entry) => {
+    return entry.countryname;
+  });
+
+  const languageList = await getExpertLanguagesInsecure(id);
+  const languageNameList: string[] = languageList.map((entry) => {
+    return entry.languagename;
+  });
+
+  const expertiseList = await getExpertExpertiseInsecure(id);
+  const expertiseNameList: string[] = expertiseList.map((entry) => {
+    return entry.expertisename;
+  });
+
+  console.log(expertChoices.userId);
+
+  expertChoices.userId = id;
+  expertChoices.countryName = countryNameList;
+  expertChoices.languageName = languageNameList;
+  expertChoices.expertiseName = expertiseNameList;
+
+  const expertInfo = await getExpertByIdInsecure(id);
+  if (typeof expertInfo?.bio === 'string') {
+    expertChoices.bio = expertInfo.bio;
+  }
+  if (typeof expertInfo?.city === 'string') {
+    expertChoices.city = expertInfo.city;
+  }
+  if (typeof expertInfo?.age == 'string') {
+    expertChoices.age = expertInfo.age;
+  }
+
+  const userInfo = await getUserByIdInsecure(id);
+  if (typeof userInfo?.firstName === 'string') {
+    expertChoices.firstName = userInfo.firstName;
+  }
+  if (typeof userInfo?.lastName === 'string') {
+    expertChoices.lastName = userInfo.lastName;
+  }
+
+  return expertChoices;
+});
+
+type AllExpertListType = { userId: number };
+
+export const getAllExpertUserWithChoicesInsecure = cache(async () => {
+  const allExpertIds = await sql<AllExpertListType[]>`
+    SELECT
+      experts.user_id
+    FROM
+      experts
+  `;
+
+  return Promise.all(
+    allExpertIds.map(async (entry) => {
+      return await getExpertUserWithChoicesInsecure(entry.userId);
+    }),
+  );
+});

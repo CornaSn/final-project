@@ -62,9 +62,9 @@ export const getExpertExpertiseInsecure = cache(async (id: number) => {
       expert_expertise.expert_user_id = ${id}
   `;
 
-  console.log(
-    '========================================= expertExpertise',
-    expertExpertise,
-  );
+  // console.log(
+  //   '========================================= expertExpertise',
+  //   expertExpertise,
+  // );
   return expertExpertise;
 });
