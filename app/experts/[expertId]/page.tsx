@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getExpertCountryInsecure } from '../../../database/countriesList';
 import { getExpertByIdWithUserInfoInsecure } from '../../../database/experts';
 
 export async function generateMetadata(props: Props) {
@@ -28,6 +29,9 @@ export default async function ExpertPage(props: Props) {
   if (!singleExpert) {
     notFound();
   }
+
+  const expertCountries = await getExpertCountryInsecure(singleExpert.userId);
+  console.log('expertCountries**********************', expertCountries);
 
   const singleExpertHardcoded = {
     firstName: 'Cornelia',
@@ -82,7 +86,7 @@ export default async function ExpertPage(props: Props) {
               <ul className="text-gray-600">
                 {singleExpertHardcoded.expertAreas.map((area, index) => (
                   <li key={index}>
-                    <i className="fas fa-star text-yellow-500"></i> {area}
+                    <i className="fas fa-star text-yellow-500" /> {area}
                   </li>
                 ))}
               </ul>
@@ -90,10 +94,10 @@ export default async function ExpertPage(props: Props) {
           </div>
         </div>
         <div className="absolute right-6 top-20 flex flex-col space-y-2">
-          <Link className="btn btn-primary" href="/get-in-touch">
+          <Link className="btn btn-primary" href="/">
             Get in touch
           </Link>
-          <Link className="btn btn-primary" href="/travel-blog-url">
+          <Link className="btn btn-primary" href="/">
             My Blog{' '}
           </Link>
         </div>
@@ -103,17 +107,17 @@ export default async function ExpertPage(props: Props) {
             Countries visited
           </h3>
           <div className="grid grid-cols-3 gap-4 mt-4 text-gray-600">
-            {singleExpertHardcoded.countriesVisited.map((country, index) => (
-              <div key={index}>
-                <i className="fas fa-globe text-gray-600 mr-2"></i>
-                {country}
+            {expertCountries.map((country) => (
+              <div key={`country-${country.countryname}`}>
+                <i className="fas fa-globe text-gray-600 mr-2" />
+                {country.countryname}
               </div>
             ))}
           </div>
         </div>
 
         <div className="absolute top-6 right-6 text-gray-500">
-          <i className="fas fa-heart"></i>
+          <i className="fas fa-heart" />
         </div>
         <div className="mt-8 bg-gray-200 w-full h-64 flex items-center justify-center">
           <span className="text-gray-500">Video Placeholder</span>

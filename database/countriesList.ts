@@ -1,7 +1,10 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
 import { Country } from '../migrations/00004-createCountriesTable';
-import { ExpertWithCountries } from '../migrations/00010-createExpertsTableWithCountries';
+import {
+  ExpertWithCountries,
+  ExpertWithCountriesName,
+} from '../migrations/00010-createExpertsTableWithCountries';
 
 // Get whole list of areas
 export const getCountriesListInsecure = cache(async () => {
@@ -42,8 +45,28 @@ export const insertExpertCountryInsecure = cache(
         expert_countries.expert_user_id,
         expert_countries.country_id
     `;
+    console.log('==========', c);
     return c;
   },
 );
 
 // select expert_id from expert_countries where country_id in (1,15);
+
+export const getExpertCountryInsecure = cache(async (id: number) => {
+  const expertCountries = await sql<ExpertWithCountriesName[]>`
+    SELECT
+      expert_countries.country_id AS countryid,
+      countries.country_name AS countryname
+    FROM
+      expert_countries
+      INNER JOIN countries ON expert_countries.country_id = countries.id
+    WHERE
+      expert_countries.expert_user_id = ${id}
+  `;
+
+  console.log(
+    '========================================= expertCountries',
+    expertCountries,
+  );
+  return expertCountries;
+});

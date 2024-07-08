@@ -1,6 +1,4 @@
 import './globals.css';
-import Link from 'next/link';
-import LogoutButton from './(auth)/logout/LogoutButton';
 import Navbar from './components/Navbar';
 
 // TODO: Add Titel and Description
