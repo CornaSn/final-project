@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getExpertByIdWithUserInfoInsecure } from '../../../database/experts';
 
@@ -63,9 +64,6 @@ export default async function ExpertPage(props: Props) {
               src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
               alt="Profile"
             />
-            <span className="absolute top-0 right-0 mt-2 mr-2 text-gray-500">
-              <i className="fas fa-heart"></i>
-            </span>
           </div>
           <div className="mt-8 lg:mt-0 lg:ml-8 flex-grow">
             <div className="flex justify-between items-center">
@@ -76,26 +74,28 @@ export default async function ExpertPage(props: Props) {
             <p className="mt-2 text-gray-600">
               {singleExpert.age}, {singleExpert.city}
             </p>
-            <p className="mt-2 text-gray-600">
+            <p className="text-gray-600">
               {singleExpertHardcoded.languages.join(', ')}
             </p>
             <div className="mt-4">
               <h3 className="text-gray-600 font-semibold">Expert Areas:</h3>
               <ul className="text-gray-600">
                 {singleExpertHardcoded.expertAreas.map((area, index) => (
-                  <li key={index}>{area}</li>
+                  <li key={index}>
+                    <i className="fas fa-star text-yellow-500"></i> {area}
+                  </li>
                 ))}
               </ul>
-              <div className="absolute right-6 top-20 flex flex-col space-y-2">
-                <button className="bg-black text-white py-2 px-4 rounded shadow hover:bg-gray-800">
-                  Get in touch
-                </button>
-                <button className="bg-black text-white py-2 px-4 rounded shadow hover:bg-gray-800">
-                  My blog
-                </button>
-              </div>
             </div>
           </div>
+        </div>
+        <div className="absolute right-6 top-20 flex flex-col space-y-2">
+          <Link className="btn btn-primary" href="/get-in-touch">
+            Get in touch
+          </Link>
+          <Link className="btn btn-primary" href="/travel-blog-url">
+            My Blog{' '}
+          </Link>
         </div>
         <p className="mt-6 text-gray-600">{singleExpert.bio}</p>
         <div className="mt-8">
@@ -104,7 +104,10 @@ export default async function ExpertPage(props: Props) {
           </h3>
           <div className="grid grid-cols-3 gap-4 mt-4 text-gray-600">
             {singleExpertHardcoded.countriesVisited.map((country, index) => (
-              <div key={index}>{country}</div>
+              <div key={index}>
+                <i className="fas fa-globe text-gray-600 mr-2"></i>
+                {country}
+              </div>
             ))}
           </div>
         </div>
