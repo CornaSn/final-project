@@ -1,4 +1,14 @@
-import { getAllExpertsWithUserInfoInsecure } from '../../database/experts';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { getCountriesListInsecure } from '../../database/countriesList';
+import { getExpertiseListInsecure } from '../../database/expertiseList';
+import {
+  getAllExpertsWithUserInfoInsecure,
+  getExpertWithUserById,
+} from '../../database/experts';
+import { getLanguageListInsecure } from '../../database/languageList';
+import { getValidSessionById } from '../../database/sessions';
+import ExpertsForm from './ExpertForm';
 
 export const metadata = {
   title: 'All_experts',
@@ -6,41 +16,29 @@ export const metadata = {
 };
 
 export default async function Experts() {
-  const experts = await getAllExpertsWithUserInfoInsecure();
-  // console.log('experts with user info', experts);
+  // 1. Checking if the sessionToken cookie exists
+  const sessionCookie = cookies().get('sessionToken');
+  // console.log('sessionCookie', sessionCookie);
+
+  // 2. Check if the sessionToken cookie is still valid
+  const session =
+    sessionCookie && (await getValidSessionById(sessionCookie.value));
+  // console.log('session', session);
+
+  // 3. If sessionToken cookie is invalid of doesn't exist, redirect to login with returnTo
+  if (!session) {
+    return redirect('/login?returnTo=/experts');
+  }
+  const userId = session.userId;
+
+  // Fetch select fields for user profile
+  const interestedExpertise = await getExpertiseListInsecure();
+  const interestedCountries = await getCountriesListInsecure();
 
   return (
-    <div className="flex justify-center p-4">
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl">
-        {experts.map((expert) => (
-          <div
-            key={`expert-${expert.id}`}
-            className="card bg-base-100 shadow-xl p-4 flex"
-          >
-            <div className="avatar mr-4">
-              <div className="w-12 rounded-full">
-                <img
-                  alt="profilepciture"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                  className="rounded-full"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <div className="font-bold text-xl mb-2">
-                {expert.firstName.toUpperCase()}{' '}
-                {expert.lastName.charAt(0).toUpperCase()}. {expert.age}
-              </div>
-
-              <div>City: {expert.city}</div>
-              <div>Bio: {expert.bio}</div>
-              <div>Languages: </div>
-              <div>Countries: </div>
-              <div>Expert Areas: </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <ExpertsForm
+    interestedExpertise={interestedExpertise}
+    interestedCountries={interestedCountries}
+    />
   );
 }
