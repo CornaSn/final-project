@@ -23,7 +23,7 @@ export default async function Navbar() {
       <div className="flex-none gap-2">
         {user ? (
           <>
-            <Link href={`/profile/${user.firstName}`} />
+            <Link href={`/profile/${user.id}`} />
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -42,7 +42,9 @@ export default async function Navbar() {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">Profile</a>
+                  <a className="justify-between" href={`/profile/${user.id}`}>
+                    Profile
+                  </a>
                 </li>
                 <li>
                   <a>About</a>

@@ -54,6 +54,7 @@ export default async function ExpertPage(props: Props) {
                 {singleExpert.firstName} {singleExpert.lastName}
               </h2>
             </div>
+
             <p className="mt-2 text-gray-600">
               {singleExpert.age}, {singleExpert.city}
             </p>
@@ -80,6 +81,7 @@ export default async function ExpertPage(props: Props) {
             </div>
           </div>
         </div>
+
         <div className="absolute right-6 top-20 flex flex-col space-y-2">
           <Link className="btn btn-primary" href="/">
             Get in touch
@@ -87,6 +89,9 @@ export default async function ExpertPage(props: Props) {
           <Link className="btn btn-primary" href="/">
             My Blog{' '}
           </Link>
+          <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center">
+            <span className="text-[24px] font-bold">84%</span>
+          </div>
         </div>
         <p className="mt-6 text-gray-600">{singleExpert.bio}</p>
         <div className="mt-8">
@@ -106,6 +111,7 @@ export default async function ExpertPage(props: Props) {
         <div className="absolute top-6 right-6 text-gray-500">
           <i className="fas fa-heart" />
         </div>
+
         <div className="mt-8 bg-gray-200 w-full h-64 flex items-center justify-center">
           <span className="text-gray-500">Video Placeholder</span>
         </div>

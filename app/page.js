@@ -1,10 +1,15 @@
+import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { getUser } from '../database/users';
 
 // TODO: Add Titel and Description
 export const metadata = {
   title: { default: 'Home | travel genius', template: '%s | travel genius' },
   description: 'Travel matching platform',
 };
+
+const sessionCookie = cookies().get('sessionToken');
+const user = sessionCookie && (await getUser(sessionCookie.value));
 
 export default function Home() {
   return (
@@ -81,9 +86,15 @@ export default function Home() {
             amazing destinations and enjoy personalized planning for a
             stress-free, unforgettable travel experience.
           </p>
-          <Link className="btn btn-primary mt-6" href="/register">
-            Register
-          </Link>
+          {user ? (
+            <Link className="btn btn-primary mt-6" href="/searc">
+              Search
+            </Link>
+          ) : (
+            <Link className="btn btn-primary mt-6" href="/register">
+              Register
+            </Link>
+          )}
         </div>
       </div>
     </div>
