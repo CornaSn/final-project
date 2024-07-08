@@ -1,7 +1,10 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
 import { Language } from '../migrations/00006-createLanguagesTable';
-import { ExpertWithLanguages } from '../migrations/00012-createExpertTableWithLanguages';
+import {
+  ExpertWithLanguageName,
+  ExpertWithLanguages,
+} from '../migrations/00012-createExpertTableWithLanguages';
 
 // Get whole list of areas
 export const getLanguageListInsecure = cache(async () => {
@@ -29,7 +32,7 @@ export const findLanguageIdInsecure = cache(async (languageName: string) => {
 
 export const insertExpertLanguageInsecure = cache(
   async (languageId: number, userId: number) => {
-    const [c] = await sql<ExpertWithLanguages[]>`
+    const [expertWithLanguages] = await sql<ExpertWithLanguages[]>`
       INSERT INTO
         expert_languages (expert_user_id, language_id)
       VALUES
@@ -42,6 +45,25 @@ export const insertExpertLanguageInsecure = cache(
         expert_languages.expert_user_id,
         expert_languages.language_id
     `;
-    return c;
+    return expertWithLanguages;
   },
 );
+
+export const getExpertLanguagesInsecure = cache(async (id: number) => {
+  const expertLanguages = await sql<ExpertWithLanguageName[]>`
+    SELECT
+      expert_languages.language_id AS languageid,
+      languages.language AS languagename
+    FROM
+      expert_languages
+      INNER JOIN languages ON expert_languages.language_id = languages.id
+    WHERE
+      expert_languages.expert_user_id = ${id}
+  `;
+
+  console.log(
+    '========================================= expertLanguages',
+    expertLanguages,
+  );
+  return expertLanguages;
+});

@@ -6,6 +6,11 @@ export type ExpertWithLanguages = {
   languageId: number;
 };
 
+export type ExpertWithLanguageName = {
+  languageid: number;
+  languagename: string;
+};
+
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE expert_languages (

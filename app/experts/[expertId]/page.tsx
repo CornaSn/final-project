@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import React from 'react';
 import { getExpertCountryInsecure } from '../../../database/countriesList';
 import { getExpertByIdWithUserInfoInsecure } from '../../../database/experts';
+import { getExpertLanguagesInsecure } from '../../../database/languageList';
 
 export async function generateMetadata(props: Props) {
   const singleExpert = await getExpertByIdWithUserInfoInsecure(
@@ -32,6 +34,9 @@ export default async function ExpertPage(props: Props) {
 
   const expertCountries = await getExpertCountryInsecure(singleExpert.userId);
   console.log('expertCountries**********************', expertCountries);
+
+  const expertLanguages = await getExpertLanguagesInsecure(singleExpert.userId);
+  console.log('expertLanguages**********************', expertLanguages);
 
   const singleExpertHardcoded = {
     firstName: 'Cornelia',
@@ -79,8 +84,15 @@ export default async function ExpertPage(props: Props) {
               {singleExpert.age}, {singleExpert.city}
             </p>
             <p className="text-gray-600">
-              {singleExpertHardcoded.languages.join(', ')}
+              {expertLanguages.map((language, index) => (
+                <React.Fragment key={`language-${language.languagename}`}>
+                  {language.languagename}
+                  {index !== expertLanguages.length - 1 && ', '}
+                  {(index + 1) % 5 === 0 && <br />}{' '}
+                </React.Fragment>
+              ))}
             </p>
+
             <div className="mt-4">
               <h3 className="text-gray-600 font-semibold">Expert Areas:</h3>
               <ul className="text-gray-600">

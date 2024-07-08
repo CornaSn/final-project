@@ -32,7 +32,7 @@ export const findCountryIdInsecure = cache(async (countryName: string) => {
 
 export const insertExpertCountryInsecure = cache(
   async (countryId: number, userId: number) => {
-    const [c] = await sql<ExpertWithCountries[]>`
+    const [expertWithCountries] = await sql<ExpertWithCountries[]>`
       INSERT INTO
         expert_countries (expert_user_id, country_id)
       VALUES
@@ -45,12 +45,9 @@ export const insertExpertCountryInsecure = cache(
         expert_countries.expert_user_id,
         expert_countries.country_id
     `;
-    console.log('==========', c);
-    return c;
+      return expertWithCountries;
   },
 );
-
-// select expert_id from expert_countries where country_id in (1,15);
 
 export const getExpertCountryInsecure = cache(async (id: number) => {
   const expertCountries = await sql<ExpertWithCountriesName[]>`
@@ -63,10 +60,5 @@ export const getExpertCountryInsecure = cache(async (id: number) => {
     WHERE
       expert_countries.expert_user_id = ${id}
   `;
-
-  console.log(
-    '========================================= expertCountries',
-    expertCountries,
-  );
   return expertCountries;
 });
