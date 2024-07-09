@@ -8,19 +8,15 @@ type Props = {
 };
 
 export default function SelectLanguage(props: Props) {
-  // console.log('sind das die props mit Languages', props);
   const [selectedItemsLanguages, setSelectedItemsLanguages] = useState<
     string[]
   >([]);
 
   const expertLanguages = props.expertLanguages;
-  // console.log('expertLanguages', expertLanguages);
 
   const languages = expertLanguages.map(
     (languageName) => languageName.language,
   );
-
-  // console.log('languageName', languages);
 
   const toggleSelection = (item: string) => {
     if (props.selectedItemsLanguages.includes(item)) {
