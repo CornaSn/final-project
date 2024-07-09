@@ -1,11 +1,8 @@
 import { cookies } from 'next/headers';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { getCountriesListInsecure } from '../../../database/countriesList';
-import { getExpertiseListInsecure } from '../../../database/expertiseList';
-import { getLanguageListInsecure } from '../../../database/languageList';
 import { getValidSessionById } from '../../../database/sessions';
 import { getUserByIdInsecure } from '../../../database/users';
-import CreateExpertProfileForm from '../createExpertProfile/CreateExpertProfileForm';
 
 export default async function UserProfil() {
   // 1. Checking if the sessionToken cookie exists
@@ -34,15 +31,32 @@ export default async function UserProfil() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="text-center text-black p-8">
-        <h1 className="mb-5 text-5xl font-bold uppercase">
+        <h1 className="mb-5 text-6xl font-bold font-amatic-sc uppercase">
           Hallo {user.firstName}
         </h1>
-        <p className="text-lg mb-8">
-          Let's get started with finding your perfect expert-travel match
-        </p>
-        <button className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-800 transition duration-300">
-          Get Started
-        </button>
+        {user.isExpert ? (
+          <div>
+            <p className="text-lg mb-8">Let's create your profile page!</p>
+            <Link
+              className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-800 transition duration-300"
+              href="/profile/createExpertProfile"
+            >
+              Get Started
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <p className="text-lg mb-8">
+              Let's get started with finding your perfect expert-travel match
+            </p>
+            <Link
+              className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-800 transition duration-300"
+              href="/experts"
+            >
+              Get Started
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

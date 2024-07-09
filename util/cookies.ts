@@ -22,7 +22,7 @@ export async function userWithValidSession() {
 
   // 3. If sessionToken cookie is invalid or doesn't exist, redirect to login with returnTo
   if (!session) {
-    return redirect('/login');
+    return redirect('/');
   }
 
   const userId = session.userId;

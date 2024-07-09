@@ -21,11 +21,6 @@ export default function ExpertsForm(props: Props) {
       setSelectedAreas([...selectedAreas, item]);
     }
   };
-  console.log('selectedAreas', selectedAreas);
-  console.log(
-    'areasOfInterestName##############################################',
-    toggleSelection,
-  );
 
   const handleCountryChange = (event: { target: { value: any } }) => {
     const country = event.target.value;
@@ -40,6 +35,8 @@ export default function ExpertsForm(props: Props) {
       toggleSelection(area);
     }
   };
+
+  const handleSearch = async () => {};
 
   return (
     <div className="flex justify-center pt-12 min-h-screen bg-gray-100">
@@ -100,9 +97,11 @@ export default function ExpertsForm(props: Props) {
           </div>
         </div>
 
-        {/* Search Button */}
         <div className="flex justify-center mt-4">
-          <button className="btn w-full md:w-2/3 lg:w-1/2 xl:w-1/3">
+          <button
+            className="btn w-full md:w-2/3 lg:w-1/2 xl:w-1/3"
+            onClick={handleSearch}
+          >
             Search
           </button>
         </div>

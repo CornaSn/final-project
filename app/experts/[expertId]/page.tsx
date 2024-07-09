@@ -5,6 +5,7 @@ import { getExpertCountryInsecure } from '../../../database/countriesList';
 import { getExpertExpertiseInsecure } from '../../../database/expertiseList';
 import { getExpertByIdWithUserInfoInsecure } from '../../../database/experts';
 import { getExpertLanguagesInsecure } from '../../../database/languageList';
+import { userWithValidSession } from '../../../util/cookies';
 
 export async function generateMetadata(props: Props) {
   const singleExpert = await getExpertByIdWithUserInfoInsecure(
@@ -24,6 +25,7 @@ type Props = {
 };
 
 export default async function ExpertPage(props: Props) {
+  const userId = await userWithValidSession();
   const singleExpert = await getExpertByIdWithUserInfoInsecure(
     Number(props.params.expertId),
   );
