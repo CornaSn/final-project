@@ -4,75 +4,58 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Country } from '../../migrations/00004-createCountriesTable';
 import { Expertise } from '../../migrations/00008-createExpertiseTable';
+import SelectCountry from '../components/selectCountries';
+import SelectExpertise from '../components/selectExpertise';
 
 type Props = {
-  interestedExpertise: Expertise[];
-  interestedCountries: Country[];
+  expertAreas: Expertise[];
+  expertCountries: Country[];
 };
 
 export default function ExpertsForm(props: Props) {
-  console.log('all Props', props);
-  const [selectedExpertise, setSelectedExpertise] = useState('');
-
-  const interestedExpertise = props.interestedExpertise;
-  const expertiseName = interestedExpertise.map(
-    (expertise) => expertise.expertiseName,
-  );
-  console.log('expertiseName***************************', expertiseName);
-
-  const toggleSelection = (item: string) => {
-    if (selectedExpertise.includes(item)) {
-      setSelectedExpertise(
-        selectedExpertise.filter(
-          (selectedItem: string) => selectedItem !== item,
-        ),
-      );
-    } else {
-      setSelectedExpertise([selectedExpertise, item]);
-    }
-  };
-
-  const handleChange = (event: { target: { value: any } }) => {
-    const expertise = event.target.value;
-    setSelectedExpertise(expertise);
-    toggleSelection(expertise);
-    setSelectedExpertise('');
-  };
-
+  const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
+  const [selectedItemsExpertise, setSelectedItemsExpertise] = useState<
+    string[]
+  >([]);
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center p-4">
-      <div className="w-full text-center mb-6">
-        <h2 className="text-2xl font-bold">
+    <form className="flex justify-center pt-12 min-h-screen bg-gray-100">
+      <div className="w-full max-w-6xl p-8 bg-white rounded shadow-md space-y-6">
+        <h1 className="text-3xl font-bold text-center mb-4">
           Match an expert based on your interest!
-        </h2>
-      </div>
-      <div className="w-full max-w-md">
-        <div>
-          <h1 className="text-2xl font-bold mb-4">Select expert areas:</h1>
-          <div className="mb-4">
-            <select
-              value={selectedExpertise}
-              onChange={handleChange}
-              className="bg-gray-300 text-gray-700 px-5 py-2 rounded-full w-full text-center"
-            >
-              <option value="" disabled>
-                Choose an expert area
-              </option>
-              {expertiseName.map((expertise) => (
-                <option
-                  key={`expertise-${expertise}`}
-                  value={expertise}
-                  disabled={props.interestedExpertise.includes(expertise)}
-                >
-                  {expertise.charAt(0).toUpperCase() + expertise.slice(1)}
-                </option>
-              ))}
-            </select>
+        </h1>
+        <div className="space-y-4">
+          <div className="flex gap-4 items-start">
+            <div className="w-1/2">
+              <h2 className="text-lg font-bold mb-2">
+                Select countries you have visited
+              </h2>
+              <SelectCountry
+                expertCountries={props.expertCountries}
+                setSelectedItemsCountries={setSelectedItemsCountries as never}
+                selectedItemsCountries={selectedItemsCountries}
+              />
+            </div>
+            <div className="w-1/2">
+              <h2 className="text-lg font-bold mb-2">Select expert areas</h2>
+              <SelectExpertise
+                expertAreas={props.expertAreas}
+                setSelectedItemsExpertise={setSelectedItemsExpertise}
+                selectedItemsExpertise={selectedItemsExpertise}
+              />
+            </div>
           </div>
         </div>
+        <div className="flex justify-center mt-4">
+          <button
+            type="submit"
+            className="btn w-full md:w-2/3 lg:w-1/2 xl:w-1/3"
+          >
+            Search
+          </button>
+        </div>
       </div>
-    </div>
+    </form>
   );
 }

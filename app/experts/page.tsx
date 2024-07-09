@@ -32,13 +32,10 @@ export default async function Experts() {
   const userId = session.userId;
 
   // Fetch select fields for user profile
-  const interestedExpertise = await getExpertiseListInsecure();
-  const interestedCountries = await getCountriesListInsecure();
+  const expertAreas = await getExpertiseListInsecure();
+  const expertCountries = await getCountriesListInsecure();
 
   return (
-    <ExpertsForm
-    interestedExpertise={interestedExpertise}
-    interestedCountries={interestedCountries}
-    />
+    <ExpertsForm expertAreas={expertAreas} expertCountries={expertCountries} />
   );
 }
