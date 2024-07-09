@@ -70,7 +70,7 @@ export default function ExpertsForm(props: Props) {
           <div className="flex flex-wrap justify-center gap-2 mb-4">
             {selectedAreas.map((area) => (
               <button
-                key={area}
+                key={`area-${area}`}
                 type="button"
                 className="bg-blue-500 text-white px-3 py-1 rounded-full"
                 onClick={() => toggleSelection(area)}
