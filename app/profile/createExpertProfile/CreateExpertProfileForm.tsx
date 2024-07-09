@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 import { Country } from '../../../migrations/00004-createCountriesTable';
 import { Language } from '../../../migrations/00006-createLanguagesTable';
 import { Expertise } from '../../../migrations/00008-createExpertiseTable';
+// import { UploadImage } from '../../../util/uploadImage';
 import { CreateExpertProfileRequestBody } from '../../api/expertProfile/route';
 import SelectCountry from '../../components/selectCountries';
-import ExpertiseList from '../../components/selectExpertise';
 import SelectExpertise from '../../components/selectExpertise';
 import SelectLanguage from '../../components/selectLanguages';
 import ErrorMessage from '../../ErrorMessage';
@@ -24,7 +24,7 @@ export default function CreateExpertProfileForm(props: Props) {
   const [age, setAge] = useState('');
   const [city, setCity] = useState('');
   const [bio, setBio] = useState('');
-  const [pictureUrl, setPictureUrl] = useState('');
+  const [pictureUrl, setPictureUrl] = useState<string | null>(null);
   const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
   const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
@@ -35,6 +35,34 @@ export default function CreateExpertProfileForm(props: Props) {
   const [errors, setErrors] = useState<{ message: string }[]>([]);
 
   const router = useRouter();
+
+  // async function handleImageUpload(event: React.ChangeEvent<HTMLInputElement>) {
+  //   const selectedFile = event.target.files?.[0];
+  //   if (!selectedFile) return;
+
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('file', selectedFile);
+  //     formData.append('upload_preset', 'expert_profile_images');
+
+  //     const response = await fetch(
+  //       `https://api.cloudinary.com/v1_1/dmntpv6mf/image/upload`,
+  //       {
+  //         method: 'POST',
+  //         body: formData,
+  //       },
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error('Failed to upload image to Cloudinary');
+  //     }
+  //     const data = await response.json();
+  //     const imageUrl = data.secure_url;
+  //     setPictureUrl(imageUrl);
+  //   } catch (error) {
+  //     console.error('Error uploading image to Cloudinary:', error);
+  //   }
+  // }
 
   async function handleProfileCreation(
     event: React.FormEvent<HTMLFormElement>,
@@ -64,7 +92,7 @@ export default function CreateExpertProfileForm(props: Props) {
       return;
     }
 
-    router.push(`/`);
+    router.push(`/experts/${data.expert.id}`);
     router.refresh();
   }
 
@@ -143,7 +171,7 @@ export default function CreateExpertProfileForm(props: Props) {
               <input
                 type="file"
                 className="file-input file-input-bordered w-full max-w-s py-3 px-4"
-                onChange={(event) => setPictureUrl(event.currentTarget.value)}
+                // onChange={handleImageUpload}
               />
             </label>
 

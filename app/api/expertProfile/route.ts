@@ -158,7 +158,7 @@ export async function POST(
       );
     }
 
-    // 5. Return the created expert profile
+    // 8. Return the created expert profile
     return NextResponse.json({ expert: newExpert });
   } catch (error) {
     console.error('Error in POST /create-expert-profile:', error);
