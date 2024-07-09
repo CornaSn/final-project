@@ -34,6 +34,7 @@ export default async function ExpertPage(props: Props) {
   if (!singleExpert) {
     notFound();
   }
+
   // Fetch experts selected choices form Country, Language and Expertise
   const expertCountries = await getExpertCountryInsecure(singleExpert.userId);
   const expertLanguages = await getExpertLanguagesInsecure(singleExpert.userId);
@@ -89,9 +90,9 @@ export default async function ExpertPage(props: Props) {
           <Link className="btn btn-primary" href="/">
             My Blog{' '}
           </Link>
-          <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center">
+          {/* <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center">
             <span className="text-[24px] font-bold">84%</span>
-          </div>
+          </div> */}
         </div>
         <div className="mt-6 text-gray-600 max-w-full break-words">
           {singleExpert.bio}

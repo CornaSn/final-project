@@ -7,6 +7,7 @@ import { Language } from '../../../migrations/00006-createLanguagesTable';
 import { Expertise } from '../../../migrations/00008-createExpertiseTable';
 import { CreateExpertProfileRequestBody } from '../../api/expertProfile/route';
 import SelectCountry from '../../components/selectCountries';
+import ExpertiseList from '../../components/selectExpertise';
 import SelectExpertise from '../../components/selectExpertise';
 import SelectLanguage from '../../components/selectLanguages';
 import ErrorMessage from '../../ErrorMessage';
@@ -63,7 +64,7 @@ export default function CreateExpertProfileForm(props: Props) {
       return;
     }
 
-    router.push(`/experts/${data.expert.id}`);
+    router.push(`/`);
     router.refresh();
   }
 

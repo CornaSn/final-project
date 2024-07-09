@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllExpertUserWithChoicesInsecure } from '../../../database/experts';
+import { userWithValidSession } from '../../../util/cookies';
 
 export const metadata = {
   title: 'All_experts',
@@ -7,6 +8,7 @@ export const metadata = {
 };
 
 export default async function ExpertsPage() {
+  const userId = await userWithValidSession();
   const expertUsers = await getAllExpertUserWithChoicesInsecure();
   console.log(
     'expertUsers#################################################################',
