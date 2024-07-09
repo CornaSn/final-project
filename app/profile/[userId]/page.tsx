@@ -31,38 +31,19 @@ export default async function UserProfil() {
     redirect(`/login`);
   }
 
-  if (user.isExpert) {
-    // TODO: this should be removed
-    redirect(`/profile/${userId}`);
-
-    // Fetch select fields for user profile
-    const expertAreas = await getExpertiseListInsecure();
-    const expertLanguages = await getLanguageListInsecure();
-    const expertCountries = await getCountriesListInsecure();
-
-    return (
-      <CreateExpertProfileForm
-        userId={userId}
-        expertAreas={expertAreas}
-        expertLanguages={expertLanguages}
-        expertCountries={expertCountries}
-      />
-    );
-  } else {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="text-center text-black p-8">
-          <h1 className="mb-5 text-5xl font-bold uppercase">
-            Hallo {user.firstName}
-          </h1>
-          <p className="text-lg mb-8">
-            Let's get started with finding your perfect expert-travel match
-          </p>
-          <button className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-800 transition duration-300">
-            Get Started
-          </button>
-        </div>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="text-center text-black p-8">
+        <h1 className="mb-5 text-5xl font-bold uppercase">
+          Hallo {user.firstName}
+        </h1>
+        <p className="text-lg mb-8">
+          Let's get started with finding your perfect expert-travel match
+        </p>
+        <button className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-800 transition duration-300">
+          Get Started
+        </button>
       </div>
-    );
-  }
+    </div>
+  );
 }

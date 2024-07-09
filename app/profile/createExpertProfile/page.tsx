@@ -17,7 +17,7 @@ export default async function CreateExpertProfilePage() {
     sessionCookie && (await getValidSessionById(sessionCookie.value));
   // console.log('session', session);
 
-  // 3. If sessionToken cookie is invalid of doesn't exist, redirect to login with returnTo
+  // 3. If sessionToken cookie is invalid or doesn't exist, redirect to login with returnTo
   if (!session) {
     return redirect('/login?returnTo=/profile/createExpertProfile');
   }

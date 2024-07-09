@@ -8,6 +8,10 @@ export const metadata = {
 
 export default async function ExpertsPage() {
   const expertUsers = await getAllExpertUserWithChoicesInsecure();
+  console.log(
+    'expertUsers#################################################################',
+    expertUsers,
+  );
 
   return (
     <div className="flex justify-center p-4">
