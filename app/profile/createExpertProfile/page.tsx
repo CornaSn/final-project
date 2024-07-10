@@ -37,7 +37,7 @@ export default async function CreateExpertProfilePage() {
   return (
     <CreateExpertProfileForm
       userId={userId}
-      expertId={expert[0]?.id}
+      // expertId={expert[0]?.id}
       expertAreas={expertAreas}
       expertLanguages={expertLanguages}
       expertCountries={expertCountries}

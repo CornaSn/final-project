@@ -193,56 +193,33 @@ export const getExpertUserWithChoicesInsecure = cache(async (id: number) => {
   });
 
   expertChoices.userId = id;
-  // console.log('#############################################');
-  // console.log('#############################################');
-  // console.log('#############################################');
-  // console.log('test userId', id);
-  // console.log('#############################################');
-  // console.log('#############################################');
-  // console.log('#############################################');
 
   expertChoices.countryName = countryNameList;
   expertChoices.languageName = languageNameList;
   expertChoices.expertiseName = expertiseNameList;
-  // console.log('*********expertChoices', expertChoices);
 
   const expertInfo = await getExpertByIdInsecure(id);
-  // console.log('ID#+#+#+#+#+#+#+#++++++++++++++', expertInfo?.id);
-  // console.log('ID#+#+#+#+#+#+#+#++++++++++++++', expertInfo?.userId);
 
   if (typeof expertInfo?.bio === 'string') {
     expertChoices.bio = expertInfo.bio;
   }
-  // console.log('test1 expertInfo BIO------------------------', expertInfo);
 
   if (typeof expertInfo?.city === 'string') {
     expertChoices.city = expertInfo.city;
   }
-  // console.log('test1 expertInfo city------------------------', expertInfo);
 
   if (typeof expertInfo?.age == 'string') {
     expertChoices.age = expertInfo.age;
   }
-  console.log('test1 expertInfo Age------------------------', expertInfo);
 
   const userInfo = await getUserByIdInsecure(id);
   if (typeof userInfo?.firstName === 'string') {
     expertChoices.firstName = userInfo.firstName;
-    // console.log(
-    //   'test1 expertInfo firstname------------------------',
-    //   expertInfo,
-    // );
   }
 
   if (typeof userInfo?.lastName === 'string') {
     expertChoices.lastName = userInfo.lastName;
   }
-  // console.log('test1 expertInfo lastname------------------------', expertInfo);
-
-  // console.log(
-  //   'test1 expertInfo expertChoices------------------------',
-  //   expertChoices,
-  // );
 
   return expertChoices;
 });
