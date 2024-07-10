@@ -24,7 +24,9 @@ export default function CreateExpertProfileForm(props: Props) {
   const [age, setAge] = useState('');
   const [city, setCity] = useState('');
   const [bio, setBio] = useState('');
-  const [pictureUrl, setPictureUrl] = useState<string | null>(null);
+  // const [pictureUrl, setPictureUrl] = useState<string | null>(null);
+  const [pictureUrl, setPictureUrl] = useState('');
+
   const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
   const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
@@ -92,7 +94,7 @@ export default function CreateExpertProfileForm(props: Props) {
       return;
     }
 
-    router.push(`/experts/${data.expert.id}`);
+    router.push(`/`);
     router.refresh();
   }
 
@@ -171,6 +173,8 @@ export default function CreateExpertProfileForm(props: Props) {
               <input
                 type="file"
                 className="file-input file-input-bordered w-full max-w-s py-3 px-4"
+                onChange={(event) => setPictureUrl(event.currentTarget.value)}
+
                 // onChange={handleImageUpload}
               />
             </label>

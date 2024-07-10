@@ -1,5 +1,8 @@
 import Link from 'next/link';
-import { getAllExpertUserWithChoicesInsecure } from '../../../database/experts';
+import {
+  getAllExpertUserWithChoicesInsecure,
+  getExpertUserWithChoicesInsecure,
+} from '../../../database/experts';
 import { userWithValidSession } from '../../../util/cookies';
 
 export const metadata = {
@@ -10,10 +13,10 @@ export const metadata = {
 export default async function ExpertsPage() {
   const userId = await userWithValidSession();
   const expertUsers = await getAllExpertUserWithChoicesInsecure();
-  console.log(
-    'expertUsers#################################################################',
-    expertUsers,
-  );
+  // console.log(
+  //   'expertUsers#################################################################',
+  //   expertUsers,
+  // );
 
   return (
     <div className="flex justify-center p-4">
@@ -109,7 +112,6 @@ export default async function ExpertsPage() {
                   className="btn btn-primary"
                   href={`/experts/${expertUser.userId}`}
                 >
-                  {' '}
                   See more
                 </Link>
               </div>

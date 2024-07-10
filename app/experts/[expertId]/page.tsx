@@ -29,16 +29,16 @@ export default async function ExpertPage(props: Props) {
   const singleExpert = await getExpertByIdWithUserInfoInsecure(
     Number(props.params.expertId),
   );
-  console.log('Single expert: ', singleExpert);
+  // console.log('Single expert: ', singleExpert);
 
   if (!singleExpert) {
     notFound();
   }
 
   // Fetch experts selected choices form Country, Language and Expertise
-  const expertCountries = await getExpertCountryInsecure(singleExpert.userId);
-  const expertLanguages = await getExpertLanguagesInsecure(singleExpert.userId);
-  const expertExpertise = await getExpertExpertiseInsecure(singleExpert.userId);
+  const expertCountries = await getExpertCountryInsecure(userId);
+  const expertLanguages = await getExpertLanguagesInsecure(userId);
+  const expertExpertise = await getExpertExpertiseInsecure(userId);
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
