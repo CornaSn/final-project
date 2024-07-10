@@ -2,9 +2,9 @@ import { revalidatePath } from 'next/cache';
 import cloudinary from '../../cloudinary.config';
 
 cloudinary.config({
-  cloud_name: 'dmntpv6mf',
-  api_key: '995274678669975',
-  api_secret: 'LNnWxnQJ4miszCi8SqOW0Iig0KA',
+  cloud_name: '',
+  api_key: '',
+  api_secret: '',
 });
 
 export async function create(formData: FormData) {

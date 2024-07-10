@@ -21,6 +21,15 @@ type Props = {
   expertCountries: Country[];
 };
 
+interface CloudinaryResource {
+  context?: {
+    alt?: string;
+    caption?: string;
+  };
+  public_id: string;
+  secure_url: string;
+}
+
 export default async function CreateExpertProfileForm(props: Props) {
   const [age, setAge] = useState('');
   const [city, setCity] = useState('');
@@ -35,15 +44,6 @@ export default async function CreateExpertProfileForm(props: Props) {
   >([]);
   const [errors, setErrors] = useState<{ message: string }[]>([]);
   // const [loading, setLoading] = useState(false);
-
-  interface CloudinaryResource {
-    context?: {
-      alt?: string;
-      caption?: string;
-    };
-    public_id: string;
-    secure_url: string;
-  }
 
   const router = useRouter();
 
