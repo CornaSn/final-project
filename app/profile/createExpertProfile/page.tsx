@@ -26,6 +26,8 @@ export default async function CreateExpertProfilePage() {
 
   // Fetch expert details for the logged-in user
   const expert = await getExpertWithUserById(session.token, userId);
+  // const expertId = expert[0]?.id
+  // console.log('expert--------------------------------------------', expert);
 
   // Fetch select fields for user profile
   const expertAreas = await getExpertiseListInsecure();
@@ -35,6 +37,7 @@ export default async function CreateExpertProfilePage() {
   return (
     <CreateExpertProfileForm
       userId={userId}
+      expertId={expert[0]?.id}
       expertAreas={expertAreas}
       expertLanguages={expertLanguages}
       expertCountries={expertCountries}

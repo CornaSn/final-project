@@ -31,7 +31,7 @@ export const getExpertByIdInsecure = cache(async (id: number) => {
     FROM
       experts
     WHERE
-      id = ${id}
+      user_id = ${id}
   `;
 
   return user;
@@ -91,7 +91,7 @@ export const getExpertByIdWithUserInfoInsecure = cache(async (id: number) => {
       experts.id = ${id}
   `;
 
-  // console.log('expert', expert);
+  console.log('expert', expert);
   return expert;
 });
 
@@ -193,24 +193,27 @@ export const getExpertUserWithChoicesInsecure = cache(async (id: number) => {
   });
 
   expertChoices.userId = id;
-  console.log('#############################################');
-  console.log('#############################################');
-  console.log('#############################################');
-  console.log('test userId', id);
-  console.log('#############################################');
-  console.log('#############################################');
-  console.log('#############################################');
+  // console.log('#############################################');
+  // console.log('#############################################');
+  // console.log('#############################################');
+  // console.log('test userId', id);
+  // console.log('#############################################');
+  // console.log('#############################################');
+  // console.log('#############################################');
 
   expertChoices.countryName = countryNameList;
   expertChoices.languageName = languageNameList;
   expertChoices.expertiseName = expertiseNameList;
-  console.log('*********expertChoices', expertChoices);
+  // console.log('*********expertChoices', expertChoices);
 
   const expertInfo = await getExpertByIdInsecure(id);
+  // console.log('ID#+#+#+#+#+#+#+#++++++++++++++', expertInfo?.id);
+  // console.log('ID#+#+#+#+#+#+#+#++++++++++++++', expertInfo?.userId);
+
   if (typeof expertInfo?.bio === 'string') {
     expertChoices.bio = expertInfo.bio;
   }
-  console.log('test1 expertInfo BIO------------------------', expertInfo);
+  // console.log('test1 expertInfo BIO------------------------', expertInfo);
 
   if (typeof expertInfo?.city === 'string') {
     expertChoices.city = expertInfo.city;
@@ -225,10 +228,10 @@ export const getExpertUserWithChoicesInsecure = cache(async (id: number) => {
   const userInfo = await getUserByIdInsecure(id);
   if (typeof userInfo?.firstName === 'string') {
     expertChoices.firstName = userInfo.firstName;
-    console.log(
-      'test1 expertInfo firstname------------------------',
-      expertInfo,
-    );
+    // console.log(
+    //   'test1 expertInfo firstname------------------------',
+    //   expertInfo,
+    // );
   }
 
   if (typeof userInfo?.lastName === 'string') {

@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { getExpertByIdInsecure } from '../../../database/experts';
 import { Country } from '../../../migrations/00004-createCountriesTable';
 import { Language } from '../../../migrations/00006-createLanguagesTable';
 import { Expertise } from '../../../migrations/00008-createExpertiseTable';
@@ -13,7 +14,8 @@ import SelectLanguage from '../../components/selectLanguages';
 import ErrorMessage from '../../ErrorMessage';
 
 type Props = {
-  userId: number | undefined;
+  userId: number;
+  expertId: number;
   expertAreas: Expertise[];
   expertLanguages: Language[];
   expertCountries: Country[];
@@ -94,7 +96,7 @@ export default function CreateExpertProfileForm(props: Props) {
       return;
     }
 
-    router.push(`/`);
+    router.push(`/experts/dashboard`);
     router.refresh();
   }
 

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {
   getAllExpertUserWithChoicesInsecure,
-  getExpertUserWithChoicesInsecure,
+  getExpertByIdInsecure,
 } from '../../../database/experts';
 import { userWithValidSession } from '../../../util/cookies';
 
@@ -13,6 +13,9 @@ export const metadata = {
 export default async function ExpertsPage() {
   const userId = await userWithValidSession();
   const expertUsers = await getAllExpertUserWithChoicesInsecure();
+  const expertId = await getExpertByIdInsecure(userId);
+  // console.log('test-------', expertId);
+
   // console.log(
   //   'expertUsers#################################################################',
   //   expertUsers,
@@ -110,7 +113,7 @@ export default async function ExpertsPage() {
               <div className="flex-grow flex justify-end items-end mt-4">
                 <Link
                   className="btn btn-primary"
-                  href={`/experts/${expertUser.userId}`}
+                  href={`/experts/${expertId?.id}`}
                 >
                   See more
                 </Link>
