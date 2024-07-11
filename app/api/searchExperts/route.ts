@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   findCountryIdInsecure,
+  getExpertCountryByCountryIdInsecure,
   getExpertCountryInsecure,
 } from '../../../database/countriesList';
-import { findExpertiseIdInsecure } from '../../../database/expertiseList';
+import {
+  findExpertiseIdInsecure,
+  getExpertExpertiseByExpertiseIdInsecure,
+} from '../../../database/expertiseList';
 import { Expert } from '../../../migrations/00002-createExpertsTable';
 import { userWithValidSession } from '../../../util/cookies';
 
@@ -30,14 +34,44 @@ export async function POST(
     // }
 
     // 2. Check if user has a valid session
-    const userId = await userWithValidSession();
+    await userWithValidSession();
     // console.log('userId', userId);
 
     // 5. Match Experts with same expert_country ID
-    const expertsCountries = await getExpertCountryInsecure(countryId?.id);
-    console.log('expertsCountries', expertsCountries);
+    const expertUsersIdsCountry = await getExpertCountryByCountryIdInsecure(
+      Number(body.selectedCountry),
+    );
+    console.log('expertUsersIds', expertUsersIdsCountry);
 
-    // const expertsWithSameCountryID = new Map();
+    // 6. Match Experts with same expert_expertise ID
+    console.log('body.selectedItemsExpertise', body.selectedItemsExpertise);
+
+    // await Promise.all(
+    console.log('Start mappping =============================');
+    console.log('Start mappping =============================');
+    const arrayOfExpertExpertiseIds = await Promise.all(
+      body.selectedItemsExpertise.map(async (expertise: number) => {
+        console.log('expertise', expertise);
+        const expertId =
+          await getExpertExpertiseByExpertiseIdInsecure(expertise);
+        console.log('expertId', expertId, expertId.length);
+
+        // const newArrayOfExpertExpertiseIds = [
+        //   ...arrayOfExpertExpertiseIds,
+        //   expertId,
+        // ];
+        // console.log(
+        //   'newArrayOfExpertExpertiseIds',
+        //   newArrayOfExpertExpertiseIds,
+        // );
+        if (expertId.length > 0) {
+          return expertId;
+        }
+      }),
+    );
+    console.log('map finished ======================================');
+    console.log('map finished ======================================');
+    console.log('arrayOfExpertExpertiseIds', arrayOfExpertExpertiseIds);
 
     return NextResponse.json({
       message: 'Search Experts',

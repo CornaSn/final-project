@@ -64,3 +64,19 @@ export const getExpertCountryInsecure = cache(
     return expertCountries;
   },
 );
+
+export const getExpertCountryByCountryIdInsecure = cache(
+  async (country_id: number) => {
+    const expertUsersIdsCountry = await sql<
+      Pick<ExpertWithCountries, 'expertUserId'>[]
+    >`
+      SELECT
+        expert_user_id
+      FROM
+        expert_countries
+      WHERE
+        country_id = ${country_id}
+    `;
+    return expertUsersIdsCountry;
+  },
+);

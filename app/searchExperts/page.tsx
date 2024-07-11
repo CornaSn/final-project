@@ -11,16 +11,9 @@ export const metadata = {
 export default async function SearchExperts() {
   const userId = await userWithValidSession();
 
-  // Fetch select fields for user profile
+  // Fetch select fields for search form
   const expertAreas = await getExpertiseListInsecure();
-  console.log('expertAreas', expertAreas);
-  // const areasOfInterestName = expertAreas.map((area) => area.expertiseName);
-
   const expertCountries = await getCountriesListInsecure();
-  console.log('expertCountries', expertCountries);
-  // const countryOfInterestName = expertCountries.map(
-  //   (country) => country.countryName,
-  // );
 
   return (
     <SearchExpertsForm

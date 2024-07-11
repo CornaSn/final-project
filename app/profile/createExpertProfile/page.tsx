@@ -2,7 +2,6 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getCountriesListInsecure } from '../../../database/countriesList';
 import { getExpertiseListInsecure } from '../../../database/expertiseList';
-import { getExpertWithUserById } from '../../../database/experts';
 import { getLanguageListInsecure } from '../../../database/languageList';
 import { getValidSessionById } from '../../../database/sessions';
 import CreateExpertProfileForm from './CreateExpertProfileForm';

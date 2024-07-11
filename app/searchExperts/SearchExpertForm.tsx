@@ -26,8 +26,8 @@ export default function ExpertsForm(props: Props) {
     const response = await fetch('/api/searchExperts', {
       method: 'POST',
       body: JSON.stringify({
-        selectedItemsCountries: selectedCountry,
-        selectedItemsExpertise: selectedItemsExpertise,
+        selectedCountry,
+        selectedItemsExpertise,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +82,8 @@ export default function ExpertsForm(props: Props) {
               onChange={handleCountryChange}
               className="bg-gray-300 text-gray-700 px-5 py-2 rounded-full w-full max-w-md mx-auto mb-4 text-center"
             >
-              <option value="" disabled>
+              <option selected={true}>
+                {/* <option value="" disabled> */}
                 Choose a country
               </option>
               {props.expertCountries.map((country) => (
