@@ -9,16 +9,25 @@ export default async function Navbar() {
   // console.log('newUser', user);
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 flex items-center justify-between px-4 py-2">
       <div className="flex-1">
         <Link className="btn btn-ghost text-xl" href="/">
           travel
           <br /> genius
         </Link>
       </div>
-      <Link className="flex-1 text-center" href="/searchExperts">
-        Search Experts
-      </Link>{' '}
+      <div className="flex flex-1 justify-center space-x-4">
+        <Link className="text-center  font-bold " href="/about">
+          About
+        </Link>
+        <Link className="text-center  font-bold " href="/help">
+          Help
+        </Link>
+        <Link className="text-center  font-bold " href="/community">
+          Community
+        </Link>
+      </div>
+      <div className="flex-1" />
       <div className="flex-none gap-2">
         {user ? (
           <>
@@ -46,10 +55,10 @@ export default async function Navbar() {
                   </a>
                 </li>
                 <li>
-                  <a>About</a>
+                  <a href="/about">About</a>
                 </li>
                 <li>
-                  <a>Community</a>
+                  <a href="/community">Community</a>
                 </li>
                 <li>
                   <a>Help</a>

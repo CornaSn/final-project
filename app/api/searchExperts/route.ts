@@ -43,10 +43,10 @@ export async function POST(
     );
     console.log('expertUsersIds', expertUsersIdsCountry);
 
+    // TODO: Simplify data structure from result
+
     // 6. Match Experts with same expert_expertise ID
     console.log('body.selectedItemsExpertise', body.selectedItemsExpertise);
-
-    // await Promise.all(
     console.log('Start mappping =============================');
     console.log('Start mappping =============================');
     const arrayOfExpertExpertiseIds = await Promise.all(

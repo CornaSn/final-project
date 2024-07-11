@@ -87,7 +87,7 @@ export default function Home() {
             stress-free, unforgettable travel experience.
           </p>
           {user ? (
-            <Link className="btn btn-primary mt-6" href="/searc">
+            <Link className="btn btn-primary mt-6" href="/searchExperts">
               Search
             </Link>
           ) : (
