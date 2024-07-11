@@ -49,16 +49,18 @@ export const insertExpertCountryInsecure = cache(
   },
 );
 
-export const getExpertCountryInsecure = cache(async (id: number) => {
-  const expertCountries = await sql<ExpertWithCountriesName[]>`
-    SELECT
-      expert_countries.country_id AS countryid,
-      countries.country_name AS countryname
-    FROM
-      expert_countries
-      INNER JOIN countries ON expert_countries.country_id = countries.id
-    WHERE
-      expert_countries.expert_user_id = ${id}
-  `;
-  return expertCountries;
-});
+export const getExpertCountryInsecure = cache(
+  async (expert_user_id: number) => {
+    const expertCountries = await sql<ExpertWithCountriesName[]>`
+      SELECT
+        expert_countries.country_id AS countryid,
+        countries.country_name AS countryname
+      FROM
+        expert_countries
+        INNER JOIN countries ON expert_countries.country_id = countries.id
+      WHERE
+        expert_countries.expert_user_id = ${expert_user_id}
+    `;
+    return expertCountries;
+  },
+);

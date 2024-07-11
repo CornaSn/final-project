@@ -25,7 +25,7 @@ export default async function CreateExpertProfilePage() {
   const userId = session.userId;
 
   // Fetch expert details for the logged-in user
-  const expert = await getExpertWithUserById(session.token, userId);
+  // const expert = await getExpertWithUserById(session.token, userId);
   // const expertId = expert[0]?.id
   // console.log('expert--------------------------------------------', expert);
 

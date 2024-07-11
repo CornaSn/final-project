@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import LogoutButton from '../(auth)/logout/LogoutButton';
-import { getValidSession } from '../../database/sessions';
 import { getUser } from '../../database/users';
 
 export default async function Navbar() {
@@ -17,7 +16,7 @@ export default async function Navbar() {
           <br /> genius
         </Link>
       </div>
-      <Link className="flex-1 text-center" href="/experts">
+      <Link className="flex-1 text-center" href="/searchExperts">
         Search Experts
       </Link>{' '}
       <div className="flex-none gap-2">

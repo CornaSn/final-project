@@ -12,19 +12,20 @@ export default async function SearchExperts() {
   const userId = await userWithValidSession();
 
   // Fetch select fields for user profile
-  const areasOfInterest = await getExpertiseListInsecure();
-  const areasOfInterestName = areasOfInterest.map((area) => area.expertiseName);
+  const expertAreas = await getExpertiseListInsecure();
+  console.log('expertAreas', expertAreas);
+  // const areasOfInterestName = expertAreas.map((area) => area.expertiseName);
 
-  const countryOfInterest = await getCountriesListInsecure();
-  const countryOfInterestName = countryOfInterest.map(
-    (country) => country.countryName,
-  );
-  console.log('countryOfInterestName', countryOfInterestName);
+  const expertCountries = await getCountriesListInsecure();
+  console.log('expertCountries', expertCountries);
+  // const countryOfInterestName = expertCountries.map(
+  //   (country) => country.countryName,
+  // );
 
   return (
     <SearchExpertsForm
-      areasOfInterestName={areasOfInterestName}
-      countryOfInterestName={countryOfInterestName}
+      expertAreas={expertAreas}
+      expertCountries={expertCountries}
     />
   );
 }

@@ -236,8 +236,8 @@ export const getAllExpertUserWithChoicesInsecure = cache(async () => {
 
   return Promise.all(
     allExpertIds.map(async (entry) => {
-      console.log('entry####################################', entry);
-      console.log('typeof entry.userId', typeof entry.userId);
+      // console.log('entry####################################', entry);
+      // console.log('typeof entry.userId', typeof entry.userId);
       return await getExpertUserWithChoicesInsecure(entry.userId);
     }),
   );
