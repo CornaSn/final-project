@@ -1,10 +1,10 @@
+import { v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from 'next/cache';
-import cloudinary from '../../cloudinary.config';
 
 cloudinary.config({
-  cloud_name: '',
-  api_key: '',
-  api_secret: '',
+  cloud_name: 'dmntpv6mf',
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 export async function create(formData: FormData) {

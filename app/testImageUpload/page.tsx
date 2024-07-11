@@ -1,6 +1,5 @@
 import { revalidatePath } from 'next/cache';
 import React from 'react';
-import cloudinary from '../../cloudinary.config';
 import { create } from './actions';
 
 interface CloudinaryResource {
@@ -13,13 +12,6 @@ interface CloudinaryResource {
 }
 
 export default async function Home() {
-  const { resources } = await cloudinary.api.resources_by_tag(
-    'expert_profile_images',
-    {
-      context: true,
-    },
-  );
-
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Add a New Image</h2>

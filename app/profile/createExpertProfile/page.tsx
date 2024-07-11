@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import cloudinary from '../../../cloudinary.config';
 import { getCountriesListInsecure } from '../../../database/countriesList';
 import { getExpertiseListInsecure } from '../../../database/expertiseList';
 import { getExpertWithUserById } from '../../../database/experts';

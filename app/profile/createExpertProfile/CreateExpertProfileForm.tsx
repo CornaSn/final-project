@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import cloudinary from '../../../cloudinary.config';
 import { Country } from '../../../migrations/00004-createCountriesTable';
 import { Language } from '../../../migrations/00006-createLanguagesTable';
 import { Expertise } from '../../../migrations/00008-createExpertiseTable';
@@ -21,16 +20,7 @@ type Props = {
   expertCountries: Country[];
 };
 
-interface CloudinaryResource {
-  context?: {
-    alt?: string;
-    caption?: string;
-  };
-  public_id: string;
-  secure_url: string;
-}
-
-export default async function CreateExpertProfileForm(props: Props) {
+export default function CreateExpertProfileForm(props: Props) {
   const [age, setAge] = useState('');
   const [city, setCity] = useState('');
   const [bio, setBio] = useState('');
@@ -46,13 +36,6 @@ export default async function CreateExpertProfileForm(props: Props) {
   // const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-
-  const { resources } = await cloudinary.api.resources_by_tag(
-    'expert_profile_images',
-    {
-      context: true,
-    },
-  );
 
   async function handleProfileCreation(
     event: React.FormEvent<HTMLFormElement>,
