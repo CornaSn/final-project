@@ -62,10 +62,6 @@ export const getExpertExpertiseInsecure = cache(async (id: number) => {
       expert_expertise.expert_user_id = ${id}
   `;
 
-  // console.log(
-  //   '========================================= expertExpertise',
-  //   expertExpertise,
-  // );
   return expertExpertise;
 });
 
@@ -76,6 +72,22 @@ export const getExpertExpertiseByExpertiseIdInsecure = cache(
     >`
       SELECT
         expertise_id,
+        expert_user_id
+      FROM
+        expert_expertise
+      WHERE
+        expertise_id = ${expertiseId}
+    `;
+    return expertUsersIdsExpertise;
+  },
+);
+
+export const getExpertIdByExpertiseIdInsecure = cache(
+  async (expertiseId: number) => {
+    const expertUsersIdsExpertise = await sql<
+      Pick<ExpertWithExpertise, 'expertUserId'>[]
+    >`
+      SELECT
         expert_user_id
       FROM
         expert_expertise

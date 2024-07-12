@@ -13,7 +13,7 @@ type Props = {
   expertCountries: Country[];
 };
 
-export default function ExpertsForm(props: Props) {
+export default function SearchExpertsForm(props: Props) {
   const [selectedCountry, setSelectedCountry] = useState<number>();
   const [selectedItemsExpertise, setSelectedItemsExpertise] = useState<
     number[]
@@ -39,7 +39,7 @@ export default function ExpertsForm(props: Props) {
       return;
     }
 
-    router.push(`/experts/dashboard`);
+    router.push(`/searchExperts`);
     router.refresh();
   }
 
