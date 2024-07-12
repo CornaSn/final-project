@@ -1,12 +1,15 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import LogoutButton from '../(auth)/logout/LogoutButton';
+import { getExpertByIdWithUserInfoInsecure } from '../../database/experts';
 import { getUser } from '../../database/users';
 
 export default async function Navbar() {
   const sessionCookie = cookies().get('sessionToken');
   const user = sessionCookie && (await getUser(sessionCookie.value));
   // console.log('newUser', user);
+  const expertId = await getExpertByIdWithUserInfoInsecure(user?.id);
+  console.log('expertID', expertId);
 
   return (
     <div className="navbar bg-base-100 flex items-center justify-between px-4 py-2">
@@ -17,21 +20,31 @@ export default async function Navbar() {
         </Link>
       </div>
       <div className="flex flex-1 justify-center space-x-4">
-        <Link className="text-center  font-bold " href="/about">
-          About
-        </Link>
-        <Link className="text-center  font-bold " href="/help">
-          Help
-        </Link>
-        <Link className="text-center  font-bold " href="/community">
-          Community
-        </Link>
+        <div className="flex space-x-4">
+          {user ? (
+            <Link className="text-center font-bold" href="/searchExperts">
+              Search Experts
+            </Link>
+          ) : (
+            <>
+              <Link className="text-center font-bold" href="/about">
+                About
+              </Link>
+              <Link className="text-center font-bold" href="/help">
+                Help
+              </Link>
+              <Link className="text-center font-bold" href="/community">
+                Community
+              </Link>
+            </>
+          )}
+        </div>
+        <div className="flex-1" />
       </div>
-      <div className="flex-1" />
       <div className="flex-none gap-2">
         {user ? (
           <>
-            <Link href={`/profile/${user.id}`} />
+            <Link href={`/experts/${user?.id}`} />
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -61,7 +74,7 @@ export default async function Navbar() {
                   <a href="/community">Community</a>
                 </li>
                 <li>
-                  <a>Help</a>
+                  <a href="/help">Help</a>
                 </li>
                 <li>
                   <LogoutButton />
@@ -70,14 +83,14 @@ export default async function Navbar() {
             </div>
           </>
         ) : (
-          <>
+          <div className="flex space-x-4">
             <Link href="/register" className="btn btn-outline">
               Register
             </Link>
             <Link className="btn btn-primary" href="/login">
               Login
             </Link>
-          </>
+          </div>
         )}
       </div>
     </div>
