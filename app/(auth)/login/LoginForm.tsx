@@ -38,7 +38,7 @@ export default function LoginForm() {
       return;
     }
 
-    router.push(`/profile/createExpertProfile`);
+    router.push('/');
     router.refresh();
   }
 

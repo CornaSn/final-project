@@ -7,7 +7,7 @@ export default function communityPage() {
         </h1>
 
         <section className="mb-12 text-center">
-          <div className="flex justify-center mb-4"></div>
+          <div className="flex justify-center mb-4" />
           <p className="text-lg leading-7 font-poppins">
             Join our vibrant community of travel enthusiasts and experts.
             Explore blog posts, read success stories, and share your own travel

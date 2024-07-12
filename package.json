@@ -20,6 +20,7 @@
     "dotenv-safe": "^9.1.0",
     "i": "^0.3.7",
     "next": "15.0.0-canary.42",
+    "p-map": "^7.0.2",
     "postgres": "^3.4.4",
     "react": "19.0.0-rc.0",
     "react-aria-components": "^1.2.1",

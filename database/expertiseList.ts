@@ -70,17 +70,17 @@ export const getExpertExpertiseInsecure = cache(async (id: number) => {
 });
 
 export const getExpertExpertiseByExpertiseIdInsecure = cache(
-  async (expertise_id: number) => {
+  async (expertiseId: number) => {
     const expertUsersIdsExpertise = await sql<
       Omit<ExpertWithExpertise, 'id'>[]
     >`
       SELECT
-        expert_user_id,
-        expertise_id
+        expertise_id,
+        expert_user_id
       FROM
         expert_expertise
       WHERE
-        expertise_id = ${expertise_id}
+        expertise_id = ${expertiseId}
     `;
     return expertUsersIdsExpertise;
   },

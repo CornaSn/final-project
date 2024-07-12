@@ -1,6 +1,5 @@
 import { cache } from 'react';
 import { sql } from '../database/connect';
-import { User } from '../migrations/00000-createUsersTable';
 import {
   Expert,
   ExpertUser,

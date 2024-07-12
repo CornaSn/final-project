@@ -1,15 +1,15 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import LogoutButton from '../(auth)/logout/LogoutButton';
-import { getExpertByIdWithUserInfoInsecure } from '../../database/experts';
+// import { getExpertByIdWithUserInfoInsecure } from '../../database/experts';
 import { getUser } from '../../database/users';
 
 export default async function Navbar() {
   const sessionCookie = cookies().get('sessionToken');
   const user = sessionCookie && (await getUser(sessionCookie.value));
   // console.log('newUser', user);
-  const expertId = await getExpertByIdWithUserInfoInsecure(user?.id);
-  console.log('expertID', expertId);
+  // const expertId = await getExpertByIdWithUserInfoInsecure(user?.id);
+  // console.log('expertID', expertId);
 
   return (
     <div className="navbar bg-base-100 flex items-center justify-between px-4 py-2">
