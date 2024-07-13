@@ -33,7 +33,7 @@ tba
 
 ## Database schema
 
-- "https://drawsql.app/teams/cornasns-team/diagrams/final-projekt"
+- [DrawSQL Database Schema](https://drawsql.app/teams/cornasns-team/diagrams/final-projekt)
 
 ## Setup
 
