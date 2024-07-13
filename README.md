@@ -29,11 +29,8 @@ tba
 
 ## Prototyping
 
-- [Fimga Prototype](https://www.figma.com/design/79B5EEm3syK8xJVof2RdeS/Untitled?node-id=0-1&t=yedTwvahBEsAsF2x-0)
-
-## Database schema
-
-- [DrawSQL Database Schema](https://drawsql.app/teams/cornasns-team/diagrams/final-projekt)
+- [Fimga](https://www.figma.com/design/79B5EEm3syK8xJVof2RdeS/Untitled?node-id=0-1&t=yedTwvahBEsAsF2x-0)
+- [DrawSQL](https://drawsql.app/teams/cornasns-team/diagrams/final-projekt)
 
 ## Setup
 
