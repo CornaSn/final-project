@@ -29,11 +29,11 @@ tba
 
 ## Prototyping
 
-- href="https://www.figma.com/design/79B5EEm3syK8xJVof2RdeS/Untitled?node-id=0-1&t=yedTwvahBEsAsF2x-0"
+- [Fimga Prototype](https://www.figma.com/design/79B5EEm3syK8xJVof2RdeS/Untitled?node-id=0-1&t=yedTwvahBEsAsF2x-0)
 
 ## Database schema
 
-- href="https://drawsql.app/teams/cornasns-team/diagrams/final-projekt"
+- "https://drawsql.app/teams/cornasns-team/diagrams/final-projekt"
 
 ## Setup
 
