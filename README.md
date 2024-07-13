@@ -1,4 +1,4 @@
-# travelgenius
+# travelgenius 🗺️
 
 Travelgenius is a full-stack web application designed to match travel-experts with users based on the desired country and interest areas. It allows users to find their matches and get in touch with the experts.
 
@@ -10,7 +10,7 @@ Travelgenius is a full-stack web application designed to match travel-experts wi
 - Search functionality based on interest
 - Algorithm for matching experts with users
 
-## Technologies
+## Technologies ⚛️
 
 - React
 - Next.js
@@ -23,7 +23,7 @@ Travelgenius is a full-stack web application designed to match travel-experts wi
 
 - Cloudinary
 
-## Screenshot
+## Screenshot 📷
 
 tba
 
