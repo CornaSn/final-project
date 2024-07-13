@@ -25,7 +25,7 @@ type Props = {
 };
 
 export default async function ExpertPage(props: Props) {
-  const userId = await userWithValidSession();
+  await userWithValidSession();
   const singleExpert = await getExpertByIdWithUserInfoInsecure(
     Number(props.params.expertId),
   );

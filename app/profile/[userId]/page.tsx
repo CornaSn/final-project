@@ -99,14 +99,16 @@ export default async function UserProfile() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="text-center text-black p-8">
-        <h1 className="mb-5 text-6xl font-bold font-amatic-sc uppercase">
-          Hallo {user.firstName}
+        <h1 className="mb-5 text-8xl font-bold font-amatic-sc uppercase mt-10">
+          Welcome, {user.firstName}
         </h1>
         {user.isExpert ? (
           <div>
-            <p className="text-lg mb-8">Let's create your profile page!</p>
+            <p className="text-lg mb-8">
+              Let's get started and create your profile page!
+            </p>
             <Link
-              className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-800 transition duration-300"
+              className="btn btn-primary"
               href="/profile/createExpertProfile"
             >
               Get Started
@@ -117,10 +119,7 @@ export default async function UserProfile() {
             <p className="text-lg mb-8">
               Let's get started with finding your perfect expert-travel match
             </p>
-            <Link
-              className="bg-black text-white font-semibold py-2 px-4 rounded hover:bg-gray-800 transition duration-300"
-              href="/experts"
-            >
+            <Link className="btn btn-primary" href="/experts">
               Get Started
             </Link>
           </div>

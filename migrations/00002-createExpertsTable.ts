@@ -49,8 +49,10 @@ export type ExpertUserWithChoices = {
   city: string | null;
   age: string | null;
   countryName: string[] | null;
+  countryId: number[] | null;
   languageName: string[] | null;
   expertiseName: string[] | null;
+  expertiseId: number[] | null;
 };
 
 export async function up(sql: Sql) {

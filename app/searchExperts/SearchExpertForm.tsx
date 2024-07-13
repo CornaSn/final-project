@@ -1,11 +1,12 @@
 'use client';
 
+import { debounce } from 'lodash';
+import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation';
-// import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Country } from '../../migrations/00004-createCountriesTable';
 import { Expertise } from '../../migrations/00008-createExpertiseTable';
-import { SearchExpertsRequestBody } from '../api/searchExperts/route';
+import { SearchExpertsRespondBody } from '../api/searchExperts/route';
 import ErrorMessage from '../ErrorMessage';
 
 type Props = {
@@ -19,28 +20,64 @@ export default function SearchExpertsForm(props: Props) {
     number[]
   >([]);
   const [errors, setErrors] = useState<{ message: string }[]>([]);
+  const [searchResults, setSearchResults] =
+    useState<SearchExpertsRespondBody | null>(null); // State to store search results
+
   const router = useRouter();
+
+  // Function to update URL with choosen Options
+  const debouncedUpdateUrl = useRef(
+    debounce(() => {
+      const query = {
+        country: selectedCountry ? selectedCountry.toString() : '',
+        expertise: selectedItemsExpertise.join(','),
+      };
+      const searchParams = new URLSearchParams(query);
+
+      router.push(`/searchExperts?${searchParams.toString()}`);
+    }, 300),
+  ).current; // debounce time in milliseconds
+
+  useEffect(() => {
+    debouncedUpdateUrl();
+    return debouncedUpdateUrl.cancel;
+  }, [selectedCountry, selectedItemsExpertise]);
 
   async function handleSearchExperts(event: { preventDefault: () => void }) {
     event.preventDefault();
-    const response = await fetch('/api/searchExperts', {
-      method: 'POST',
-      body: JSON.stringify({
-        selectedCountry,
-        selectedItemsExpertise,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
+    const query = {
+      country: selectedCountry ? selectedCountry.toString() : '',
+      expertise: selectedItemsExpertise.join(','),
+    };
+    const searchParams = new URLSearchParams(query);
+
+    const response = await fetch(
+      `/api/searchExperts?${searchParams.toString()}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    });
-    const data: SearchExpertsRequestBody = await response.json();
+    );
+
+    const data: SearchExpertsRespondBody = await response.json();
+    console.log('data', data);
+
     if ('errors' in data) {
       setErrors(data.errors);
-      return;
+    } else {
+      setSearchResults(data); // Save search results in state
+      router.push('/searchExperts/match'); // Redirect to match page
     }
 
-    router.push(`/searchExperts`);
-    router.refresh();
+    // router.push('/searchExperts/match');
+    // // router.push(
+    // //   { pathname: '/searchExperts/match',
+    // //   query: { data: data } }>,
+    // // );
+
+    // router.refresh();
   }
 
   const toggleSelection = (item: number) => {
@@ -103,7 +140,10 @@ export default function SearchExpertsForm(props: Props) {
                   className="bg-blue-500 text-white px-3 py-1 rounded-full"
                   onClick={() => toggleSelection(areaId)}
                 >
-                  {props.expertAreas[areaId - 1]?.expertiseName}
+                  {
+                    props.expertAreas.find((area) => area.id === areaId)
+                      ?.expertiseName
+                  }
                 </button>
               ))}
             </div>
@@ -136,6 +176,13 @@ export default function SearchExpertsForm(props: Props) {
               Search
             </button>
           </div>
+          {errors.length > 0 && (
+            <div className="mt-4">
+              {errors.map((error, index) => (
+                <ErrorMessage key={index} message={error.message} />
+              ))}
+            </div>
+          )}
         </div>
       </form>
     </div>

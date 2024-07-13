@@ -113,7 +113,7 @@ export default async function ExpertsPage() {
               <div className="flex-grow flex justify-end items-end mt-4">
                 <Link
                   className="btn btn-primary"
-                  href={`/experts/${expertId?.id}`}
+                  href={`/experts/${expertUser.userId}`}
                 >
                   See more
                 </Link>

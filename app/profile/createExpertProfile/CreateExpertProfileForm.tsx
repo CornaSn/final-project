@@ -76,12 +76,10 @@ export default function CreateExpertProfileForm(props: Props) {
         className="flex justify-center items-center min-h-screen bg-gray-100"
       >
         <div className="w-full max-w-4xl p-8 bg-white rounded shadow-md space-y-6">
-          <h1 className="text-3xl font-bold text-center mb-8">
-            Welcome, to travel genius!
+          <h1 className="text-4xl font-bold text-center font-amatic-sc  mb-8">
+            Welcome to Travel Genius! Let's Get Your Profile Set Up{' '}
           </h1>
-          <h3 className="text-s font-bold text-center mb-8">
-            Let's create your profile.
-          </h3>
+
           <div className="grid grid-cols-2 gap-8">
             <div className="space-y-4">
               <label className="flex flex-col space-y-2">

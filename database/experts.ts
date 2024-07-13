@@ -247,27 +247,27 @@ export const getAllExpertUserWithChoicesInsecure = cache(async () => {
 // *****************************************************************************
 // *****************************************************************************
 
-type AllExpertUserInfoWithAllChoices = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  isExpert: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  expertId: number;
-  // age: string | null;
-  // city: string | null;
-  // bio: string | null;
-  // pictureUrl: string | null;
-  // videoUrl: string | null;
-  // travelBlogUrl: string | null;
-  countriesId: number[];
-  // countryNames: string[];
-  // languagesId: number[];
-  // languageNames: string[];
-  // expertiseAreasId: number[];
-  // expertiseNames: string[];
-};
+// type AllExpertUserInfoWithAllChoices = {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   isExpert: boolean;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   expertId: number;
+//   // age: string | null;
+//   // city: string | null;
+//   // bio: string | null;
+//   // pictureUrl: string | null;
+//   // videoUrl: string | null;
+//   // travelBlogUrl: string | null;
+//   countriesId: number[];
+//   // countryNames: string[];
+//   // languagesId: number[];
+//   // languageNames: string[];
+//   // expertiseAreasId: number[];
+//   // expertiseNames: string[];
+// };
 
 // export const getAllExpertInfosWithChoicesInsecure = cache(
 //   async (id: number) => {

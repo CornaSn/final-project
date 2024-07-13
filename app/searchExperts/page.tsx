@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function SearchExperts() {
-  const userId = await userWithValidSession();
+  await userWithValidSession();
 
   // Fetch select fields for search form
   const expertAreas = await getExpertiseListInsecure();
