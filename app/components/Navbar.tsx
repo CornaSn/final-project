@@ -1,6 +1,10 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import LogoutButton from '../(auth)/logout/LogoutButton';
+import {
+  getExpertByIdInsecure,
+  getExpertByIdWithUserInfoInsecure,
+} from '../../database/experts';
 // import { getExpertByIdWithUserInfoInsecure } from '../../database/experts';
 import { getUser } from '../../database/users';
 
@@ -8,7 +12,26 @@ export default async function Navbar() {
   const sessionCookie = cookies().get('sessionToken');
   const user = sessionCookie && (await getUser(sessionCookie.value));
   // console.log('newUser', user);
-  // const expertId = await getExpertByIdWithUserInfoInsecure(user?.id);
+  let profileLink;
+  if (typeof user === 'undefined') {
+    console.log('undefined');
+    // no user -> register
+    profileLink = '/register';
+  } else {
+    // must be user or expert
+    console.log('user.id', user.id);
+    const expert = await getExpertByIdInsecure(user.id);
+    console.log('expertId', expert);
+    if (typeof expert === 'undefined') {
+      console.log('user');
+      // must be a normal user
+      profileLink = `/profile/${user.id}`;
+    } else {
+      console.log('expert');
+      profileLink = `/experts/${expert.id}`;
+      // must be expert user
+    }
+  }
   // console.log('expertID', expertId);
 
   return (
@@ -44,7 +67,8 @@ export default async function Navbar() {
       <div className="flex-none gap-2">
         {user ? (
           <>
-            <Link href={`/experts/${user?.id}`} />
+            {/* <Link href={`/experts/${user?.id}`} /> */}
+            {/* <Link href={profileLink} /> */}
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -63,7 +87,8 @@ export default async function Navbar() {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between" href={`/profile/${user.id}`}>
+                  {/* <a className="justify-between" href={`/profile/${user.id}`}> */}
+                  <a className="justify-between" href={profileLink}>
                     Profile
                   </a>
                 </li>

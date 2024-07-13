@@ -61,7 +61,7 @@ export default async function MatchExperts() {
     },
   );
   // console.log('combinedResults', combinedResults);
-
+  console.log('combinedResults', combinedResults);
   return (
     <div className="flex justify-center p-4">
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl">
@@ -154,7 +154,7 @@ export default async function MatchExperts() {
                     <div className="flex-grow flex justify-end items-end mt-4">
                       <Link
                         className="btn btn-primary"
-                        href={`/experts/${matchedExpert.expertUserId}`}
+                        href={`/experts/${matchedExpert.experts.expertId}`}
                       >
                         See more
                       </Link>

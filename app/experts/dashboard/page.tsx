@@ -11,9 +11,9 @@ export const metadata = {
 };
 
 export default async function ExpertsPage() {
-  const userId = await userWithValidSession();
+  await userWithValidSession();
   const expertUsers = await getAllExpertUserWithChoicesInsecure();
-  const expertId = await getExpertByIdInsecure(userId);
+  // const expertId = await getExpertByIdInsecure(userId);
   // console.log('test-------', expertId);
 
   // console.log(
@@ -113,7 +113,7 @@ export default async function ExpertsPage() {
               <div className="flex-grow flex justify-end items-end mt-4">
                 <Link
                   className="btn btn-primary"
-                  href={`/experts/${expertUser.userId}`}
+                  href={`/experts/${expertUser.expertId}`}
                 >
                   See more
                 </Link>

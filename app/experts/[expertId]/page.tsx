@@ -7,16 +7,16 @@ import { getExpertByIdWithUserInfoInsecure } from '../../../database/experts';
 import { getExpertLanguagesInsecure } from '../../../database/languageList';
 import { userWithValidSession } from '../../../util/cookies';
 
-export async function generateMetadata(props: Props) {
-  const singleExpert = await getExpertByIdWithUserInfoInsecure(
-    Number(props.params.expertId),
-  );
+// export async function generateMetadata(props: Props) {
+//   const singleExpert = await getExpertByIdWithUserInfoInsecure(
+//     Number(props.params.expertId),
+//   );
 
-  return {
-    title: singleExpert?.firstName,
-    description: 'Single Expert Page',
-  };
-}
+//   return {
+//     title: singleExpert?.firstName,
+//     description: 'Single Expert Page',
+//   };
+// }
 
 type Props = {
   params: {

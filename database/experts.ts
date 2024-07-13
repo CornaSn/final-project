@@ -201,7 +201,9 @@ export const getExpertUserWithChoicesInsecure = cache(async (id: number) => {
   if (typeof expertInfo?.bio === 'string') {
     expertChoices.bio = expertInfo.bio;
   }
-
+  if (typeof expertInfo?.id == 'number') {
+    expertChoices.expertId = expertInfo.id;
+  }
   if (typeof expertInfo?.city === 'string') {
     expertChoices.city = expertInfo.city;
   }

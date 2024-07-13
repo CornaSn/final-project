@@ -119,7 +119,7 @@ export default async function UserProfile() {
             <p className="text-lg mb-8">
               Let's get started with finding your perfect expert-travel match
             </p>
-            <Link className="btn btn-primary" href="/experts">
+            <Link className="btn btn-primary" href="/searchExperts">
               Get Started
             </Link>
           </div>
