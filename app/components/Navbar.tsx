@@ -14,22 +14,22 @@ export default async function Navbar() {
   // console.log('newUser', user);
   let profileLink;
   if (typeof user === 'undefined') {
-    console.log('undefined');
+    // console.log('undefined');
     // no user -> register
     profileLink = '/register';
   } else {
     // must be user or expert
-    console.log('user.id', user.id);
+    // console.log('user.id', user.id);
     const expert = await getExpertByIdInsecure(user.id);
-    console.log('expertId', expert);
+    // console.log('expertId', expert);
     if (typeof expert === 'undefined') {
-      console.log('user');
+      // console.log('user');
       // must be a normal user
       profileLink = `/profile/${user.id}`;
     } else {
-      console.log('expert');
-      profileLink = `/experts/${expert.id}`;
       // must be expert user
+      // console.log('expert');
+      profileLink = `/experts/${expert.id}`;
     }
   }
   // console.log('expertID', expertId);

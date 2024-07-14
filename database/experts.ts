@@ -113,7 +113,7 @@ export const getExpertWithUserById = cache(
   },
 );
 
-export const createExpert = cache(
+export const createOrUpdateExpert = cache(
   async (
     sessionToken: string,
     userId: number,
@@ -130,43 +130,62 @@ export const createExpert = cache(
           user_id = ${userId}
       `;
 
+      let expert;
+
       if (existingExpert.length > 0) {
-        throw new Error('!!!=====> An entry with this user_id already exists');
+        // Update the existing expert profile
+        [expert] = await sql<Expert[]>`
+          UPDATE experts
+          SET
+            age = ${newExpert.age},
+            city = ${newExpert.city},
+            bio = ${newExpert.bio},
+            picture_url = ${newExpert.pictureUrl},
+            video_url = ${newExpert.videoUrl},
+            travel_blog_url = ${newExpert.travelBlogUrl}
+          FROM
+            sessions
+          WHERE
+            experts.user_id = ${userId}
+            AND sessions.token = ${sessionToken}
+            AND sessions.expiry_timestamp > now()
+          RETURNING
+            experts.*
+        `;
+      } else {
+        // Insert the new expert profile
+        [expert] = await sql<Expert[]>`
+          INSERT INTO
+            experts (
+              age,
+              city,
+              bio,
+              picture_url,
+              video_url,
+              travel_blog_url,
+              user_id
+            )
+          SELECT
+            ${newExpert.age},
+            ${newExpert.city},
+            ${newExpert.bio},
+            ${newExpert.pictureUrl},
+            ${newExpert.videoUrl},
+            ${newExpert.travelBlogUrl},
+            ${userId}
+          FROM
+            sessions
+          WHERE
+            token = ${sessionToken}
+            AND sessions.expiry_timestamp > now()
+          RETURNING
+            experts.*
+        `;
       }
 
-      // Proceed with inserting the new expert profile
-      const [expert] = await sql<Expert[]>`
-        INSERT INTO
-          experts (
-            age,
-            city,
-            bio,
-            picture_url,
-            video_url,
-            travel_blog_url,
-            user_id
-          )
-        SELECT
-          ${newExpert.age},
-          ${newExpert.city},
-          ${newExpert.bio},
-          ${newExpert.pictureUrl},
-          ${newExpert.videoUrl},
-          ${newExpert.travelBlogUrl},
-          ${userId}
-        FROM
-          sessions
-        WHERE
-          token = ${sessionToken}
-          AND sessions.expiry_timestamp > now()
-        RETURNING
-          experts.*
-      `;
       return expert;
     } catch (error: any) {
-      // console.error(error.message);
-      // console.error(error);
-      // console.error('Error creating expert:', 'expert profile already exist');
+      console.error('Error creating or updating expert:', error.message);
       throw error; // Rethrow the error for further handling
     }
   },

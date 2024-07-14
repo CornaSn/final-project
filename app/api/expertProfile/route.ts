@@ -8,7 +8,7 @@ import {
   findExpertiseIdInsecure,
   insertExpertExpertiseInsecure,
 } from '../../../database/expertiseList';
-import { createExpert } from '../../../database/experts';
+import { createOrUpdateExpert } from '../../../database/experts';
 import {
   findLanguageIdInsecure,
   insertExpertLanguageInsecure,
@@ -19,7 +19,7 @@ import {
   expertSchema,
 } from '../../../migrations/00002-createExpertsTable';
 
-export type CreateExpertProfileRequestBody =
+export type CreateOrUpdateExpertProfileRequestBody =
   | {
       expert: Expert;
     }
@@ -31,11 +31,11 @@ export type CreateExpertProfileRequestBody =
 
 export async function POST(
   request: NextRequest,
-): Promise<NextResponse<CreateExpertProfileRequestBody>> {
+): Promise<NextResponse<CreateOrUpdateExpertProfileRequestBody>> {
   try {
     // 1. Get the user data from the request
     const body = await request.json();
-
+    console.log('body', body);
     // 2. Validation schema for request body
     const result = expertSchema.safeParse(body);
 
@@ -79,16 +79,20 @@ export async function POST(
       );
     }
 
-    // 4. Create new expert profile
-    const newExpert = await createExpert(sessionCookie.value, session.userId, {
-      age: result.data.age || null,
-      city: result.data.city || null,
-      bio: result.data.bio || null,
-      pictureUrl: result.data.pictureUrl || null,
-      videoUrl: result.data.videoUrl || null,
-      travelBlogUrl: result.data.travelBlogUrl || null,
-      userId: session.userId,
-    });
+    // 4. Create or update expert profile
+    const newExpert = await createOrUpdateExpert(
+      sessionCookie.value,
+      session.userId,
+      {
+        age: result.data.age || null,
+        city: result.data.city || null,
+        bio: result.data.bio || null,
+        pictureUrl: result.data.pictureUrl || null,
+        videoUrl: result.data.videoUrl || null,
+        travelBlogUrl: result.data.travelBlogUrl || null,
+        userId: session.userId,
+      },
+    );
 
     // 5. Create expert with Countries
     await Promise.all(
@@ -100,7 +104,7 @@ export async function POST(
             const returnFromExpertCountryInsert =
               await insertExpertCountryInsecure(countryId.id, session.userId);
 
-            console.log(returnFromExpertCountryInsert);
+            // console.log(returnFromExpertCountryInsert);
           } catch (error) {
             console.error('Error while inserting into DB', error);
           }
@@ -117,7 +121,7 @@ export async function POST(
             const returnFromExpertLanguageInsert =
               await insertExpertLanguageInsecure(languageId.id, session.userId);
 
-            console.log(returnFromExpertLanguageInsert);
+            // console.log(returnFromExpertLanguageInsert);
           } catch (error) {
             console.error('Error while inserting into DB', error);
           }
@@ -137,7 +141,7 @@ export async function POST(
                 session.userId,
               );
 
-            console.log(returnFromExpertExpertiseInsert);
+            // console.log(returnFromExpertExpertiseInsert);
           } catch (error) {
             console.error('Error while inserting into DB', error);
           }

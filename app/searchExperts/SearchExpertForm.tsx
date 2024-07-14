@@ -62,7 +62,7 @@ export default function SearchExpertsForm(props: Props) {
     );
 
     const data: SearchExpertsRespondBody = await response.json();
-    console.log('data', data);
+    // console.log('data', data);
 
     if ('errors' in data) {
       setErrors(data.errors);
@@ -176,13 +176,6 @@ export default function SearchExpertsForm(props: Props) {
               Search
             </button>
           </div>
-          {errors.length > 0 && (
-            <div className="mt-4">
-              {errors.map((error, index) => (
-                <ErrorMessage key={index} message={error.message} />
-              ))}
-            </div>
-          )}
         </div>
       </form>
     </div>

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { Country } from '../../../migrations/00004-createCountriesTable';
 import { Language } from '../../../migrations/00006-createLanguagesTable';
 import { Expertise } from '../../../migrations/00008-createExpertiseTable';
-import { CreateExpertProfileRequestBody } from '../../api/expertProfile/route';
+import { CreateOrUpdateExpertProfileRequestBody } from '../../api/expertProfile/route';
 import SelectCountry from '../../components/selectCountries';
 import SelectExpertise from '../../components/selectExpertise';
 import SelectLanguage from '../../components/selectLanguages';
@@ -24,8 +24,8 @@ export default function CreateExpertProfileForm(props: Props) {
   const [age, setAge] = useState('');
   const [city, setCity] = useState('');
   const [bio, setBio] = useState('');
-  const [pictureUrl, setPictureUrl] = useState('');
-  const [videoUrl, setVideoUrl] = useState('');
+  // const [pictureUrl, setPictureUrl] = useState('');
+  // const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
   const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
   const [selectedItemsLanguages, setSelectedItemsLanguages] = useState([]);
@@ -48,8 +48,8 @@ export default function CreateExpertProfileForm(props: Props) {
         age,
         city,
         bio,
-        pictureUrl,
-        videoUrl,
+        // pictureUrl,
+        // videoUrl,
         travelBlogUrl,
         selectedItemsCountries,
         selectedItemsLanguages,
@@ -59,7 +59,7 @@ export default function CreateExpertProfileForm(props: Props) {
         'Content-Type': 'application/json',
       },
     });
-    const data: CreateExpertProfileRequestBody = await response.json();
+    const data: CreateOrUpdateExpertProfileRequestBody = await response.json();
     if ('errors' in data) {
       setErrors(data.errors);
       return;
@@ -68,6 +68,13 @@ export default function CreateExpertProfileForm(props: Props) {
     router.push(`/experts/dashboard`);
     router.refresh();
   }
+
+  // async function handleImageUpload(event: React.FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.currentTarget);
+  //   const imageUrl = await create(formData);
+  //   setPictureUrl(imageUrl); // Aktualisieren des pictureUrl-States
+  // }
 
   return (
     <div>
@@ -136,18 +143,26 @@ export default function CreateExpertProfileForm(props: Props) {
             </div>
 
             <div className="space-y-4">
-              <label className="flex flex-col space-y-2">
+              {/* <label className="flex flex-col space-y-2">
                 <span className="text-lg font-medium text-gray-700">
                   Picture:
                 </span>
                 <input
+                  name="testImage"
                   type="file"
                   className="file-input file-input-bordered w-full max-w-s py-3 px-4"
-                  onChange={(event) => setPictureUrl(event.currentTarget.value)}
+                  // onChange={(event) => setPictureUrl(event.currentTarget.value)}
+                  onChange={(event) => {
+                    console.log(
+                      'event.currentTarget.value',
+                      event.currentTarget.value,
+                    );
+                    setPictureUrl(event.currentTarget.value);
+                  }}
                 />
-              </label>
+              </label> */}
 
-              <label className="flex flex-col space-y-2">
+              {/* <label className="flex flex-col space-y-2">
                 <span className="text-lg font-medium text-gray-700">
                   Video:
                 </span>
@@ -156,7 +171,7 @@ export default function CreateExpertProfileForm(props: Props) {
                   className="file-input file-input-bordered w-full max-w-s py-3 px-4"
                   onChange={(event) => setVideoUrl(event.currentTarget.value)}
                 />
-              </label>
+              </label> */}
               <SelectLanguage
                 expertLanguages={props.expertLanguages}
                 // TODO****

@@ -32,7 +32,7 @@ export default async function MatchExperts() {
   // Get match result from cookies
   const cookie = cookies().get('searchParams');
   if (!cookie) {
-    console.log('searchParamsCookie is not found');
+    // console.log('searchParamsCookie is not found');
     return <div>No matching parameters found</div>;
   }
 
@@ -40,10 +40,10 @@ export default async function MatchExperts() {
     name: cookie.name,
     value: cookie.value,
   };
-  console.log('searchParamsCookie', searchParamsCookie);
+  // console.log('searchParamsCookie', searchParamsCookie);
 
   const matchResults = JSON.parse(searchParamsCookie.value);
-  console.log('matchResult', matchResults);
+  // console.log('matchResult', matchResults);
 
   const allExperts = await getAllExpertUserWithChoicesInsecure();
   // console.log('allExperts', allExperts);
@@ -61,12 +61,12 @@ export default async function MatchExperts() {
     },
   );
   // console.log('combinedResults', combinedResults);
-  console.log('combinedResults', combinedResults);
+  // console.log('combinedResults', combinedResults);
   return (
     <div className="flex justify-center p-4">
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl">
         {combinedResults.map((matchedExpert: any) => {
-          console.log('Rendering matchedExpert:', matchedExpert);
+          // console.log('Rendering matchedExpert:', matchedExpert);
           return (
             <div
               key={`matchedExpert-${matchedExpert.expertUserId}`}

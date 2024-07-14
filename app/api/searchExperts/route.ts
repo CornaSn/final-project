@@ -41,7 +41,7 @@ export async function GET(
       return Number(idString);
     });
 
-    console.log('expertise', selectedItemsExpertise);
+    // console.log('expertise', selectedItemsExpertise);
 
     // 2. Check if user has a valid session
     await userWithValidSession();
@@ -72,8 +72,8 @@ export async function GET(
         async (expertiseId: number) => {
           const result =
             await getExpertExpertiseByExpertiseIdInsecure(expertiseId);
-          console.log('===========');
-          console.log(result);
+          // console.log('===========');
+          // console.log(result);
           return {
             expertiseId: expertiseId,
             expertUserIds: result.map((expert) => expert.expertUserId),
