@@ -13,6 +13,7 @@ export default async function Navbar() {
   const user = sessionCookie && (await getUser(sessionCookie.value));
   // console.log('newUser', user);
   let profileLink;
+  let expert;
   if (typeof user === 'undefined') {
     // console.log('undefined');
     // no user -> register
@@ -20,7 +21,7 @@ export default async function Navbar() {
   } else {
     // must be user or expert
     // console.log('user.id', user.id);
-    const expert = await getExpertByIdInsecure(user.id);
+    expert = await getExpertByIdInsecure(user.id);
     // console.log('expertId', expert);
     if (typeof expert === 'undefined') {
       // console.log('user');
@@ -78,7 +79,11 @@ export default async function Navbar() {
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    src={
+                      typeof expert?.pictureUrl === 'string'
+                        ? expert.pictureUrl
+                        : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'
+                    }
                   />
                 </div>
               </div>

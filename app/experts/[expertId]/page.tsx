@@ -40,6 +40,14 @@ export default async function ExpertPage(props: Props) {
   const expertLanguages = await getExpertLanguagesInsecure(singleExpert.userId);
   const expertExpertise = await getExpertExpertiseInsecure(singleExpert.userId);
 
+  // console.log('singleExpert.pictureUrl', singleExpert.pictureUrl);
+  // console.log('typeof singleExpert.pictureUrl', typeof singleExpert.pictureUrl);
+
+  const profileImg =
+    typeof singleExpert.pictureUrl === 'string'
+      ? singleExpert.pictureUrl
+      : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg';
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-6 relative">
@@ -47,7 +55,7 @@ export default async function ExpertPage(props: Props) {
           <div className="relative">
             <img
               className="w-48 h-48 rounded-full object-cover"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+              src={profileImg}
               alt="Profile"
             />
           </div>

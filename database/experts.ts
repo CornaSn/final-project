@@ -230,7 +230,12 @@ export const getExpertUserWithChoicesInsecure = cache(async (id: number) => {
   if (typeof expertInfo?.age == 'string') {
     expertChoices.age = expertInfo.age;
   }
-
+  if (typeof expertInfo?.videoUrl == 'string') {
+    expertChoices.videoUrl = expertInfo.videoUrl;
+  }
+  if (typeof expertInfo?.pictureUrl == 'string') {
+    expertChoices.pictureUrl = expertInfo.pictureUrl;
+  }
   const userInfo = await getUserByIdInsecure(id);
   if (typeof userInfo?.firstName === 'string') {
     expertChoices.firstName = userInfo.firstName;
@@ -257,7 +262,9 @@ export const getAllExpertUserWithChoicesInsecure = cache(async () => {
     allExpertIds.map(async (entry) => {
       // console.log('entry####################################', entry);
       // console.log('typeof entry.userId', typeof entry.userId);
-      return await getExpertUserWithChoicesInsecure(entry.userId);
+      const expertUser = await getExpertUserWithChoicesInsecure(entry.userId);
+      console.log(expertUser);
+      return expertUser;
     }),
   );
 });

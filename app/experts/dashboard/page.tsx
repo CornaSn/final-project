@@ -13,13 +13,14 @@ export const metadata = {
 export default async function ExpertsPage() {
   await userWithValidSession();
   const expertUsers = await getAllExpertUserWithChoicesInsecure();
+
   // const expertId = await getExpertByIdInsecure(userId);
   // console.log('test-------', expertId);
 
-  // console.log(
-  //   'expertUsers#################################################################',
-  //   expertUsers,
-  // );
+  console.log(
+    'expertUsers#################################################################',
+    expertUsers,
+  );
 
   return (
     <div className="flex justify-center p-4">
@@ -35,7 +36,11 @@ export default async function ExpertsPage() {
                   <div className="w-24 h-24 rounded-full">
                     <img
                       alt="profilepicture"
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                      src={
+                        typeof expertUser.pictureUrl === 'string'
+                          ? expertUser.pictureUrl
+                          : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'
+                      }
                       className="rounded-full object-cover"
                     />
                   </div>
@@ -65,7 +70,7 @@ export default async function ExpertsPage() {
               </div>
               <div className="flex items-center">
                 <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center mr-4">
-                  <span className="text-[24px] font-bold">84%</span>
+                  <span className="text-[24px] font-bold">100%</span>
                 </div>
 
                 <div className="ml-4">

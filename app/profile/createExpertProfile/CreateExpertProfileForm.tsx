@@ -1,5 +1,6 @@
 'use client';
 
+import { CldUploadWidget } from 'next-cloudinary';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Country } from '../../../migrations/00004-createCountriesTable';
@@ -11,6 +12,13 @@ import SelectExpertise from '../../components/selectExpertise';
 import SelectLanguage from '../../components/selectLanguages';
 import ErrorMessage from '../../ErrorMessage';
 import { create } from './actions';
+
+interface UploadedAssetData {
+  public_id: string;
+  width: number;
+  height: number;
+  id: string;
+}
 
 type Props = {
   userId: number;
@@ -24,8 +32,8 @@ export default function CreateExpertProfileForm(props: Props) {
   const [age, setAge] = useState('');
   const [city, setCity] = useState('');
   const [bio, setBio] = useState('');
-  // const [pictureUrl, setPictureUrl] = useState('');
-  // const [videoUrl, setVideoUrl] = useState('');
+  const [pictureUrl, setPictureUrl] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
   const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
   const [selectedItemsLanguages, setSelectedItemsLanguages] = useState([]);
@@ -33,6 +41,8 @@ export default function CreateExpertProfileForm(props: Props) {
     string[]
   >([]);
   const [errors, setErrors] = useState<{ message: string }[]>([]);
+  const [result, setResult] = useState<UploadedAssetData | null>(null);
+
   // const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -41,32 +51,38 @@ export default function CreateExpertProfileForm(props: Props) {
     event: React.FormEvent<HTMLFormElement>,
   ) {
     event.preventDefault();
-    const response = await fetch('/api/expertProfile', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: props.userId,
-        age,
-        city,
-        bio,
-        // pictureUrl,
-        // videoUrl,
-        travelBlogUrl,
-        selectedItemsCountries,
-        selectedItemsLanguages,
-        selectedItemsExpertise,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const data: CreateOrUpdateExpertProfileRequestBody = await response.json();
-    if ('errors' in data) {
-      setErrors(data.errors);
-      return;
-    }
 
-    router.push(`/experts/dashboard`);
-    router.refresh();
+    const buttonText = event.nativeEvent.submitter.innerText;
+    //only trigger this if the Button Upload is pressed
+    if (buttonText === 'Upload') {
+      const response = await fetch('/api/expertProfile', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: props.userId,
+          age,
+          city,
+          bio,
+          pictureUrl,
+          videoUrl,
+          travelBlogUrl,
+          selectedItemsCountries,
+          selectedItemsLanguages,
+          selectedItemsExpertise,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data: CreateOrUpdateExpertProfileRequestBody =
+        await response.json();
+      if ('errors' in data) {
+        setErrors(data.errors);
+        return;
+      }
+
+      router.push(`/experts/dashboard`);
+      router.refresh();
+    }
   }
 
   // async function handleImageUpload(event: React.FormEvent<HTMLFormElement>) {
@@ -143,35 +159,38 @@ export default function CreateExpertProfileForm(props: Props) {
             </div>
 
             <div className="space-y-4">
-              {/* <label className="flex flex-col space-y-2">
-                <span className="text-lg font-medium text-gray-700">
-                  Picture:
-                </span>
-                <input
-                  name="testImage"
-                  type="file"
-                  className="file-input file-input-bordered w-full max-w-s py-3 px-4"
-                  // onChange={(event) => setPictureUrl(event.currentTarget.value)}
-                  onChange={(event) => {
-                    console.log(
-                      'event.currentTarget.value',
-                      event.currentTarget.value,
-                    );
-                    setPictureUrl(event.currentTarget.value);
-                  }}
-                />
-              </label> */}
-
-              {/* <label className="flex flex-col space-y-2">
-                <span className="text-lg font-medium text-gray-700">
-                  Video:
-                </span>
-                <input
-                  type="file"
-                  className="file-input file-input-bordered w-full max-w-s py-3 px-4"
-                  onChange={(event) => setVideoUrl(event.currentTarget.value)}
-                />
-              </label> */}
+              <CldUploadWidget
+                signatureEndpoint="/api/sign-image"
+                onSuccess={(res) => {
+                  setResult(res.info as UploadedAssetData);
+                  // console.log('===================res================');
+                  // console.log(typeof res.info?.url);
+                  // console.log(res.info?.url);
+                  setPictureUrl(res.info?.url);
+                }}
+              >
+                {({ open }) => {
+                  return (
+                    <button onClick={() => open()}>Upload an image</button>
+                  );
+                }}
+              </CldUploadWidget>
+              <CldUploadWidget
+                signatureEndpoint="/api/sign-image"
+                onSuccess={(res) => {
+                  setResult(res.info as UploadedAssetData);
+                  // console.log('===================res================');
+                  // console.log(typeof res.info?.url);
+                  // console.log(res.info?.url);
+                  setVideoUrl(res.info?.url);
+                }}
+              >
+                {({ open }) => {
+                  return (
+                    <button onClick={() => open()}>Upload an video</button>
+                  );
+                }}
+              </CldUploadWidget>
               <SelectLanguage
                 expertLanguages={props.expertLanguages}
                 // TODO****
@@ -189,28 +208,6 @@ export default function CreateExpertProfileForm(props: Props) {
           </div>
         </div>
       </form>
-
-      <div>
-        <h2 className="text-xl font-bold mb-4">Add a New Image</h2>
-        <form
-          action={create}
-          className="bg-white border border-slate-200 dark:border-slate-500 rounded p-6 mb-6"
-        >
-          <p className="mb-6">
-            <label htmlFor="image" className="block font-semibold text-sm mb-2">
-              Select an Image to Upload
-            </label>
-            <input
-              id="image"
-              className="block w-full border-slate-400 rounded focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              type="file"
-              name="image"
-              required
-            />
-          </p>
-          <button>Submit</button>
-        </form>
-      </div>
     </div>
   );
 }

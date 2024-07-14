@@ -60,7 +60,7 @@ export default async function MatchExperts() {
       };
     },
   );
-  // console.log('combinedResults', combinedResults);
+  console.log('combinedResults', combinedResults);
   // console.log('combinedResults', combinedResults);
   return (
     <div className="flex justify-center p-4">
@@ -80,7 +80,12 @@ export default async function MatchExperts() {
                         <div className="w-24 h-24 rounded-full">
                           <img
                             alt="profilepicture"
-                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                            src={
+                              typeof matchedExpert.experts.pictureUrl ===
+                              'string'
+                                ? matchedExpert.experts.pictureUrl
+                                : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'
+                            }
                             className="rounded-full object-cover"
                           />
                         </div>

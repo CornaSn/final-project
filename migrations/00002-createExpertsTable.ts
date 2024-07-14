@@ -54,6 +54,8 @@ export type ExpertUserWithChoices = {
   expertiseName: string[] | null;
   expertiseId: number[] | null;
   expertId: number | null;
+  pictureUrl: string | null;
+  videoUrl: string | null;
 };
 
 export async function up(sql: Sql) {
