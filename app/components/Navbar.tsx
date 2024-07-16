@@ -1,11 +1,7 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import LogoutButton from '../(auth)/logout/LogoutButton';
-import {
-  getExpertByIdInsecure,
-  getExpertByIdWithUserInfoInsecure,
-} from '../../database/experts';
-// import { getExpertByIdWithUserInfoInsecure } from '../../database/experts';
+import { getExpertByIdInsecure } from '../../database/experts';
 import { getUser } from '../../database/users';
 
 export default async function Navbar() {

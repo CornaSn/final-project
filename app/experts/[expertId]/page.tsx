@@ -7,17 +7,6 @@ import { getExpertByIdWithUserInfoInsecure } from '../../../database/experts';
 import { getExpertLanguagesInsecure } from '../../../database/languageList';
 import { userWithValidSession } from '../../../util/cookies';
 
-// export async function generateMetadata(props: Props) {
-//   const singleExpert = await getExpertByIdWithUserInfoInsecure(
-//     Number(props.params.expertId),
-//   );
-
-//   return {
-//     title: singleExpert?.firstName,
-//     description: 'Single Expert Page',
-//   };
-// }
-
 type Props = {
   params: {
     expertId: number;
@@ -25,7 +14,8 @@ type Props = {
 };
 
 export default async function ExpertPage(props: Props) {
-  await userWithValidSession();
+  const currentUser = await userWithValidSession();
+  console.log('currentUser', currentUser);
   const singleExpert = await getExpertByIdWithUserInfoInsecure(
     Number(props.params.expertId),
   );
@@ -123,6 +113,16 @@ export default async function ExpertPage(props: Props) {
         </div>
         <div className="mt-8 bg-gray-200 w-full h-64 flex items-center justify-center">
           <span className="text-gray-500">Video Placeholder</span>
+        </div>
+        <div className="text-right mt-4">
+          {currentUser === singleExpert.userId && (
+            <Link
+              href={`/profile/updateExpertProfile/`}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-700 hover:text-gray-800 px-4 py-2 rounded transition-colors"
+            >
+              Edit Profile
+            </Link>
+          )}
         </div>
       </div>
     </div>

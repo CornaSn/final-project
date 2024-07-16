@@ -89,7 +89,6 @@ export const getExpertByIdWithUserInfoInsecure = cache(async (id: number) => {
     WHERE
       experts.id = ${id}
   `;
-
   return expert;
 });
 
