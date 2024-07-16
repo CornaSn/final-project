@@ -52,8 +52,9 @@ export default function CreateExpertProfileForm(props: Props) {
   ) {
     event.preventDefault();
 
-    const buttonText = event.nativeEvent.submitter.innerText;
-    //only trigger this if the Button Upload is pressed
+    const submitEvent = event.nativeEvent as SubmitEvent;
+    const buttonText = (submitEvent.submitter as HTMLButtonElement).innerText;
+    // Only trigged if Button Upload is pressed
     if (buttonText === 'Upload') {
       const response = await fetch('/api/expertProfile', {
         method: 'POST',

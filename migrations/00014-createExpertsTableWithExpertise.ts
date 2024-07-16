@@ -7,7 +7,7 @@ export type ExpertWithExpertise = {
 };
 
 export type ExpertWithExpertiseName = {
-  expertiseid: number;
+  expertised: number;
   expertisename: string;
 };
 

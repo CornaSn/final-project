@@ -105,9 +105,9 @@ export default async function MatchExperts() {
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center mr-4">
+                      <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center mr-4">
                         <span className="text-[24px] font-bold">
-                          {matchedExpert.matchingPercent}%
+                          {matchedExpert.matchingPercent.toFixed(2)}%
                         </span>
                       </div>
                       <div className="ml-4">

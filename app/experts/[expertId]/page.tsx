@@ -108,16 +108,18 @@ export default async function ExpertPage(props: Props) {
             ))}
           </div>
         </div>
-        <div className="absolute top-6 right-6 text-gray-500">
-          <i className="fas fa-heart" />
-        </div>
+        {currentUser !== singleExpert.userId && (
+          <div className="absolute top-6 right-6 text-gray-500">
+            <i className="fas fa-heart" />
+          </div>
+        )}
         <div className="mt-8 bg-gray-200 w-full h-64 flex items-center justify-center">
           <span className="text-gray-500">Video Placeholder</span>
         </div>
         <div className="text-right mt-4">
           {currentUser === singleExpert.userId && (
             <Link
-              href={`/profile/updateExpertProfile/`}
+              href="/profile/updateExpertProfile"
               className="bg-gray-300 hover:bg-gray-400 text-gray-700 hover:text-gray-800 px-4 py-2 rounded transition-colors"
             >
               Edit Profile

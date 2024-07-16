@@ -112,8 +112,10 @@ export async function GET(
           expertUserId: entry.expertUserId,
           expertiseIds: entry.expertiseIds,
           // Calculate matching percentage based on the number of expertiseIds
-          matchingPercent:
-            (100 * entry.expertiseIds.length) / selectedItemsExpertise.length,
+          matchingPercent: (
+            (100 * entry.expertiseIds.length) /
+            selectedItemsExpertise.length
+          ).toFixed(2),
           // Check if expertUserId is in expertUsersIdsCountryList
           matchingCountry: expertUsersIdsCountryList.includes(
             entry.expertUserId,
