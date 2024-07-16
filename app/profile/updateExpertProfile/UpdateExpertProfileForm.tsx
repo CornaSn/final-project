@@ -165,38 +165,58 @@ export default function UpdateExpertProfileForm(props: Props) {
             </div>
 
             <div className="space-y-4">
-              <CldUploadWidget
-                signatureEndpoint="/api/sign-image"
-                onSuccess={(res) => {
-                  setResult(res.info as UploadedAssetData);
-                  // console.log('===================res================');
-                  // console.log(typeof res.info?.url);
-                  // console.log(res.info?.url);
-                  setPictureUrl(res.info?.url);
-                }}
-              >
-                {({ open }) => {
-                  return (
-                    <button onClick={() => open()}>Upload an image</button>
-                  );
-                }}
-              </CldUploadWidget>
-              <CldUploadWidget
-                signatureEndpoint="/api/sign-image"
-                onSuccess={(res) => {
-                  setResult(res.info as UploadedAssetData);
-                  // console.log('===================res================');
-                  // console.log(typeof res.info?.url);
-                  // console.log(res.info?.url);
-                  setVideoUrl(res.info?.url);
-                }}
-              >
-                {({ open }) => {
-                  return (
-                    <button onClick={() => open()}>Upload an video</button>
-                  );
-                }}
-              </CldUploadWidget>
+              <div className="flex flex-col space-y-2">
+                <span className="text-lg font-medium text-gray-700">
+                  Profile Picture:
+                </span>
+                <CldUploadWidget
+                  signatureEndpoint="/api/sign-image"
+                  onSuccess={(res) => {
+                    setResult(res.info as UploadedAssetData);
+                    // console.log('===================res================');
+                    // console.log(typeof res.info?.url);
+                    // console.log(res.info?.url);
+                    setPictureUrl(res.info?.url);
+                  }}
+                >
+                  {({ open }) => {
+                    return (
+                      <button
+                        onClick={() => open()}
+                        className="input input-bordered w-full py-3 px-4 text-left"
+                      >
+                        Upload an image
+                      </button>
+                    );
+                  }}
+                </CldUploadWidget>
+              </div>
+              <div className="flex flex-col space-y-2">
+                <span className="text-lg font-medium text-gray-700">
+                  Profile Video:
+                </span>
+                <CldUploadWidget
+                  signatureEndpoint="/api/sign-image"
+                  onSuccess={(res) => {
+                    setResult(res.info as UploadedAssetData);
+                    // console.log('===================res================');
+                    // console.log(typeof res.info?.url);
+                    // console.log(res.info?.url);
+                    setVideoUrl(res.info?.url);
+                  }}
+                >
+                  {({ open }) => {
+                    return (
+                      <button
+                        onClick={() => open()}
+                        className="input input-bordered w-full py-3 px-4 text-left"
+                      >
+                        Upload a Video
+                      </button>
+                    );
+                  }}
+                </CldUploadWidget>
+              </div>
               <SelectLanguage
                 expertLanguages={props.expertLanguages}
                 // TODO****
