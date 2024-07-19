@@ -127,13 +127,8 @@ export default async function ExpertPage(props: Props) {
             controls
             preload="auto"
           >
+            <track default kind="captions" src="" />
             <source src={profileVideo} type="video/mp4" />
-            <track
-              src={profileVideo}
-              kind="subtitles"
-              srcLang="en"
-              label="English"
-            />
             Your browser does not support the video tag.
           </video>
         </div>

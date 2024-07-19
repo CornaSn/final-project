@@ -67,7 +67,7 @@ export default async function MatchExperts() {
                               typeof matchedExpert.experts.pictureUrl ===
                               'string'
                                 ? matchedExpert.experts.pictureUrl
-                                : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'
+                                : 'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325127/samples/man-portrait.jpg'
                             }
                             className="rounded-full object-cover"
                           />

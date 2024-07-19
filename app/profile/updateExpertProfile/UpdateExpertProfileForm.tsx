@@ -222,6 +222,7 @@ export default function UpdateExpertProfileForm(props: Props) {
                 {!!videoUrl && (
                   <div className="mt-4">
                     <video width="320" height="240" controls>
+                      <track default kind="captions" src="" />
                       <source src={videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
