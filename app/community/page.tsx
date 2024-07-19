@@ -165,7 +165,7 @@ export default function communityPage() {
             Have a travel story to share? We would love to hear from you! Submit
             your story and inspire others with your adventures.
           </p>
-          <a href="/" className="btn btn-primary font-poppins">
+          <a href="/" className="btn btn-primary font-poppins text-base">
             Submit Your Story
           </a>
         </section>

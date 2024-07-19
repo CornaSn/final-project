@@ -25,7 +25,7 @@ export default function SearchExpertsForm(props: Props) {
 
   const router = useRouter();
 
-  // Function to update URL with choosen Options
+  // Function to update URL with chosen Options
   const debouncedUpdateUrl = useRef(
     debounce(() => {
       const query = {
@@ -62,7 +62,6 @@ export default function SearchExpertsForm(props: Props) {
     );
 
     const data: SearchExpertsRespondBody = await response.json();
-    // console.log('data', data);
 
     if ('errors' in data) {
       setErrors(data.errors);
@@ -70,14 +69,6 @@ export default function SearchExpertsForm(props: Props) {
       setSearchResults(data); // Save search results in state
       router.push('/searchExperts/match'); // Redirect to match page
     }
-
-    // router.push('/searchExperts/match');
-    // // router.push(
-    // //   { pathname: '/searchExperts/match',
-    // //   query: { data: data } }>,
-    // // );
-
-    // router.refresh();
   }
 
   const toggleSelection = (item: number) => {
@@ -107,22 +98,19 @@ export default function SearchExpertsForm(props: Props) {
   return (
     <div className="flex justify-center pt-12 min-h-screen bg-gray-100">
       <form onSubmit={handleSearchExperts}>
-        <div className="w-full max-w-6xl p-8 bg-white rounded shadow-md space-y-6">
+        <div className="w-full max-w-10l p-8 bg-white rounded shadow-md space-y-6">
           <h1 className="text-6xl font-bold text-center mb-4">
             <strong>Match an expert based on your interest!</strong>
           </h1>
           <br />
           <div className="text-center">
-            <h2 className="text-lg font-bold mb-2">Choose a Country</h2>
+            <h2 className="text-4xl font-bold mb-2">Choose a Country</h2>
             <select
               value={selectedCountry}
               onChange={handleCountryChange}
               className="bg-gray-300 text-gray-700 px-5 py-2 rounded-full w-full max-w-md mx-auto mb-4 text-center"
             >
-              <option selected={true}>
-                {/* <option value="" disabled> */}
-                Choose a country
-              </option>
+              <option selected={true}>Choose a country</option>
               {props.expertCountries.map((country) => (
                 <option key={`country-${country.id}`} value={country.id}>
                   {country.countryName}
@@ -151,7 +139,11 @@ export default function SearchExpertsForm(props: Props) {
           </div>
           <br />
           <div>
-            <h2 className="text-lg font-bold mb-2">Select areas:</h2>
+            <div className="text-center">
+              <h2 className="text-4xl font-bold mb-2">
+                Choose your interest areas:
+              </h2>
+            </div>
             <div className="flex flex-wrap gap-2 justify-center">
               {props.expertAreas.map((area) => (
                 <div
@@ -190,10 +182,10 @@ export default function SearchExpertsForm(props: Props) {
                   alt="Filter by Interests"
                   className="w-24 h-24 mb-4"
                 />
-                <strong className="text-4xl font-semibold">
+                <strong className="text-6xl font-semibold">
                   Filter by Interests
                 </strong>
-                <p className="text-gray-600">
+                <p className="text-xl text-gray-600">
                   Discover experts who share your passion.
                 </p>
               </div>
@@ -203,10 +195,10 @@ export default function SearchExpertsForm(props: Props) {
                   alt="Watch introductory Video"
                   className="w-24 h-24 mb-4"
                 />
-                <strong className="text-4xl font-semibold">
+                <strong className="text-6xl font-semibold">
                   Watch introductory Video
                 </strong>
-                <p className="text-gray-600">
+                <p className="text-xl text-gray-600">
                   Get to know them before you connect.
                 </p>
               </div>
@@ -216,17 +208,14 @@ export default function SearchExpertsForm(props: Props) {
                   alt="Chat with an Expert"
                   className="w-24 h-24 mb-4"
                 />
-                <strong className="text-4xl font-semibold">
+                <strong className="text-6xl font-semibold">
                   Chat with an Expert
                 </strong>
-                <p className="text-gray-600">
+                <p className=" text-xl text-gray-600">
                   Start a conversation with your ideal match today.
                 </p>
               </div>
             </div>
-            <br />
-            <br />
-            <br />
           </div>
         </div>
       </form>

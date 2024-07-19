@@ -46,6 +46,7 @@ export default async function ExpertPage(props: Props) {
       : 'https://res.cloudinary.com/dmntpv6mf/video/upload/v1720946788/z0wqijip8qytbipqryzn.mp4';
 
   const emailLink = `mailto:${singleExpert.email}`;
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-6 relative">
@@ -59,12 +60,13 @@ export default async function ExpertPage(props: Props) {
           </div>
           <div className="mt-8 lg:mt-0 lg:ml-8 flex-grow">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-semibold text-gray-800">
-                {singleExpert.firstName} {singleExpert.lastName}
+              <h2 className="mb-4 font-amatic-sc text-6xl font-bold">
+                {singleExpert.firstName.toUpperCase()}{' '}
+                {singleExpert.lastName.charAt(0).toUpperCase()}
               </h2>
             </div>
 
-            <p className="mt-2 text-gray-600">
+            <p className="text-xl text-gray-600">
               {singleExpert.age}, {singleExpert.city}
             </p>
             <p className="text-gray-600">
@@ -77,7 +79,9 @@ export default async function ExpertPage(props: Props) {
               ))}
             </p>
             <div className="mt-4">
-              <h3 className="text-gray-600 font-semibold">Expert Areas:</h3>
+              <h3 className="text-xl font-semibold text-gray-800">
+                Expert Areas:
+              </h3>
               <ul className="text-gray-600">
                 {expertExpertise.map((expertiseArea) => (
                   <div key={`expertiseArea-${expertiseArea.expertisename}`}>
@@ -90,15 +94,12 @@ export default async function ExpertPage(props: Props) {
           </div>
         </div>
         <div className="absolute right-6 top-20 flex flex-col space-y-2">
-          <Link className="btn btn-primary" href={emailLink}>
+          <a className="btn btn-primary text-base" href={emailLink}>
             Get in touch
-          </Link>
-          <Link className="btn btn-primary" href="/">
+          </a>
+          <Link className="btn btn-primary text-base" href="/">
             My Blog{' '}
           </Link>
-          {/* <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center">
-            <span className="text-[24px] font-bold">84%</span>
-          </div> */}
         </div>
         <div className="mt-6 text-gray-600 max-w-full break-words">
           {singleExpert.bio}

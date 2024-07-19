@@ -83,23 +83,16 @@ export default function CreateExpertProfileForm(props: Props) {
       });
       const data: CreateOrUpdateExpertProfileRequestBody =
         await response.json();
-      // console.log('data', data);
+      console.log('data', data);
       if ('errors' in data) {
         setErrors(data.errors);
         return;
       }
 
-      router.push(`/experts/dashboard`);
+      router.push(`/`);
       router.refresh();
     }
   }
-
-  // async function handleImageUpload(event: React.FormEvent<HTMLFormElement>) {
-  //   event.preventDefault();
-  //   const formData = new FormData(event.currentTarget);
-  //   const imageUrl = await create(formData);
-  //   setPictureUrl(imageUrl); // Aktualisieren des pictureUrl-States
-  // }
 
   return (
     <div>
@@ -262,7 +255,7 @@ export default function CreateExpertProfileForm(props: Props) {
           </div>
 
           <div className="flex justify-center mt-8">
-            <button className="btn w-full md:w-2/3 lg:w-1/2 xl:w-1/3">
+            <button className="btn text-base w-full md:w-2/3 lg:w-1/2 xl:w-1/3">
               Upload
             </button>
           </div>

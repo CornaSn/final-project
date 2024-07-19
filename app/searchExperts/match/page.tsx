@@ -2,12 +2,21 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { getAllExpertUserWithChoicesInsecure } from '../../../database/experts';
+import { ExpertUser } from '../../../migrations/00002-createExpertsTable';
 import { userWithValidSession } from '../../../util/cookies';
 
 type SearchParamsCookie = {
   name: string;
   value: string;
 };
+
+type MatchResultItem = {
+  expertUserId: number;
+  expertiseIds: number[];
+  matchingPercent: string;
+  matchingCountry: boolean;
+};
+type MatchResult = MatchResultItem[];
 
 export default async function MatchExperts() {
   // Check if user has an valid session
@@ -26,8 +35,8 @@ export default async function MatchExperts() {
   };
   // console.log('searchParamsCookie', searchParamsCookie);
 
-  const matchResults = JSON.parse(searchParamsCookie.value);
-  // console.log('matchResult', matchResults);
+  const matchResults: MatchResult = JSON.parse(searchParamsCookie.value);
+  console.log('matchResult', matchResults);
 
   const allExperts = await getAllExpertUserWithChoicesInsecure();
   // console.log('allExperts', allExperts);
@@ -45,6 +54,9 @@ export default async function MatchExperts() {
     },
   );
   console.log('combinedResults', combinedResults);
+  // combinedResults.sort(combinedResults.matchingPercent);
+
+  // console.log('combinedResultsaftersorting', combinedResults);
 
   return (
     <div className="flex justify-center p-4">
