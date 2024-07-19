@@ -3,12 +3,11 @@ import { Country } from '../../migrations/00004-createCountriesTable';
 
 type Props = {
   expertCountries: Country[];
-  setSelectedItemsCountries: Dispatch<SetStateAction<string[] | never[]>>;
+  setSelectedItemsCountries: Dispatch<SetStateAction<string[] | []>>;
   selectedItemsCountries: string[];
 };
 
 export default function SelectCountry(props: Props) {
-  // const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [selectedCountry, setSelectedCountry] = useState('');
 
   const expertCountries = props.expertCountries;

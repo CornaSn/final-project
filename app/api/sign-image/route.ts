@@ -1,6 +1,8 @@
 import { v2 as cloudinary } from 'cloudinary';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+// eslint-disable-next-line no-restricted-syntax
+export async function POST(request: NextRequest): Promise<NextResponse> {
   console.log('api/sign-image');
   const body = (await request.json()) as {
     paramsToSign: Record<string, string>;
@@ -13,5 +15,5 @@ export async function POST(request: Request) {
     process.env.CLOUDINARY_API_SECRET as string,
   );
 
-  return Response.json({ signature });
+  return NextResponse.json({ signature });
 }

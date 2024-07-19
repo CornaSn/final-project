@@ -11,7 +11,6 @@ import SelectCountry from '../../components/selectCountries';
 import SelectExpertise from '../../components/selectExpertise';
 import SelectLanguage from '../../components/selectLanguages';
 import ErrorMessage from '../../ErrorMessage';
-import { create } from './actions';
 
 interface UploadedAssetData {
   public_id: string;
@@ -22,7 +21,6 @@ interface UploadedAssetData {
 
 type Props = {
   userId: number;
-  // expertId: number;
   expertAreas: Expertise[];
   expertLanguages: Language[];
   expertCountries: Country[];
@@ -76,6 +74,7 @@ export default function CreateExpertProfileForm(props: Props) {
       });
       const data: CreateOrUpdateExpertProfileRequestBody =
         await response.json();
+      console.log('data', data);
       if ('errors' in data) {
         setErrors(data.errors);
         return;
@@ -147,9 +146,7 @@ export default function CreateExpertProfileForm(props: Props) {
               </label>{' '}
               <SelectCountry
                 expertCountries={props.expertCountries}
-                // TODO****
-                // Change this as never part - THIS IS NOT allowed!
-                setSelectedItemsCountries={setSelectedItemsCountries as never}
+                setSelectedItemsCountries={setSelectedItemsCountries}
                 selectedItemsCountries={selectedItemsCountries}
               />
               <SelectExpertise
@@ -168,10 +165,18 @@ export default function CreateExpertProfileForm(props: Props) {
                   signatureEndpoint="/api/sign-image"
                   onSuccess={(res) => {
                     setResult(res.info as UploadedAssetData);
-                    // console.log('===================res================');
-                    // console.log(typeof res.info?.url);
-                    // console.log(res.info?.url);
-                    setPictureUrl(res.info?.url);
+                    try {
+                      if (typeof res.info === 'string') {
+                        throw new Error('Unexpected string in res.info');
+                      }
+                      if (typeof res.info === 'undefined') {
+                        throw new Error('Unexpected undefined in res.info');
+                      }
+                      const secureUrl = res.info.secure_url;
+                      setPictureUrl(secureUrl);
+                    } catch (error) {
+                      console.error('Error:', error);
+                    }
                   }}
                 >
                   {({ open }) => {
@@ -194,10 +199,20 @@ export default function CreateExpertProfileForm(props: Props) {
                   signatureEndpoint="/api/sign-image"
                   onSuccess={(res) => {
                     setResult(res.info as UploadedAssetData);
-                    // console.log('===================res================');
-                    // console.log(typeof res.info?.url);
-                    // console.log(res.info?.url);
-                    setVideoUrl(res.info?.url);
+                    console.log('response*******================');
+                    console.log('response', res);
+                    try {
+                      if (typeof res.info === 'string') {
+                        throw new Error('Unexpected string in res.info');
+                      }
+                      if (typeof res.info === 'undefined') {
+                        console.log('Result is undefined');
+                      }
+                      const secureUrl = res.info?.secure_url ?? '';
+                      setVideoUrl(secureUrl);
+                    } catch (error) {
+                      console.error('Error', error);
+                    }
                   }}
                 >
                   {({ open }) => {
@@ -214,9 +229,7 @@ export default function CreateExpertProfileForm(props: Props) {
               </div>
               <SelectLanguage
                 expertLanguages={props.expertLanguages}
-                // TODO****
-                // Change this as never part - THIS IS NOT allowed!
-                setSelectedItemsLanguages={setSelectedItemsLanguages as never}
+                setSelectedItemsLanguages={setSelectedItemsLanguages}
                 selectedItemsLanguages={selectedItemsLanguages}
               />
             </div>
@@ -228,6 +241,11 @@ export default function CreateExpertProfileForm(props: Props) {
             </button>
           </div>
         </div>
+        {errors.map((error) => (
+          <div key={`error-${error.message}`}>
+            <ErrorMessage>{error.message}</ErrorMessage>
+          </div>
+        ))}
       </form>
     </div>
   );

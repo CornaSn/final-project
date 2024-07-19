@@ -9,22 +9,6 @@ type SearchParamsCookie = {
   value: string;
 };
 
-// type MacthedExpert = {
-//   expertUserId: number;
-//   expertiseIds: number[];
-//   matchingPercent: number;
-//   matchingCountry: boolean;
-//   experts: {
-//     userId: number;
-//     countryName: string[];
-//     languageName: string[];
-//     expertiseName: string[];
-//     city: string;
-//     age: string;
-//     firstName: string;
-//     lastName: string;
-//   };
-
 export default async function MatchExperts() {
   // Check if user has an valid session
   await userWithValidSession();
@@ -107,7 +91,7 @@ export default async function MatchExperts() {
                     <div className="flex items-center">
                       <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center mr-4">
                         <span className="text-[24px] font-bold">
-                          {matchedExpert.matchingPercent.toFixed(2)}%
+                          {matchedExpert.matchingPercent}%
                         </span>
                       </div>
                       <div className="ml-4">

@@ -60,8 +60,8 @@ export default function UpdateExpertProfileForm(props: Props) {
     const submitEvent = event.nativeEvent as SubmitEvent;
     const buttonText = (submitEvent.submitter as HTMLButtonElement).innerText;
 
-    // const buttonText = event.nativeEvent.submitter.innerText;
-    //only trigger this if the Button Upload is pressed
+    // Const buttonText = event.nativeEvent.submitter.innerText;
+    // Only trigger this if the Button Upload is pressed
     if (buttonText === 'Upload') {
       const response = await fetch('/api/expertProfile', {
         method: 'POST',
@@ -152,9 +152,7 @@ export default function UpdateExpertProfileForm(props: Props) {
               </label>{' '}
               <SelectCountry
                 expertCountries={props.expertCountries}
-                // TODO****
-                // Change this as never part - THIS IS NOT allowed!
-                setSelectedItemsCountries={setSelectedItemsCountries as never}
+                setSelectedItemsCountries={setSelectedItemsCountries}
                 selectedItemsCountries={selectedItemsCountries}
               />
               <SelectExpertise
@@ -173,10 +171,18 @@ export default function UpdateExpertProfileForm(props: Props) {
                   signatureEndpoint="/api/sign-image"
                   onSuccess={(res) => {
                     setResult(res.info as UploadedAssetData);
-                    // console.log('===================res================');
-                    // console.log(typeof res.info?.url);
-                    // console.log(res.info?.url);
-                    setPictureUrl(res.info?.url);
+                    try {
+                      if (typeof res.info === 'string') {
+                        throw new Error('Unexpected string in res.info');
+                      }
+                      if (typeof res.info === 'undefined') {
+                        console.log('Result is undefined');
+                      }
+                      const secureUrl = res.info?.secure_url ?? '';
+                      setPictureUrl(secureUrl);
+                    } catch (error) {
+                      console.error('Error:', error);
+                    }
                   }}
                 >
                   {({ open }) => {
@@ -199,10 +205,18 @@ export default function UpdateExpertProfileForm(props: Props) {
                   signatureEndpoint="/api/sign-image"
                   onSuccess={(res) => {
                     setResult(res.info as UploadedAssetData);
-                    // console.log('===================res================');
-                    // console.log(typeof res.info?.url);
-                    // console.log(res.info?.url);
-                    setVideoUrl(res.info?.url);
+                    try {
+                      if (typeof res.info === 'string') {
+                        throw new Error('Unexpected string in res.info');
+                      }
+                      if (typeof res.info === 'undefined') {
+                        console.log('Result is undefined');
+                      }
+                      const secureUrl = res.info?.secure_url ?? '';
+                      setVideoUrl(secureUrl);
+                    } catch (error) {
+                      console.error('Error', error);
+                    }
                   }}
                 >
                   {({ open }) => {
@@ -219,9 +233,7 @@ export default function UpdateExpertProfileForm(props: Props) {
               </div>
               <SelectLanguage
                 expertLanguages={props.expertLanguages}
-                // TODO****
-                // Change this as never part - THIS IS NOT allowed!
-                setSelectedItemsLanguages={setSelectedItemsLanguages as never}
+                setSelectedItemsLanguages={setSelectedItemsLanguages}
                 selectedItemsLanguages={selectedItemsLanguages}
               />
             </div>
@@ -233,6 +245,11 @@ export default function UpdateExpertProfileForm(props: Props) {
             </button>
           </div>
         </div>
+        {errors.map((error) => (
+          <div key={`error-${error.message}`}>
+            <ErrorMessage>{error.message}</ErrorMessage>
+          </div>
+        ))}
       </form>
     </div>
   );

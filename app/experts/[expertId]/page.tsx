@@ -38,6 +38,11 @@ export default async function ExpertPage(props: Props) {
       ? singleExpert.pictureUrl
       : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg';
 
+  const profileVideo =
+    typeof singleExpert.videoUrl === 'string'
+      ? singleExpert.videoUrl
+      : 'https://res.cloudinary.com/dmntpv6mf/video/upload/v1720946788/z0wqijip8qytbipqryzn.mp4';
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-6 relative">
@@ -113,8 +118,22 @@ export default async function ExpertPage(props: Props) {
             <i className="fas fa-heart" />
           </div>
         )}
-        <div className="mt-8 bg-gray-200 w-full h-64 flex items-center justify-center">
-          <span className="text-gray-500">Video Placeholder</span>
+
+        <div className="mt-8 bg-gray-200 w-full h-170 flex items-center justify-center">
+          <video
+            className="w-full h-full max-w-none max-h-none"
+            controls
+            preload="none"
+          >
+            <source src="/" type="video/mp4" />
+            <track
+              src={profileVideo}
+              kind="subtitles"
+              srcLang="en"
+              label="English"
+            />
+            Your browser does not support the video tag.
+          </video>
         </div>
         <div className="text-right mt-4">
           {currentUser === singleExpert.userId && (

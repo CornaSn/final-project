@@ -108,10 +108,10 @@ export default function SearchExpertsForm(props: Props) {
     <div className="flex justify-center pt-12 min-h-screen bg-gray-100">
       <form onSubmit={handleSearchExperts}>
         <div className="w-full max-w-6xl p-8 bg-white rounded shadow-md space-y-6">
-          <h1 className="text-3xl font-bold text-center mb-4">
-            Match an expert based on your interest!
+          <h1 className="text-6xl font-bold text-center mb-4">
+            <strong>Match an expert based on your interest!</strong>
           </h1>
-
+          <br />
           <div className="text-center">
             <h2 className="text-lg font-bold mb-2">Choose a Country</h2>
             <select
@@ -130,6 +130,7 @@ export default function SearchExpertsForm(props: Props) {
               ))}
             </select>
           </div>
+          <br />
           <div className="text-center">
             <h2 className="text-lg font-bold mb-2">Selected Areas:</h2>
             <div className="flex flex-wrap justify-center gap-2 mb-4">
@@ -148,7 +149,7 @@ export default function SearchExpertsForm(props: Props) {
               ))}
             </div>
           </div>
-
+          <br />
           <div>
             <h2 className="text-lg font-bold mb-2">Select areas:</h2>
             <div className="flex flex-wrap gap-2 justify-center">
@@ -167,7 +168,7 @@ export default function SearchExpertsForm(props: Props) {
               ))}
             </div>
           </div>
-
+          <br />
           <div className="flex justify-center mt-4">
             <button
               className="btn w-full md:w-2/3 lg:w-1/2 xl:w-1/3"
@@ -175,6 +176,57 @@ export default function SearchExpertsForm(props: Props) {
             >
               Search
             </button>
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <div className="container mx-auto text-center py-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="flex flex-col items-center">
+                <img
+                  src="/images/match.webp"
+                  alt="Filter by Interests"
+                  className="w-24 h-24 mb-4"
+                />
+                <strong className="text-4xl font-semibold">
+                  Filter by Interests
+                </strong>
+                <p className="text-gray-600">
+                  Discover experts who share your passion.
+                </p>
+              </div>
+              <div className="flex flex-col items-center">
+                <img
+                  src="/images/video.webp"
+                  alt="Watch introductory Video"
+                  className="w-24 h-24 mb-4"
+                />
+                <strong className="text-4xl font-semibold">
+                  Watch introductory Video
+                </strong>
+                <p className="text-gray-600">
+                  Get to know them before you connect.
+                </p>
+              </div>
+              <div className="flex flex-col items-center">
+                <img
+                  src="/images/text.webp"
+                  alt="Chat with an Expert"
+                  className="w-24 h-24 mb-4"
+                />
+                <strong className="text-4xl font-semibold">
+                  Chat with an Expert
+                </strong>
+                <p className="text-gray-600">
+                  Start a conversation with your ideal match today.
+                </p>
+              </div>
+            </div>
+            <br />
+            <br />
+            <br />
           </div>
         </div>
       </form>
