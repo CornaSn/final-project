@@ -31,13 +31,18 @@ export const findCountryIdInsecure = cache(async (countryName: string) => {
 });
 
 export const insertExpertCountryInsecure = cache(
-  async (countryId: number, userId: number) => {
+  async (countryId: number, expertUserId: number) => {
+    await sql`
+      DELETE FROM expert_countries
+      WHERE
+        expert_countries.expert_user_id = ${expertUserId}
+    `;
     const [expertWithCountries] = await sql<ExpertWithCountries[]>`
       INSERT INTO
         expert_countries (expert_user_id, country_id)
       VALUES
         (
-          ${userId},
+          ${expertUserId},
           ${countryId}
         )
       RETURNING

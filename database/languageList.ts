@@ -31,13 +31,18 @@ export const findLanguageIdInsecure = cache(async (languageName: string) => {
 });
 
 export const insertExpertLanguageInsecure = cache(
-  async (languageId: number, userId: number) => {
+  async (languageId: number, expertUserId: number) => {
+    await sql`
+      DELETE FROM expert_languages
+      WHERE
+        expert_languages.expert_user_id = ${expertUserId}
+    `;
     const [expertWithLanguages] = await sql<ExpertWithLanguages[]>`
       INSERT INTO
         expert_languages (expert_user_id, language_id)
       VALUES
         (
-          ${userId},
+          ${expertUserId},
           ${languageId}
         )
       RETURNING

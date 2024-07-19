@@ -33,6 +33,12 @@ export const findExpertiseIdInsecure = cache(async (expertiseName: string) => {
 
 export const insertExpertExpertiseInsecure = cache(
   async (expertiseId: number, expertUserId: number) => {
+    await sql`
+      DELETE FROM expert_expertise
+      WHERE
+        expert_expertise.expert_user_id = ${expertUserId}
+    `;
+
     const [c] = await sql<ExpertWithExpertise[]>`
       INSERT INTO
         expert_expertise (expert_user_id, expertise_id)
