@@ -3,14 +3,11 @@ import { Expertise } from '../../migrations/00008-createExpertiseTable';
 
 type Props = {
   expertAreas: Expertise[];
-  setSelectedItemsExpertise: Dispatch<SetStateAction<string[] | never[]>>;
+  setSelectedItemsExpertise: Dispatch<SetStateAction<string[] | []>>;
   selectedItemsExpertise: string[];
 };
 
 export default function SelectExpertise(props: Props) {
-  // const [selectedItemsExpertise, setSelectedItemsExpertise] = useState<
-  //   string[]
-  // >([]);
   const [selectedExpertise, setSelectedExpertise] = useState('');
 
   const expertExpertise = props.expertAreas;

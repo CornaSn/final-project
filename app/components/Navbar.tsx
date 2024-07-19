@@ -78,7 +78,7 @@ export default async function Navbar() {
                     src={
                       typeof expert?.pictureUrl === 'string'
                         ? expert.pictureUrl
-                        : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'
+                        : 'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325127/samples/man-portrait.jpg'
                     }
                   />
                 </div>

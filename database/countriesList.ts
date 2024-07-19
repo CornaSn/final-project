@@ -40,10 +40,6 @@ export const insertExpertCountryInsecure = cache(
           ${userId},
           ${countryId}
         )
-      ON CONFLICT (expert_user_id, country_id) DO
-      UPDATE
-      SET
-        expert_user_id = excluded.expert_user_id
       RETURNING
         expert_countries.id,
         expert_countries.expert_user_id,

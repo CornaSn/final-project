@@ -29,12 +29,16 @@ type Props = {
 };
 
 export default function UpdateExpertProfileForm(props: Props) {
-  console.log('props', props.expertUserWithChoices.age);
+  // console.log('props', props.expertUserWithChoices.age);
   const [age, setAge] = useState(props.expertUserWithChoices.age || '');
   const [city, setCity] = useState(props.expertUserWithChoices.city || '');
   const [bio, setBio] = useState(props.expertUserWithChoices.bio || '');
-  const [pictureUrl, setPictureUrl] = useState('');
-  const [videoUrl, setVideoUrl] = useState('');
+  const [pictureUrl, setPictureUrl] = useState(
+    props.expertUserWithChoices.pictureUrl,
+  );
+  const [videoUrl, setVideoUrl] = useState(
+    props.expertUserWithChoices.videoUrl,
+  );
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
   const [selectedItemsCountries, setSelectedItemsCountries] = useState<
     string[]
@@ -46,7 +50,12 @@ export default function UpdateExpertProfileForm(props: Props) {
     string[]
   >(props.expertUserWithChoices.expertiseName || []);
   const [errors, setErrors] = useState<{ message: string }[]>([]);
-  const [result, setResult] = useState<UploadedAssetData | null>(null);
+  const [resultPicture, setResultPicture] = useState<UploadedAssetData | null>(
+    null,
+  );
+  const [resultVideo, setResultVideo] = useState<UploadedAssetData | null>(
+    null,
+  );
 
   // const [loading, setLoading] = useState(false);
 
@@ -167,18 +176,27 @@ export default function UpdateExpertProfileForm(props: Props) {
                 <span className="text-lg font-medium text-gray-700">
                   Profile Picture:
                 </span>
+                {!!pictureUrl && (
+                  <div className="relative">
+                    <img
+                      className="w-48 h-48 rounded-full object-cover"
+                      src={pictureUrl}
+                      alt="Profile"
+                    />
+                  </div>
+                )}
                 <CldUploadWidget
                   signatureEndpoint="/api/sign-image"
                   onSuccess={(res) => {
-                    setResult(res.info as UploadedAssetData);
+                    setResultPicture(res.info as UploadedAssetData);
                     try {
                       if (typeof res.info === 'string') {
                         throw new Error('Unexpected string in res.info');
                       }
                       if (typeof res.info === 'undefined') {
-                        console.log('Result is undefined');
+                        throw new Error('Unexpected undefined in res.info');
                       }
-                      const secureUrl = res.info?.secure_url ?? '';
+                      const secureUrl = res.info.secure_url;
                       setPictureUrl(secureUrl);
                     } catch (error) {
                       console.error('Error:', error);
@@ -201,10 +219,18 @@ export default function UpdateExpertProfileForm(props: Props) {
                 <span className="text-lg font-medium text-gray-700">
                   Profile Video:
                 </span>
+                {!!videoUrl && (
+                  <div className="mt-4">
+                    <video width="320" height="240" controls>
+                      <source src={videoUrl} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                )}
                 <CldUploadWidget
                   signatureEndpoint="/api/sign-image"
                   onSuccess={(res) => {
-                    setResult(res.info as UploadedAssetData);
+                    setResultVideo(res.info as UploadedAssetData);
                     try {
                       if (typeof res.info === 'string') {
                         throw new Error('Unexpected string in res.info');

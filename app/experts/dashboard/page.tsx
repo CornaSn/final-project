@@ -17,10 +17,10 @@ export default async function ExpertsPage() {
   // const expertId = await getExpertByIdInsecure(userId);
   // console.log('test-------', expertId);
 
-  console.log(
-    'expertUsers#################################################################',
-    expertUsers,
-  );
+  // console.log(
+  //   'expertUsers#################################################################',
+  //   expertUsers,
+  // );
 
   return (
     <div className="flex justify-center p-4">
@@ -39,7 +39,7 @@ export default async function ExpertsPage() {
                       src={
                         typeof expertUser.pictureUrl === 'string'
                           ? expertUser.pictureUrl
-                          : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'
+                          : 'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325127/samples/man-portrait.jpg'
                       }
                       className="rounded-full object-cover"
                     />
@@ -69,10 +69,6 @@ export default async function ExpertsPage() {
                 </div>
               </div>
               <div className="flex items-center">
-                <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center mr-4">
-                  <span className="text-[24px] font-bold">100%</span>
-                </div>
-
                 <div className="ml-4">
                   <div className="absolute top-6 right-6 text-gray-500">
                     <i className="fas fa-heart" />

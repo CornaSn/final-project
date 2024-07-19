@@ -3,7 +3,7 @@ import { Language } from '../../migrations/00006-createLanguagesTable';
 
 type Props = {
   expertLanguages: Language[];
-  setSelectedItemsLanguages: Dispatch<SetStateAction<string[] | never[]>>;
+  setSelectedItemsLanguages: Dispatch<SetStateAction<string[] | []>>;
   selectedItemsLanguages: string[];
 };
 

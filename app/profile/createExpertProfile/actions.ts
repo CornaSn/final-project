@@ -47,5 +47,5 @@ export async function create(formData: FormData) {
 
   revalidatePath('/');
 
-  console.log('url', response.secure_url);
+  // console.log('url', response.secure_url);
 }

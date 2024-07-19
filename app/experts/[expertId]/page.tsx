@@ -1,3 +1,4 @@
+import { CldVideoPlayer } from 'next-cloudinary';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react';
@@ -29,14 +30,15 @@ export default async function ExpertPage(props: Props) {
   const expertCountries = await getExpertCountryInsecure(singleExpert.userId);
   const expertLanguages = await getExpertLanguagesInsecure(singleExpert.userId);
   const expertExpertise = await getExpertExpertiseInsecure(singleExpert.userId);
-
+  // console.log(singleExpert.userId);
+  // console.log('expertCountries', expertCountries);
   // console.log('singleExpert.pictureUrl', singleExpert.pictureUrl);
   // console.log('typeof singleExpert.pictureUrl', typeof singleExpert.pictureUrl);
 
   const profileImg =
     typeof singleExpert.pictureUrl === 'string'
       ? singleExpert.pictureUrl
-      : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg';
+      : 'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325127/samples/man-portrait.jpg';
 
   const profileVideo =
     typeof singleExpert.videoUrl === 'string'
@@ -119,13 +121,13 @@ export default async function ExpertPage(props: Props) {
           </div>
         )}
 
-        <div className="mt-8 bg-gray-200 w-full h-170 flex items-center justify-center">
+        {/* <div className="mt-8 bg-gray-200 w-full h-100 flex items-center justify-center">
           <video
             className="w-full h-full max-w-none max-h-none"
             controls
             preload="none"
           >
-            <source src="/" type="video/mp4" />
+            <source src={profileVideo} type="video/mp4" />
             <track
               src={profileVideo}
               kind="subtitles"
@@ -134,7 +136,8 @@ export default async function ExpertPage(props: Props) {
             />
             Your browser does not support the video tag.
           </video>
-        </div>
+        </div> */}
+
         <div className="text-right mt-4">
           {currentUser === singleExpert.userId && (
             <Link

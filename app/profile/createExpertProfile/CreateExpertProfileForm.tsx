@@ -1,6 +1,6 @@
 'use client';
 
-import { CldUploadWidget } from 'next-cloudinary';
+import { CldUploadWidget, CldVideoPlayer } from 'next-cloudinary';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Country } from '../../../migrations/00004-createCountriesTable';
@@ -33,13 +33,22 @@ export default function CreateExpertProfileForm(props: Props) {
   const [pictureUrl, setPictureUrl] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [travelBlogUrl, setTravelBlogUrl] = useState('');
-  const [selectedItemsCountries, setSelectedItemsCountries] = useState([]);
-  const [selectedItemsLanguages, setSelectedItemsLanguages] = useState([]);
+  const [selectedItemsCountries, setSelectedItemsCountries] = useState<
+    string[]
+  >([]);
+  const [selectedItemsLanguages, setSelectedItemsLanguages] = useState<
+    string[]
+  >([]);
   const [selectedItemsExpertise, setSelectedItemsExpertise] = useState<
     string[]
   >([]);
   const [errors, setErrors] = useState<{ message: string }[]>([]);
-  const [result, setResult] = useState<UploadedAssetData | null>(null);
+  const [resultPicture, setResultPicture] = useState<UploadedAssetData | null>(
+    null,
+  );
+  const [resultVideo, setResultVideo] = useState<UploadedAssetData | null>(
+    null,
+  );
 
   // const [loading, setLoading] = useState(false);
 
@@ -49,7 +58,7 @@ export default function CreateExpertProfileForm(props: Props) {
     event: React.FormEvent<HTMLFormElement>,
   ) {
     event.preventDefault();
-
+    // console.log('selectedItemsCountries');
     const submitEvent = event.nativeEvent as SubmitEvent;
     const buttonText = (submitEvent.submitter as HTMLButtonElement).innerText;
     // Only trigged if Button Upload is pressed
@@ -74,7 +83,7 @@ export default function CreateExpertProfileForm(props: Props) {
       });
       const data: CreateOrUpdateExpertProfileRequestBody =
         await response.json();
-      console.log('data', data);
+      // console.log('data', data);
       if ('errors' in data) {
         setErrors(data.errors);
         return;
@@ -161,10 +170,19 @@ export default function CreateExpertProfileForm(props: Props) {
                 <span className="text-lg font-medium text-gray-700">
                   Profile Picture:
                 </span>
+                {!!pictureUrl && (
+                  <div className="relative">
+                    <img
+                      className="w-48 h-48 rounded-full object-cover"
+                      src={pictureUrl}
+                      alt="Profile"
+                    />
+                  </div>
+                )}
                 <CldUploadWidget
                   signatureEndpoint="/api/sign-image"
                   onSuccess={(res) => {
-                    setResult(res.info as UploadedAssetData);
+                    setResultPicture(res.info as UploadedAssetData);
                     try {
                       if (typeof res.info === 'string') {
                         throw new Error('Unexpected string in res.info');
@@ -195,20 +213,27 @@ export default function CreateExpertProfileForm(props: Props) {
                 <span className="text-lg font-medium text-gray-700">
                   Profile Video:
                 </span>
+                {!!videoUrl && (
+                  <div className="mt-4">
+                    <video width="320" height="240" controls>
+                      <source src={videoUrl} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                )}
                 <CldUploadWidget
                   signatureEndpoint="/api/sign-image"
                   onSuccess={(res) => {
-                    setResult(res.info as UploadedAssetData);
-                    console.log('response*******================');
-                    console.log('response', res);
                     try {
                       if (typeof res.info === 'string') {
                         throw new Error('Unexpected string in res.info');
                       }
                       if (typeof res.info === 'undefined') {
                         console.log('Result is undefined');
+                        throw new Error('Unexpected string in res.info');
                       }
-                      const secureUrl = res.info?.secure_url ?? '';
+                      const secureUrl = res.info.secure_url;
+                      setResultVideo(res.info);
                       setVideoUrl(secureUrl);
                     } catch (error) {
                       console.error('Error', error);

@@ -262,7 +262,6 @@ export const getAllExpertUserWithChoicesInsecure = cache(async () => {
       // console.log('entry####################################', entry);
       // console.log('typeof entry.userId', typeof entry.userId);
       const expertUser = await getExpertUserWithChoicesInsecure(entry.userId);
-      console.log(expertUser);
       return expertUser;
     }),
   );

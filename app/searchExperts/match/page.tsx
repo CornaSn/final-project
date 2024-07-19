@@ -44,7 +44,6 @@ export default async function MatchExperts() {
       };
     },
   );
-  console.log('combinedResults', combinedResults);
   // console.log('combinedResults', combinedResults);
   return (
     <div className="flex justify-center p-4">

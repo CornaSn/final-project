@@ -25,17 +25,17 @@ export default async function CreateExpertProfilePage() {
     return redirect('/login?returnTo=/profile/createExpertProfile');
   }
 
-  console.log('session', session);
+  // console.log('session', session);
 
   // Fetch expert details for the logged-in user
-  const expert = await getExpertWithUserById(session.token, session.userId);
-  console.log('expert--------------------------------------------', expert);
+  await getExpertWithUserById(session.token, session.userId);
+  // console.log('expert--------------------------------------------', expert);
 
   // Fetch all expert users information
   const expertUserWithChoices = await getExpertUserWithChoicesInsecure(
     session.userId,
   );
-  console.log('ExpertUserInfo -----------', expertUserWithChoices);
+  // console.log('ExpertUserInfo -----------', expertUserWithChoices);
 
   // Fetch select fields for user profile
   const expertAreas = await getExpertiseListInsecure();

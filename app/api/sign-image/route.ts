@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // eslint-disable-next-line no-restricted-syntax
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  console.log('api/sign-image');
+  // console.log('api/sign-image');
   const body = (await request.json()) as {
     paramsToSign: Record<string, string>;
   };
-  console.log('body', body);
+  // console.log('body', body);
   const { paramsToSign } = body;
 
   const signature = cloudinary.utils.api_sign_request(
