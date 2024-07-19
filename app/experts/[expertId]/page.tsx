@@ -45,6 +45,7 @@ export default async function ExpertPage(props: Props) {
       ? singleExpert.videoUrl
       : 'https://res.cloudinary.com/dmntpv6mf/video/upload/v1720946788/z0wqijip8qytbipqryzn.mp4';
 
+  const emailLink = `mailto:${singleExpert.email}`;
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-6 relative">
@@ -89,7 +90,7 @@ export default async function ExpertPage(props: Props) {
           </div>
         </div>
         <div className="absolute right-6 top-20 flex flex-col space-y-2">
-          <Link className="btn btn-primary" href="/">
+          <Link className="btn btn-primary" href={emailLink}>
             Get in touch
           </Link>
           <Link className="btn btn-primary" href="/">

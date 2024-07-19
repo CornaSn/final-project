@@ -1,4 +1,4 @@
-export default function help() {
+export default function Help() {
   return (
     <div className="bg-base-100 py-10">
       <div className="container mx-auto px-4">

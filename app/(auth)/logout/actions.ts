@@ -6,7 +6,6 @@ import { deleteSession } from '../../../database/sessions';
 export async function logout() {
   // 1. Get the session token from the cookie
   const cookieStore = cookies();
-  // console.log('cookieStore', cookieStore);
 
   const session = cookieStore.get('sessionToken');
 

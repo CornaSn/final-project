@@ -128,3 +128,22 @@ export const getUserByIdInsecure = cache(async (userId: number) => {
   `;
   return user;
 });
+
+export const deleteUser = cache(
+  async (sessionToken: string, userId: number) => {
+    try {
+      await sql`
+        DELETE FROM users USING sessions
+        WHERE
+          sessions.token = ${sessionToken}
+          AND sessions.expiry_timestamp > now()
+          AND users.id = ${userId}
+      `;
+
+      return true; // Return the true user was deleted
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      throw new Error('Could not delete user');
+    }
+  },
+);

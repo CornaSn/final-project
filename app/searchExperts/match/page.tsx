@@ -44,7 +44,8 @@ export default async function MatchExperts() {
       };
     },
   );
-  // console.log('combinedResults', combinedResults);
+  console.log('combinedResults', combinedResults);
+
   return (
     <div className="flex justify-center p-4">
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl">

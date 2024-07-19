@@ -63,51 +63,49 @@ export default async function Navbar() {
       </div>
       <div className="flex-none gap-2">
         {user ? (
-          <>
-            {/* <Link href={`/experts/${user?.id}`} /> */}
-            {/* <Link href={profileLink} /> */}
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src={
-                      typeof expert?.pictureUrl === 'string'
-                        ? expert.pictureUrl
-                        : 'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325127/samples/man-portrait.jpg'
-                    }
-                  />
-                </div>
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src={
+                    typeof expert?.pictureUrl === 'string'
+                      ? expert.pictureUrl
+                      : 'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325127/samples/man-portrait.jpg'
+                  }
+                />
               </div>
-              <ul
-                tabIndex={-1}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-              >
-                <li>
-                  {/* <a className="justify-between" href={`/profile/${user.id}`}> */}
-                  <a className="justify-between" href={profileLink}>
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <a href="/about">About</a>
-                </li>
-                <li>
-                  <a href="/community">Community</a>
-                </li>
-                <li>
-                  <a href="/help">Help</a>
-                </li>
-                <li>
-                  <LogoutButton />
-                </li>
-              </ul>
             </div>
-          </>
+            <ul
+              tabIndex={-1}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <a className="justify-between" href={profileLink}>
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a href="/about">About</a>
+              </li>
+              <li>
+                <a href="/community">Community</a>
+              </li>
+              <li>
+                <a href="/help">Help</a>
+              </li>
+              <li>
+                <a href="/setting">Settings</a>
+              </li>
+              <li>
+                <LogoutButton />
+              </li>
+            </ul>
+          </div>
         ) : (
           <div className="flex space-x-4">
             <Link href="/register" className="btn btn-outline">
