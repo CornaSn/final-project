@@ -88,13 +88,16 @@ export default function Home() {
           </p>
           {user ? (
             <Link
-              className="btn text-lg btn-primary mt-6 "
+              className="mt-8 btn text-xl btn-primary md:w-2/3 lg:w-1/2 xl:w-1/3"
               href="/searchExperts"
             >
               Search
             </Link>
           ) : (
-            <Link className="btn btn-primary mt-6" href="/register">
+            <Link
+              className="mt-8 btn text-xl btn-primary md:w-2/3 lg:w-1/2 xl:w-1/3"
+              href="/register"
+            >
               Register
             </Link>
           )}
