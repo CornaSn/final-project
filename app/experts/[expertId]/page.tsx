@@ -1,4 +1,3 @@
-import { CldVideoPlayer } from 'next-cloudinary';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import React from 'react';
@@ -42,8 +41,8 @@ export default async function ExpertPage(props: Props) {
   const emailLink = `mailto:${singleExpert.email}`;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-6 relative">
+    <div className="min-h-screen bg-base-200 flex items-center justify-center p-4">
+      <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-6 relative mt-10">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="relative">
             <img

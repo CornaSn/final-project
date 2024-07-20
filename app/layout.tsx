@@ -1,4 +1,5 @@
 import './globals.css';
+import Footer from './components/footer';
 import Navbar from './components/Navbar';
 
 // TODO: Add Titel and Description
@@ -24,7 +25,7 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen">
           <Navbar />
           {children}
-          {/* <Footer  /> */}
+          <Footer />
         </div>
       </body>
     </html>

@@ -88,7 +88,7 @@ export default function Home() {
           </p>
           {user ? (
             <Link
-              className="btn text-base btn-primary mt-6"
+              className="btn text-lg btn-primary mt-6 "
               href="/searchExperts"
             >
               Search

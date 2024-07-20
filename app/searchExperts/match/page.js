@@ -2,7 +2,6 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { getAllExpertUserWithChoicesInsecure } from '../../../database/experts';
-import { ExpertUser } from '../../../migrations/00002-createExpertsTable';
 import { userWithValidSession } from '../../../util/cookies';
 
 // type SearchParamsCookie = {
@@ -54,8 +53,12 @@ export default async function MatchExperts() {
   );
 
   return (
-    <div className="flex justify-center p-4">
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl">
+    <div className="flex justify-center p-4 bg-base-200">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl mt-10">
+        <h1 className="text-4xl font-bold text-center mb-4">
+          <strong>It's a match !</strong>
+        </h1>
+        <br />
         {combinedResults.map((matchedExpert) => {
           return (
             <div

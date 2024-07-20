@@ -24,7 +24,7 @@ export default async function SearchExperts() {
         expertAreas={expertAreas}
         expertCountries={expertCountries}
       />
-      <div className="flex justify-center pt-12 min-h-screen">
+      <div className="flex justify-center pt-12 min-h-screen bg-base-200">
         <div className="w-full max-w-6xl p-8 space-y-6 ">
           {' '}
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl ">

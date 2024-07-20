@@ -96,7 +96,7 @@ export default function SearchExpertsForm(props: Props) {
   };
 
   return (
-    <div className="flex justify-center pt-12 min-h-screen bg-gray-100">
+    <div className="flex justify-center pt-12 min-h-screen bg-base-200">
       <form onSubmit={handleSearchExperts}>
         <div className="w-full max-w-10l p-8 bg-white rounded shadow-md space-y-6">
           <h1 className="text-4xl font-bold text-center mb-4">
@@ -166,7 +166,7 @@ export default function SearchExpertsForm(props: Props) {
           <br />
           <div className="flex justify-center mt-4">
             <button
-              className="btn w-full md:w-2/3 lg:w-1/2 xl:w-1/3"
+              className="btn text-xl w-full md:w-2/3 lg:w-1/2 xl:w-1/3"
               onClick={handleSearchExperts}
             >
               Search

@@ -44,7 +44,7 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={async (event) => await handleLogin(event)}>
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="flex justify-center items-center min-h-screen bg-base-200">
         <div className="w-full max-w-md p-6 bg-white rounded shadow-md space-y-4">
           <h1 className="text-2xl font-bold text-center mb-6">Login</h1>
 

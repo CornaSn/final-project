@@ -96,9 +96,9 @@ export default function CreateExpertProfileForm(props: Props) {
     <div>
       <form
         onSubmit={handleProfileCreation}
-        className="flex justify-center items-center min-h-screen bg-gray-100"
+        className="flex justify-center items-center min-h-screen bg-base-200"
       >
-        <div className="w-full max-w-4xl p-8 bg-white rounded shadow-md space-y-6">
+        <div className="w-full max-w-4xl p-8 bg-white rounded shadow-md space-y-6 mt-10">
           <h1 className="text-4xl font-bold text-center font-amatic-sc  mb-8">
             Welcome to Travel Genius! Let's Get Your Profile Set Up{' '}
           </h1>

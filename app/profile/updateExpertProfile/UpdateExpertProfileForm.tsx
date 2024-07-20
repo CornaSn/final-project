@@ -105,9 +105,9 @@ export default function UpdateExpertProfileForm(props: Props) {
     <div>
       <form
         onSubmit={handleProfileCreation}
-        className="flex justify-center items-center min-h-screen bg-white"
+        className="flex justify-center items-center min-h-screen bg-base-200"
       >
-        <div className="w-full max-w-4xl p-8 bg-white rounded space-y-6 mr-5">
+        <div className="w-full max-w-4xl p-8 bg-white rounded space-y-6 mr-5 mt-10">
           <h1 className="text-4xl font-bold text-center font-amatic-sc  mb-8">
             Hey, {props.expertUserWithChoices.firstName}! <br />
             Nice that you are back, let's change your profile.
@@ -276,13 +276,6 @@ export default function UpdateExpertProfileForm(props: Props) {
             <ErrorMessage>{error.message}</ErrorMessage>
           </div>
         ))}
-        <div className="ml-11">
-          <img
-            src="/images/registration.webp"
-            alt="Filter by Interests"
-            className="w-50 h-50"
-          />
-        </div>
       </form>
     </div>
   );

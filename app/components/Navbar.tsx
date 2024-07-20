@@ -27,9 +27,8 @@ export default async function Navbar() {
   return (
     <div className="navbar bg-base-100 flex items-center justify-between px-4 py-2">
       <div className="flex-1">
-        <Link className="btn btn-ghost text-xl" href="/">
-          travel
-          <br /> genius
+        <Link className="btn btn-ghost font-amatic-sc text-4xl" href="/">
+          travel Genius
         </Link>
       </div>
       <div className="flex flex-1 justify-center space-x-4">
