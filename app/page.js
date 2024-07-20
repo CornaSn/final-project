@@ -8,10 +8,10 @@ export const metadata = {
   description: 'Travel matching platform',
 };
 
-const sessionCookie = cookies().get('sessionToken');
-const user = sessionCookie && (await getUser(sessionCookie.value));
+export default async function Home() {
+  const sessionCookie = cookies().get('sessionToken');
+  const user = sessionCookie && (await getUser(sessionCookie.value));
 
-export default function Home() {
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">

@@ -2,7 +2,6 @@ import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '../../../../database/connect';
 import { createSessionInsecure } from '../../../../database/sessions';
 import {
   createUserInsecure,
