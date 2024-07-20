@@ -24,14 +24,14 @@ export default async function SearchExperts() {
         expertAreas={expertAreas}
         expertCountries={expertCountries}
       />
-      <div className="flex justify-center pt-12 min-h-screen bg-gray-100">
-        <div className="w-full max-w-6xl p-8 bg-white rounded shadow-md space-y-6">
+      <div className="flex justify-center pt-12 min-h-screen">
+        <div className="w-full max-w-6xl p-8 space-y-6 ">
           {' '}
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl ">
             {expertUsers.map((expertUser) => (
               <div
                 key={`expert-${expertUser.userId}`}
-                className="card bg-base-100 shadow-xl p-6 flex flex-col space-y-4"
+                className="p-6 flex flex-col space-y-4 bg-white border rounded-lg w-full max-w-90% mb-5 shadow-md"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
@@ -60,8 +60,8 @@ export default async function SearchExperts() {
                   </div>
                   <div className="flex items-center">
                     <div className="ml-4">
-                      <div className="absolute top-6 right-6 text-gray-500">
-                        <i className="fas fa-heart" />
+                      <div className="relative right-1 text-red-500">
+                        <i className="far fa-heart text-2xl" />
                       </div>
                     </div>
                   </div>
@@ -98,7 +98,7 @@ export default async function SearchExperts() {
                     </div>
                     <div className="mt-6 text-gray-600 mb-6">
                       <p className="text-xl font-semibold text-gray-800">
-                        Bio:
+                        All About Me{' '}
                       </p>
                       <p className="text-base ml-4">
                         {expertUser.bio && expertUser.bio.length > 50

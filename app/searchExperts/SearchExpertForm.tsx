@@ -99,12 +99,15 @@ export default function SearchExpertsForm(props: Props) {
     <div className="flex justify-center pt-12 min-h-screen bg-gray-100">
       <form onSubmit={handleSearchExperts}>
         <div className="w-full max-w-10l p-8 bg-white rounded shadow-md space-y-6">
-          <h1 className="text-6xl font-bold text-center mb-4">
-            <strong>Match an expert based on your interest!</strong>
+          <h1 className="text-4xl font-bold text-center mb-4">
+            <strong>Start your journey to an unforgettable trip</strong>
+            <p className="text-base text-gray-600">
+              We have hundreds of experts so you receive your perfect-match
+            </p>
           </h1>
           <br />
           <div className="text-center">
-            <h2 className="text-4xl font-bold mb-2">Choose a Country</h2>
+            <h2 className="text-2xl font-bold mb-2">Choose a Country</h2>
             <select
               value={selectedCountry}
               onChange={handleCountryChange}
@@ -140,7 +143,7 @@ export default function SearchExpertsForm(props: Props) {
           <br />
           <div>
             <div className="text-center">
-              <h2 className="text-4xl font-bold mb-2">
+              <h2 className="text-2xl font-bold mb-2">
                 Choose your interest areas:
               </h2>
             </div>
@@ -172,8 +175,6 @@ export default function SearchExpertsForm(props: Props) {
           <br />
           <br />
           <br />
-          <br />
-          <br />
           <div className="container mx-auto text-center py-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center">
@@ -182,10 +183,10 @@ export default function SearchExpertsForm(props: Props) {
                   alt="Filter by Interests"
                   className="w-24 h-24 mb-4"
                 />
-                <strong className="text-6xl font-semibold">
+                <strong className="text-4xl font-semibold">
                   Filter by Interests
                 </strong>
-                <p className="text-xl text-gray-600">
+                <p className="text-base text-gray-600">
                   Discover experts who share your passion.
                 </p>
               </div>
@@ -195,10 +196,10 @@ export default function SearchExpertsForm(props: Props) {
                   alt="Watch introductory Video"
                   className="w-24 h-24 mb-4"
                 />
-                <strong className="text-6xl font-semibold">
+                <strong className="text-4xl font-semibold">
                   Watch introductory Video
                 </strong>
-                <p className="text-xl text-gray-600">
+                <p className="text-base text-gray-600">
                   Get to know them before you connect.
                 </p>
               </div>
@@ -208,10 +209,10 @@ export default function SearchExpertsForm(props: Props) {
                   alt="Chat with an Expert"
                   className="w-24 h-24 mb-4"
                 />
-                <strong className="text-6xl font-semibold">
+                <strong className="text-4xl font-semibold">
                   Chat with an Expert
                 </strong>
-                <p className=" text-xl text-gray-600">
+                <p className=" text-base text-gray-600">
                   Start a conversation with your ideal match today.
                 </p>
               </div>

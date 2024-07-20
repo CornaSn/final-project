@@ -5,18 +5,18 @@ import { getAllExpertUserWithChoicesInsecure } from '../../../database/experts';
 import { ExpertUser } from '../../../migrations/00002-createExpertsTable';
 import { userWithValidSession } from '../../../util/cookies';
 
-type SearchParamsCookie = {
-  name: string;
-  value: string;
-};
+// type SearchParamsCookie = {
+//   name: string;
+//   value: string;
+// };
 
-type MatchResultItem = {
-  expertUserId: number;
-  expertiseIds: number[];
-  matchingPercent: string;
-  matchingCountry: boolean;
-};
-type MatchResult = MatchResultItem[];
+// type MatchResultItem = {
+//   expertUserId: number;
+//   expertiseIds: number[];
+//   matchingPercent: string;
+//   matchingCountry: boolean;
+// };
+// type MatchResult = MatchResultItem[];
 
 export default async function MatchExperts() {
   // Check if user has an valid session
@@ -29,44 +29,45 @@ export default async function MatchExperts() {
     return <div>No matching parameters found</div>;
   }
 
-  const searchParamsCookie: SearchParamsCookie = {
+  const searchParamsCookie = {
     name: cookie.name,
     value: cookie.value,
   };
   // console.log('searchParamsCookie', searchParamsCookie);
 
-  const matchResults: MatchResult = JSON.parse(searchParamsCookie.value);
+  const matchResults = JSON.parse(searchParamsCookie.value);
   console.log('matchResult', matchResults);
 
   const allExperts = await getAllExpertUserWithChoicesInsecure();
   // console.log('allExperts', allExperts);
 
   // Combine searchParams with data query
-  const combinedResults = matchResults.map(
-    (matchedExperts: { expertUserId: number | null }) => {
-      const experts = allExperts.find(
-        (expert) => expert.userId === matchedExperts.expertUserId,
-      );
-      return {
-        ...matchedExperts,
-        experts,
-      };
-    },
-  );
-  console.log('combinedResults', combinedResults);
-  // combinedResults.sort(combinedResults.matchingPercent);
+  const combinedResults = matchResults.map((matchedExperts) => {
+    const experts = allExperts.find(
+      (expert) => expert.userId === matchedExperts.expertUserId,
+    );
+    return {
+      ...matchedExperts,
+      experts,
+    };
+  });
+  console.log('combinedResults', combinedResults[0]?.matchingPercent);
+  combinedResults.sort(combinedResults.matchingPercent);
 
-  // console.log('combinedResultsaftersorting', combinedResults);
+  console.log('combinedResultsaftersorting', combinedResults);
+  combinedResults.sort(
+    (a, b) => Number(b.matchingPercent) - Number(a.matchingPercent),
+  );
 
   return (
     <div className="flex justify-center p-4">
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl">
-        {combinedResults.map((matchedExpert: any) => {
+        {combinedResults.map((matchedExpert) => {
           // console.log('Rendering matchedExpert:', matchedExpert);
           return (
             <div
               key={`matchedExpert-${matchedExpert.expertUserId}`}
-              className="card bg-base-100 shadow-xl p-6 flex flex-col space-y-4"
+              className="p-6 flex flex-col space-y-4 bg-white border rounded-lg w-full max-w-90% mb-5 shadow-md"
             >
               {matchedExpert.experts ? (
                 <>
@@ -87,14 +88,14 @@ export default async function MatchExperts() {
                         </div>
                       </div>
                       <div>
-                        <h2 className="font-amatic-sc text-[40px] font-bold">
+                        <h2 className="mb-4 font-amatic-sc text-6xl font-bold">
                           {matchedExpert.experts.firstName.toUpperCase()}{' '}
                           {matchedExpert.experts.lastName
                             .charAt(0)
                             .toUpperCase()}
                           .
                         </h2>
-                        <div className="text-gray-600">
+                        <div className="text-xl text-gray-600">
                           {matchedExpert.experts.age},{' '}
                           {matchedExpert.experts.city}
                         </div>
@@ -107,23 +108,25 @@ export default async function MatchExperts() {
                         </span>
                       </div>
                       <div className="ml-4">
-                        <div className="absolute top-6 right-6 text-gray-500">
-                          <i className="fas fa-heart" />
+                        <div className="relative right-1 text-red-500">
+                          <i className="far fa-heart text-2xl" />
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="border-t border-gray-300 pt-4">
                     <div className="mt-2">
-                      <div className="ml-4">Expert Areas:</div>
+                      <div className="text-xl font-semibold text-gray-800">
+                        Expert Areas:
+                      </div>
                       <ul className="flex flex-wrap mt-1 text-gray-600">
                         {matchedExpert.experts.expertiseName?.map(
-                          (expertiseArea: string) => (
+                          (expertiseArea) => (
                             <span
                               key={`expertiseArea-${expertiseArea}`}
                               className="flex items-center mr-2 mb-2"
                             >
-                              <i className="fas fa-star text-yellow-500 mr-2 ml-4" />
+                              <i className="fas fa-star text-yellow-500 mr-2 ml-4 " />
                               {expertiseArea}
                             </span>
                           ),
@@ -131,19 +134,21 @@ export default async function MatchExperts() {
                       </ul>
                     </div>
                     <div className="mt-2">
-                      <div className="ml-4">Countries visited:</div>
+                      <div className="text-xl font-semibold text-gray-800">
+                        Countries visited:
+                      </div>
                       <div className="grid grid-cols-3 gap-4 mt-4 text-gray-600">
-                        {matchedExpert.experts.countryName?.map(
-                          (name: string) => (
-                            <div key={`country-${name}`}>
-                              <i className="fas fa-globe text-gray-600 mr-2 ml-4" />
-                              {name}
-                            </div>
-                          ),
-                        )}
+                        {matchedExpert.experts.countryName?.map((name) => (
+                          <div key={`country-${name}`}>
+                            <i className="fas fa-globe text-gray-600 mr-2 ml-4" />
+                            {name}
+                          </div>
+                        ))}
                       </div>
                       <div className="mt-6 text-gray-600">
-                        <p className="text-lg font-semibold mb-2 ml-4">Bio:</p>
+                        <p className="text-xl font-semibold text-gray-800">
+                          All About Me{' '}
+                        </p>
                         <p className="text-base ml-4">
                           {matchedExpert.experts.bio &&
                           matchedExpert.experts.bio.length > 50
@@ -154,7 +159,7 @@ export default async function MatchExperts() {
                     </div>
                     <div className="flex-grow flex justify-end items-end mt-4">
                       <Link
-                        className="btn btn-primary"
+                        className="btn btn-primary text-base"
                         href={`/experts/${matchedExpert.experts.expertId}`}
                       >
                         See more

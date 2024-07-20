@@ -101,7 +101,10 @@ export default async function ExpertPage(props: Props) {
             My Blog{' '}
           </Link>
         </div>
-        <div className="mt-6 text-gray-600 max-w-full break-words">
+        <p className="mt-8 text-xl font-semibold text-gray-800">
+          All About Me{' '}
+        </p>
+        <div className="text-gray-600 max-w-full break-words">
           {singleExpert.bio}
         </div>
         <div className="mt-8">
@@ -118,8 +121,8 @@ export default async function ExpertPage(props: Props) {
           </div>
         </div>
         {currentUser !== singleExpert.userId && (
-          <div className="absolute top-6 right-6 text-gray-500">
-            <i className="fas fa-heart" />
+          <div className="absolute top-6 right-6 text-red-500">
+            <i className="far fa-heart text-2xl" />
           </div>
         )}
 
