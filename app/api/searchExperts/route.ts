@@ -35,13 +35,10 @@ export async function GET(
     // 1. Extract query parameters
     const { searchParams } = new URL(request.url);
     const selectedCountry = searchParams.get('country');
-    // console.log('search Params country', selectedCountry);
     const expertise = searchParams.get('expertise');
     const selectedItemsExpertise = expertise?.split(',').map((idString) => {
       return Number(idString);
     });
-
-    // console.log('expertise', selectedItemsExpertise);
 
     // 2. Check if user has a valid session
     await userWithValidSession();
@@ -65,22 +62,16 @@ export async function GET(
           return newResult;
         })
       ).flat();
-      // console.log('matchedUserId+++++++++++++++++++++', matchedUserId);
 
-      const expertiseMappingResults = await pMap(
-        selectedItemsExpertise,
-        async (expertiseId: number) => {
-          const result =
-            await getExpertExpertiseByExpertiseIdInsecure(expertiseId);
-          // console.log('===========');
-          // console.log(result);
-          return {
-            expertiseId: expertiseId,
-            expertUserIds: result.map((expert) => expert.expertUserId),
-          };
-        },
-      );
-      // console.log('expertiseMappingResults', expertiseMappingResults);
+      await pMap(selectedItemsExpertise, async (expertiseId: number) => {
+        const result =
+          await getExpertExpertiseByExpertiseIdInsecure(expertiseId);
+
+        return {
+          expertiseId: expertiseId,
+          expertUserIds: result.map((expert) => expert.expertUserId),
+        };
+      });
 
       // 5.Grouped expertiseIds by expertUserId and convert result into an array of objects
       const resultMap = new Map();
@@ -99,7 +90,6 @@ export async function GET(
           expertiseIds,
         }),
       );
-      // console.log('ExpertIDCountry', expertUsersIdsCountry);
 
       // 6. Extract expertUserId from each entry in expertUsersIdsCountry and store in a new array
       const expertUsersIdsCountryList = expertUsersIdsCountry.map((entry) => {
@@ -131,7 +121,6 @@ export async function GET(
       ...secureCookieOptions, // Convert to JSON string
     });
 
-    console.log('resultArray', resultArrayWithPercent);
     return NextResponse.json({ resultArrayWithPercent });
   } catch (error) {
     console.error('Error in GET /search-experts:', error);

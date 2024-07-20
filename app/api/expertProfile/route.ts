@@ -35,7 +35,6 @@ export async function POST(
   try {
     // 1. Get the user data from the request
     const body = await request.json();
-    // console.log('body', body);
     // 2. Validation schema for request body
     const result = expertSchema.safeParse(body);
 
@@ -103,8 +102,6 @@ export async function POST(
           try {
             const returnFromExpertCountryInsert =
               await insertExpertCountryInsecure(countryId.id, session.userId);
-
-            // console.log(returnFromExpertCountryInsert);
           } catch (error) {
             console.error('Error while inserting into DB', error);
           }
@@ -118,10 +115,7 @@ export async function POST(
         const languageId = await findLanguageIdInsecure(language);
         if (typeof languageId?.id === 'number') {
           try {
-            const returnFromExpertLanguageInsert =
-              await insertExpertLanguageInsecure(languageId.id, session.userId);
-
-            // console.log(returnFromExpertLanguageInsert);
+            await insertExpertLanguageInsecure(languageId.id, session.userId);
           } catch (error) {
             console.error('Error while inserting into DB', error);
           }
@@ -135,13 +129,7 @@ export async function POST(
         const expertiseId = await findExpertiseIdInsecure(expertise);
         if (typeof expertiseId?.id === 'number') {
           try {
-            const returnFromExpertExpertiseInsert =
-              await insertExpertExpertiseInsecure(
-                expertiseId.id,
-                session.userId,
-              );
-
-            // console.log(returnFromExpertExpertiseInsert);
+            await insertExpertExpertiseInsecure(expertiseId.id, session.userId);
           } catch (error) {
             console.error('Error while inserting into DB', error);
           }

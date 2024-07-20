@@ -16,11 +16,9 @@ type Props = {
 
 export default async function ExpertPage(props: Props) {
   const currentUser = await userWithValidSession();
-  console.log('currentUser', currentUser);
   const singleExpert = await getExpertByIdWithUserInfoInsecure(
     Number(props.params.expertId),
   );
-  // console.log('Single expert: ', singleExpert);
 
   if (!singleExpert) {
     notFound();
@@ -30,10 +28,6 @@ export default async function ExpertPage(props: Props) {
   const expertCountries = await getExpertCountryInsecure(singleExpert.userId);
   const expertLanguages = await getExpertLanguagesInsecure(singleExpert.userId);
   const expertExpertise = await getExpertExpertiseInsecure(singleExpert.userId);
-  // console.log(singleExpert.userId);
-  // console.log('expertCountries', expertCountries);
-  // console.log('singleExpert.pictureUrl', singleExpert.pictureUrl);
-  // console.log('typeof singleExpert.pictureUrl', typeof singleExpert.pictureUrl);
 
   const profileImg =
     typeof singleExpert.pictureUrl === 'string'

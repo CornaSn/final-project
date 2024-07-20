@@ -58,7 +58,6 @@ export default function CreateExpertProfileForm(props: Props) {
     event: React.FormEvent<HTMLFormElement>,
   ) {
     event.preventDefault();
-    // console.log('selectedItemsCountries');
     const submitEvent = event.nativeEvent as SubmitEvent;
     const buttonText = (submitEvent.submitter as HTMLButtonElement).innerText;
     // Only trigged if Button Upload is pressed
@@ -83,7 +82,6 @@ export default function CreateExpertProfileForm(props: Props) {
       });
       const data: CreateOrUpdateExpertProfileRequestBody =
         await response.json();
-      console.log('data', data);
       if ('errors' in data) {
         setErrors(data.errors);
         return;

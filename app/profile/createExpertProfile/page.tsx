@@ -9,12 +9,10 @@ import CreateExpertProfileForm from './CreateExpertProfileForm';
 export default async function CreateExpertProfilePage() {
   // 1. Checking if the sessionToken cookie exists
   const sessionCookie = cookies().get('sessionToken');
-  // console.log('sessionCookie', sessionCookie);
 
   // 2. Check if the sessionToken cookie is still valid
   const session =
     sessionCookie && (await getValidSessionById(sessionCookie.value));
-  // console.log('session', session);
 
   // 3. If sessionToken cookie is invalid or doesn't exist, redirect to login with returnTo
   if (!session) {
@@ -22,11 +20,6 @@ export default async function CreateExpertProfilePage() {
   }
 
   const userId = session.userId;
-
-  // Fetch expert details for the logged-in user
-  // const expert = await getExpertWithUserById(session.token, userId);
-  // const expertId = expert[0]?.id
-  // console.log('expert--------------------------------------------', expert);
 
   // Fetch select fields for user profile
   const expertAreas = await getExpertiseListInsecure();

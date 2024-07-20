@@ -36,7 +36,6 @@ export default function RegisterForm() {
       },
     });
     const data: RegisterResponseBodyPost = await response.json();
-    // console.log('RegisterResponseData', data);
 
     if ('errors' in data) {
       setErrors(data.errors);

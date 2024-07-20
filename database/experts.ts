@@ -36,8 +36,6 @@ export const getExpertByIdInsecure = cache(async (id: number) => {
   return user;
 });
 
-// console.log(getExpertsInsecure());
-
 // Function to get all experts with user information
 export const getAllExpertsWithUserInfoInsecure = cache(async () => {
   const experts = await sql<ExpertUser[]>`
@@ -56,11 +54,8 @@ export const getAllExpertsWithUserInfoInsecure = cache(async () => {
         AND users.is_expert = TRUE
       )
   `;
-  // console.log('Query result:', experts);
   return experts;
 });
-
-// console.log('getAllExpertWithUserInfo', getAllExpertsWithUserInfoInsecure());
 
 // Function to get a single expert with user information by ID
 export const getExpertByIdWithUserInfoInsecure = cache(async (id: number) => {
@@ -259,82 +254,8 @@ export const getAllExpertUserWithChoicesInsecure = cache(async () => {
 
   return Promise.all(
     allExpertIds.map(async (entry) => {
-      // console.log('entry####################################', entry);
-      // console.log('typeof entry.userId', typeof entry.userId);
       const expertUser = await getExpertUserWithChoicesInsecure(entry.userId);
       return expertUser;
     }),
   );
 });
-
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-// *****************************************************************************
-
-// type AllExpertUserInfoWithAllChoices = {
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-//   isExpert: boolean;
-//   createdAt: Date;
-//   updatedAt: Date;
-//   expertId: number;
-//   // age: string | null;
-//   // city: string | null;
-//   // bio: string | null;
-//   // pictureUrl: string | null;
-//   // videoUrl: string | null;
-//   // travelBlogUrl: string | null;
-//   countriesId: number[];
-//   // countryNames: string[];
-//   // languagesId: number[];
-//   // languageNames: string[];
-//   // expertiseAreasId: number[];
-//   // expertiseNames: string[];
-// };
-
-// export const getAllExpertInfosWithChoicesInsecure = cache(
-//   async (id: number) => {
-//     const [user] = await sql<AllExpertUserInfoWithAllChoices[]>`
-//       SELECT
-//         users.id AS user_id,
-//         users.first_name AS user_first_name,
-//         users.last_name AS user_last_name,
-//         users.email AS user_email,
-//         users.is_expert AS user_is_expert,
-//         users.created_at AS user_created_at,
-//         users.updated_at AS user_updated_at,
-//         coalesce(
-//           json_agg(countries.*) FILTER (
-//             WHERE
-//               country_id IS NOT NULL
-//           ),
-//           '[]'
-//         ) AS expert_user_country_ids
-//       FROM
-//         users
-//         LEFT JOIN expert_countries ON users.id = expert_countries.expert_user_id
-//         LEFT JOIN countries ON countries.id = expert_countries.country_id
-//       WHERE
-//         users.id = ${id}
-//       GROUP BY
-//         users.id,
-//         users.first_name
-//     `;
-
-//     console.log(
-//       '--------------------------------------USER---------------------------------',
-//     );
-//     console.log(
-//       '--------------------------------------USER---------------------------------',
-//     );
-//     console.log(
-//       '--------------------------------------USER---------------------------------',
-//     );
-//     console.log(user);
-
-//     return user;
-//   },
-// );

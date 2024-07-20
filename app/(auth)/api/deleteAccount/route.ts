@@ -17,7 +17,6 @@ export type UserResponseBodyDelete =
 export async function DELETE(
   request: Request,
 ): Promise<NextResponse<UserResponseBodyDelete>> {
-  console.log('request', request);
 
   const sessionCookie = cookies().get('sessionToken');
   if (sessionCookie !== undefined) {

@@ -7,29 +7,22 @@ import { getUser } from '../../database/users';
 export default async function Navbar() {
   const sessionCookie = cookies().get('sessionToken');
   const user = sessionCookie && (await getUser(sessionCookie.value));
-  // console.log('newUser', user);
   let profileLink;
   let expert;
   if (typeof user === 'undefined') {
-    // console.log('undefined');
     // no user -> register
     profileLink = '/register';
   } else {
     // must be user or expert
-    // console.log('user.id', user.id);
     expert = await getExpertByIdInsecure(user.id);
-    // console.log('expertId', expert);
     if (typeof expert === 'undefined') {
-      // console.log('user');
       // must be a normal user
       profileLink = `/profile/${user.id}`;
     } else {
       // must be expert user
-      // console.log('expert');
       profileLink = `/experts/${expert.id}`;
     }
   }
-  // console.log('expertID', expertId);
 
   return (
     <div className="navbar bg-base-100 flex items-center justify-between px-4 py-2">

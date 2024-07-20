@@ -25,7 +25,6 @@ export default async function MatchExperts() {
   // Get match result from cookies
   const cookie = cookies().get('searchParams');
   if (!cookie) {
-    // console.log('searchParamsCookie is not found');
     return <div>No matching parameters found</div>;
   }
 
@@ -33,13 +32,11 @@ export default async function MatchExperts() {
     name: cookie.name,
     value: cookie.value,
   };
-  // console.log('searchParamsCookie', searchParamsCookie);
 
   const matchResults = JSON.parse(searchParamsCookie.value);
   console.log('matchResult', matchResults);
 
   const allExperts = await getAllExpertUserWithChoicesInsecure();
-  // console.log('allExperts', allExperts);
 
   // Combine searchParams with data query
   const combinedResults = matchResults.map((matchedExperts) => {
@@ -51,10 +48,7 @@ export default async function MatchExperts() {
       experts,
     };
   });
-  console.log('combinedResults', combinedResults[0]?.matchingPercent);
   combinedResults.sort(combinedResults.matchingPercent);
-
-  console.log('combinedResultsaftersorting', combinedResults);
   combinedResults.sort(
     (a, b) => Number(b.matchingPercent) - Number(a.matchingPercent),
   );
@@ -63,7 +57,6 @@ export default async function MatchExperts() {
     <div className="flex justify-center p-4">
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl">
         {combinedResults.map((matchedExpert) => {
-          // console.log('Rendering matchedExpert:', matchedExpert);
           return (
             <div
               key={`matchedExpert-${matchedExpert.expertUserId}`}

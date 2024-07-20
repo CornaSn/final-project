@@ -29,7 +29,6 @@ type Props = {
 };
 
 export default function UpdateExpertProfileForm(props: Props) {
-  // console.log('props', props.expertUserWithChoices.age);
   const [age, setAge] = useState(props.expertUserWithChoices.age || '');
   const [city, setCity] = useState(props.expertUserWithChoices.city || '');
   const [bio, setBio] = useState(props.expertUserWithChoices.bio || '');
