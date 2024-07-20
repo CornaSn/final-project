@@ -60,7 +60,7 @@ export default async function ExpertPage(props: Props) {
           </div>
           <div className="mt-8 lg:mt-0 lg:ml-8 flex-grow">
             <div className="flex justify-between items-center">
-              <h2 className="mb-4 font-amatic-sc text-6xl font-bold">
+              <h2 className="mb-2 mt-10 font-amatic-sc text-6xl font-bold">
                 {singleExpert.firstName.toUpperCase()}{' '}
                 {singleExpert.lastName.charAt(0).toUpperCase()}
               </h2>
@@ -79,9 +79,6 @@ export default async function ExpertPage(props: Props) {
               ))}
             </p>
             <div className="mt-4">
-              <h3 className="text-xl font-semibold text-gray-800">
-                Expert Areas:
-              </h3>
               <ul className="text-gray-600">
                 {expertExpertise.map((expertiseArea) => (
                   <div key={`expertiseArea-${expertiseArea.expertisename}`}>
@@ -97,6 +94,7 @@ export default async function ExpertPage(props: Props) {
           <a className="btn btn-primary text-base" href={emailLink}>
             Get in touch
           </a>
+
           <Link className="btn btn-primary text-base" href="/">
             My Blog{' '}
           </Link>
@@ -108,10 +106,10 @@ export default async function ExpertPage(props: Props) {
           {singleExpert.bio}
         </div>
         <div className="mt-8">
-          <h3 className="text-xl font-semibold text-gray-800">
-            Countries visited
-          </h3>
-          <div className="grid grid-cols-3 gap-4 mt-4 text-gray-600">
+          <div className="text-xl font-semibold text-gray-800">
+            Global Footprints{' '}
+          </div>
+          <div className="grid grid-cols-5 mt-4 text-gray-600">
             {expertCountries.map((country) => (
               <div key={`country-${country.countryname}`}>
                 <i className="fas fa-globe text-gray-600 mr-2" />

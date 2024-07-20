@@ -88,7 +88,7 @@ export default async function MatchExperts() {
                         </div>
                       </div>
                       <div>
-                        <h2 className="mb-4 font-amatic-sc text-6xl font-bold">
+                        <h2 className="mb-2 mt-4  font-amatic-sc text-6xl font-bold">
                           {matchedExpert.experts.firstName.toUpperCase()}{' '}
                           {matchedExpert.experts.lastName
                             .charAt(0)
@@ -116,9 +116,6 @@ export default async function MatchExperts() {
                   </div>
                   <div className="border-t border-gray-300 pt-4">
                     <div className="mt-2">
-                      <div className="text-xl font-semibold text-gray-800">
-                        Expert Areas:
-                      </div>
                       <ul className="flex flex-wrap mt-1 text-gray-600">
                         {matchedExpert.experts.expertiseName?.map(
                           (expertiseArea) => (
@@ -135,9 +132,9 @@ export default async function MatchExperts() {
                     </div>
                     <div className="mt-2">
                       <div className="text-xl font-semibold text-gray-800">
-                        Countries visited:
+                        Global Footprints{' '}
                       </div>
-                      <div className="grid grid-cols-3 gap-4 mt-4 text-gray-600">
+                      <div className="grid grid-cols-5 mt-4 text-gray-600">
                         {matchedExpert.experts.countryName?.map((name) => (
                           <div key={`country-${name}`}>
                             <i className="fas fa-globe text-gray-600 mr-2 ml-4" />
