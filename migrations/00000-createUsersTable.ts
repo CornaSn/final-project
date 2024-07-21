@@ -7,8 +7,8 @@ export type User = {
   lastName: string;
   email: string;
   isExpert: boolean;
-  createdAt: Date | null;
-  updatedAt: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type UserWithPasswordHash = User & {
@@ -41,8 +41,8 @@ export async function up(sql: Sql) {
       email varchar(80) NOT NULL UNIQUE,
       password_hash varchar(150) NOT NULL,
       is_expert boolean NOT NULL DEFAULT FALSE,
-      created_at timestamptz DEFAULT CURRENT_TIMESTAMP,
-      updated_at timestamptz DEFAULT CURRENT_TIMESTAMP
+      created_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
   `;
 }

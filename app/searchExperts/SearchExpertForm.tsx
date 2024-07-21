@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Country } from '../../migrations/00004-createCountriesTable';
+import { Language } from '../../migrations/00006-createLanguagesTable';
 import { Expertise } from '../../migrations/00008-createExpertiseTable';
 import { SearchExpertsRespondBody } from '../api/searchExperts/route';
 import ErrorMessage from '../ErrorMessage';
@@ -166,7 +167,7 @@ export default function SearchExpertsForm(props: Props) {
           <br />
           <div className="flex justify-center mt-4">
             <button
-              className="btn text-xl btn-primary md:w-2/3 lg:w-1/2 xl:w-1/3"
+              className="mt-8 btn text-base btn-primary md:w-2/5 lg:w-1/5 xl:w-1/5"
               onClick={handleSearchExperts}
             >
               Search

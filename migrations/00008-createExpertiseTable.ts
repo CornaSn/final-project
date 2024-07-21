@@ -9,7 +9,7 @@ export async function up(sql: Sql) {
   await sql`
     CREATE TABLE expertise (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      expertise_name varchar(50) NOT NULL
+      expertise_name varchar(100) NOT NULL
     )
   `;
 }

@@ -55,7 +55,7 @@ export default async function ExpertPage(props: Props) {
             <div className="flex justify-between items-center">
               <h2 className="mb-2 mt-10 font-amatic-sc text-6xl font-bold">
                 {singleExpert.firstName.toUpperCase()}{' '}
-                {singleExpert.lastName.charAt(0).toUpperCase()}
+                {singleExpert.lastName.charAt(0).toUpperCase()}.
               </h2>
             </div>
 
@@ -117,17 +117,19 @@ export default async function ExpertPage(props: Props) {
           </div>
         )}
 
-        <div className="mt-8 bg-gray-200 w-full h-100 flex items-center justify-center">
-          <video
-            className="w-full h-full max-w-none max-h-none"
-            controls
-            preload="auto"
-          >
-            <track default kind="captions" src="" />
-            <source src={profileVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+        {Boolean(singleExpert.videoUrl) && (
+          <div className="mt-8 bg-gray-200 w-full h-100 flex items-center justify-center">
+            <video
+              className="w-full h-full max-w-none max-h-none"
+              controls
+              preload="auto"
+            >
+              <track default kind="captions" src="" />
+              <source src={profileVideo} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        )}
 
         <div className="text-right mt-4">
           {currentUser === singleExpert.userId && (

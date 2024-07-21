@@ -1,6 +1,6 @@
 'use client';
 
-import { CldUploadWidget, CldVideoPlayer } from 'next-cloudinary';
+import { CldUploadWidget } from 'next-cloudinary';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { Country } from '../../../migrations/00004-createCountriesTable';
@@ -128,7 +128,7 @@ export default function CreateExpertProfileForm(props: Props) {
                 <textarea
                   className="input input-bordered w-full h-48 resize-none py-3 px-4"
                   placeholder="Bio"
-                  maxLength={200}
+                  maxLength={1000}
                   onChange={(event) => setBio(event.currentTarget.value)}
                 />
               </label>

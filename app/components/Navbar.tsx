@@ -67,7 +67,7 @@ export default async function Navbar() {
                   src={
                     typeof expert?.pictureUrl === 'string'
                       ? expert.pictureUrl
-                      : 'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325127/samples/man-portrait.jpg'
+                      : '/images/fotoplaceholder.webp'
                   }
                 />
               </div>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getCountriesListInsecure } from '../../database/countriesList';
 import { getExpertiseListInsecure } from '../../database/expertiseList';
 import { getAllExpertUserWithChoicesInsecure } from '../../database/experts';
+import { getLanguageListInsecure } from '../../database/languageList';
 import { userWithValidSession } from '../../util/cookies';
 import SearchExpertsForm from './SearchExpertForm';
 
@@ -56,6 +57,17 @@ export default async function SearchExperts() {
                       <div className="text-xl text-gray-600">
                         {expertUser.age}, {expertUser.city}
                       </div>
+                      <ul className="flex flex-wrap mt-1 text-gray-600">
+                        {expertUser.languageName?.map((language) => (
+                          <span
+                            key={`language-${language}`}
+                            className="flex items-center mr-2 mb-2"
+                          >
+                            {' '}
+                            {language},
+                          </span>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -66,21 +78,9 @@ export default async function SearchExperts() {
                     </div>
                   </div>
                 </div>
-                <div className="border-t border-gray-300 pt-4">
-                  <div className="mt-2">
-                    <ul className="flex flex-wrap mt-1 text-gray-600">
-                      {expertUser.expertiseName?.map((expertiseArea) => (
-                        <span
-                          key={`expertiseArea-${expertiseArea}`}
-                          className="flex items-center mr-2 mb-2"
-                        >
-                          <i className="fas fa-star text-yellow-500 mr-2 ml-4" />
 
-                          {expertiseArea}
-                        </span>
-                      ))}
-                    </ul>
-                  </div>
+                <div className="border-t border-gray-300 pt-4">
+                  <div className="mt-2" />
                   <div className="mt-2">
                     <div className="text-xl font-semibold text-gray-800">
                       Global Footprints{' '}
@@ -99,7 +99,7 @@ export default async function SearchExperts() {
                       </p>
                       <p className="text-base ml-4">
                         {expertUser.bio && expertUser.bio.length > 50
-                          ? `${expertUser.bio.slice(0, 50)}...`
+                          ? `${expertUser.bio.slice(0, 400)}...`
                           : expertUser.bio}
                       </p>
                     </div>

@@ -9,7 +9,7 @@ export async function up(sql: Sql) {
   await sql`
     CREATE TABLE countries (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      country_name varchar(20) NOT NULL
+      country_name varchar(30) NOT NULL
     )
   `;
 }

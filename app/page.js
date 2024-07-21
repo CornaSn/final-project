@@ -88,14 +88,14 @@ export default async function Home() {
           </p>
           {user ? (
             <Link
-              className="mt-8 btn text-xl btn-primary md:w-2/3 lg:w-1/2 xl:w-1/3"
+              className="mt-8 btn text-base btn-primary md:w-2/5 lg:w-1/5 xl:w-1/5"
               href="/searchExperts"
             >
               Search
             </Link>
           ) : (
             <Link
-              className="mt-8 btn text-xl btn-primary md:w-2/3 lg:w-1/2 xl:w-1/3"
+              className="mt-8 btn text-base btn-primary md:w-2/5 lg:w-1/5 xl:w-1/5"
               href="/register"
             >
               Register

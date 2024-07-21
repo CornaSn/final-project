@@ -52,7 +52,7 @@ export const getUser = cache(async (sessionToken: string) => {
       users.first_name AS first_name,
       users.last_name AS last_name,
       users.email AS email,
-      users.is_expert AS isexpert,
+      users.is_expert AS is_expert,
       users.created_at AS created_at,
       users.updated_at AS updated_at
     FROM

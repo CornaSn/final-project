@@ -70,7 +70,7 @@ export default function UpdateExpertProfileForm(props: Props) {
 
     // Const buttonText = event.nativeEvent.submitter.innerText;
     // Only trigger this if the Button Upload is pressed
-    if (buttonText === 'Upload') {
+    if (buttonText === 'Save') {
       const response = await fetch('/api/expertProfile', {
         method: 'POST',
         body: JSON.stringify({
@@ -141,7 +141,7 @@ export default function UpdateExpertProfileForm(props: Props) {
                   value={bio}
                   className="input input-bordered w-full h-48 resize-none py-3 px-4"
                   placeholder="Bio"
-                  maxLength={200}
+                  maxLength={1000}
                   onChange={(event) => setBio(event.currentTarget.value)}
                 />
               </label>
@@ -237,8 +237,10 @@ export default function UpdateExpertProfileForm(props: Props) {
                       }
                       if (typeof res.info === 'undefined') {
                         console.log('Result is undefined');
+                        throw new Error('Unexpected string in res.info');
                       }
-                      const secureUrl = res.info?.secure_url ?? '';
+                      const secureUrl = res.info.secure_url;
+                      setResultVideo(res.info);
                       setVideoUrl(secureUrl);
                     } catch (error) {
                       console.error('Error', error);

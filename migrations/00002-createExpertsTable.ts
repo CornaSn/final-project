@@ -64,10 +64,10 @@ export async function up(sql: Sql) {
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       age varchar(3),
       city varchar(20),
-      bio varchar(200),
-      picture_url varchar(100),
-      video_url varchar(100),
-      travel_blog_url varchar(100),
+      bio varchar(1000),
+      picture_url varchar(200),
+      video_url varchar(200),
+      travel_blog_url varchar(200),
       user_id integer NOT NULL UNIQUE REFERENCES users (id) ON DELETE cascade
     )
   `;

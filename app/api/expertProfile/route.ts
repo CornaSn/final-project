@@ -35,6 +35,8 @@ export async function POST(
   try {
     // 1. Get the user data from the request
     const body = await request.json();
+    console.log('body', body);
+
     // 2. Validation schema for request body
     const result = expertSchema.safeParse(body);
 
