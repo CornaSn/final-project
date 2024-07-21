@@ -33,8 +33,6 @@ export default async function MatchExperts() {
   };
 
   const matchResults = JSON.parse(searchParamsCookie.value);
-  console.log('matchResult', matchResults);
-
   const allExperts = await getAllExpertUserWithChoicesInsecure();
 
   // Combine searchParams with data query
@@ -47,10 +45,10 @@ export default async function MatchExperts() {
       experts,
     };
   });
-  combinedResults.sort(combinedResults.matchingPercent);
   combinedResults.sort(
     (a, b) => Number(b.matchingPercent) - Number(a.matchingPercent),
   );
+  combinedResults.sort((a, b) => b.matchingCountry - a.matchingCountry);
 
   return (
     <div className="flex justify-center p-4 bg-base-200">
@@ -70,7 +68,7 @@ export default async function MatchExperts() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <div className="avatar mr-4">
-                        <div className="w-24 h-24 rounded-full">
+                        <div className="w-40 h-40 rounded-full">
                           <img
                             alt="profilepicture"
                             src={
@@ -84,7 +82,7 @@ export default async function MatchExperts() {
                         </div>
                       </div>
                       <div>
-                        <h2 className="mb-2 mt-4  font-amatic-sc text-6xl font-bold">
+                        <h2 className="mb-4 mt-4  font-amatic-sc text-6xl font-bold">
                           {matchedExpert.experts.firstName.toUpperCase()}{' '}
                           {matchedExpert.experts.lastName
                             .charAt(0)
@@ -98,9 +96,19 @@ export default async function MatchExperts() {
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-28 h-28 rounded-full bg-gray-300 flex items-center justify-center mr-4">
+                      <div
+                        className={`w-28 h-28 rounded-full ${matchedExpert.matchingCountry ? 'bg-orange-300' : 'bg-slate-300'} flex items-center justify-center mr-4`}
+                      >
                         <span className="text-[24px] font-bold">
-                          {matchedExpert.matchingPercent}%
+                          {matchedExpert.matchingCountry
+                            ? Math.round(
+                                (Number(matchedExpert.matchingPercent) + 100) /
+                                  2,
+                              )
+                            : Math.round(
+                                Number(matchedExpert.matchingPercent) / 2,
+                              )}
+                          %
                         </span>
                       </div>
                       <div className="ml-4">

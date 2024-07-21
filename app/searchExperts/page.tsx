@@ -37,7 +37,7 @@ export default async function SearchExperts() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <div className="avatar mr-4">
-                      <div className="w-24 h-24 rounded-full">
+                      <div className="w-40 h-40 rounded-full">
                         <img
                           alt="profilepicture"
                           src={
@@ -50,7 +50,7 @@ export default async function SearchExperts() {
                       </div>
                     </div>
                     <div>
-                      <h2 className="mb-2 mt-4 font-amatic-sc text-6xl font-bold">
+                      <h2 className="mb-4 mt-4 font-amatic-sc text-6xl font-bold">
                         {expertUser.firstName?.toUpperCase()}{' '}
                         {expertUser.lastName?.charAt(0).toUpperCase()}.
                       </h2>

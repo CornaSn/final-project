@@ -46,14 +46,14 @@ export default async function ExpertPage(props: Props) {
         <div className="flex flex-col lg:flex-row items-center">
           <div className="relative">
             <img
-              className="w-48 h-48 rounded-full object-cover"
+              className="w-56 h-56 rounded-full object-cover"
               src={profileImg}
               alt="Profile"
             />
           </div>
           <div className="mt-8 lg:mt-0 lg:ml-8 flex-grow">
             <div className="flex justify-between items-center">
-              <h2 className="mb-2 mt-10 font-amatic-sc text-6xl font-bold">
+              <h2 className="mb-4 mt-2 font-amatic-sc text-6xl font-bold">
                 {singleExpert.firstName.toUpperCase()}{' '}
                 {singleExpert.lastName.charAt(0).toUpperCase()}.
               </h2>
@@ -116,20 +116,20 @@ export default async function ExpertPage(props: Props) {
             <i className="far fa-heart text-2xl" />
           </div>
         )}
-
-        {Boolean(singleExpert.videoUrl) && (
-          <div className="mt-8 bg-gray-200 w-full h-100 flex items-center justify-center">
-            <video
-              className="w-full h-full max-w-none max-h-none"
-              controls
-              preload="auto"
+        <div className="outer-container flex items-center justify-center">
+          {Boolean(singleExpert.videoUrl) && (
+            <div
+              className="mt-8 bg-gray-200 flex items-center justify-center"
+              style={{ width: '640px', height: '360px' }}
             >
-              <track default kind="captions" src="" />
-              <source src={profileVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        )}
+              <video className="w-full h-full" controls preload="auto">
+                <track default kind="captions" src="" />
+                <source src={profileVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          )}
+        </div>
 
         <div className="text-right mt-4">
           {currentUser === singleExpert.userId && (
