@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { getAllExpertUserWithChoicesInsecure } from '../../../database/experts';
 import { userWithValidSession } from '../../../util/cookies';
 
-export const metadata = {
-  title: { default: 'Matches | Travel Genius', template: '%s | Travel Genius' },
-  description:
-    'Discover your perfect travel matches on Travel Genius. Explore and connect with travel experts tailored to your preferences.',
-};
+// export const metadata = {
+//   title: { default: 'Matches | Travel Genius', template: '%s | Travel Genius' },
+//   description:
+//     'Discover your perfect travel matches on Travel Genius. Explore and connect with travel experts tailored to your preferences.',
+// };
 
 // type SearchParamsCookie = {
 //   name: string;
