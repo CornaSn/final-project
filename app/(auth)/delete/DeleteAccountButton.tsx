@@ -36,7 +36,7 @@ export default function DeleteAccountButton() {
       // Redirect to homepage or login page after account deletion
       router.push('/');
       router.refresh();
-    } catch (e) {
+    } catch (e: any) {
       setError(e.message);
     } finally {
       setLoading(false);
