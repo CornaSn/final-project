@@ -11,15 +11,22 @@ import {
   userWithValidSession,
 } from '../../../util/cookies';
 
-type SingleResult = {
-  expertUserId: number;
-  expertiseIds: number[];
-  matchingPercent: number;
-  matchingCountry: boolean;
-};
+// type SingleResult = {
+//   expertUserId: number;
+//   expertiseIds: number[];
+//   matchingPercent: number;
+//   matchingCountry: boolean;
+// };
 export type SearchExpertsRespondBody =
   | {
-      resultArrayWithPercent: SingleResult[] | undefined;
+      resultArrayWithPercent:
+        | {
+            expertUserId: number;
+            expertiseIds: number[];
+            matchingPercent: number;
+            matchingCountry: boolean;
+          }[]
+        | undefined;
     }
   | {
       errors: {
@@ -99,13 +106,12 @@ export async function GET(
       // 7. Map over resultArray to add matching percentage and country match information
       resultArrayWithPercent = resultArray.map((entry) => {
         return {
-          expertUserId: entry.expertUserId,
-          expertiseIds: entry.expertiseIds,
+          expertUserId: Number(entry.expertUserId),
+          expertiseIds: Array<number>(entry.expertiseIds),
           // Calculate matching percentage based on the number of expertiseIds
-          matchingPercent: (
-            (100 * entry.expertiseIds.length) /
-            selectedItemsExpertise.length
-          ).toFixed(2),
+          matchingPercent: Number(
+            (100 * entry.expertiseIds.length) / selectedItemsExpertise.length,
+          ), // .toFixed(2),
           // Check if expertUserId is in expertUsersIdsCountryList
           matchingCountry: expertUsersIdsCountryList.includes(
             entry.expertUserId,
@@ -113,7 +119,11 @@ export async function GET(
         };
       });
     }
+    // I was expecting a type matching  { resultArrayWithPercent: { expertUserId: number; expertiseIds: number[]; matchingPercent: number; matchingCountry: boolean; } | undefined; }, but instead you passed                  { resultArrayWithPercent: { expertUserId: any; expertiseIds: any; matchingPercent: string; matchingCountry: boolean; }[] | undefined; }.
 
+    // I was expecting a type matching { resultArrayWithPercent: { expertUserId: number; expertiseIds: number[]; matchingPercent: number; matchingCountry: boolean; } | undefined; }, but instead you passed                 { resultArrayWithPercent: { expertUserId: number; expertiseIds: number[]; matchingPercent: string; matchingCountry: boolean; }[] | undefined; }.
+
+    // I was expecting a type matching { expertUserId: number; expertiseIds: number[]; matchingPercent: number; matchingCountry: boolean; } | undefined, but instead you passed                             { expertUserId: number; expertiseIds: number[]; matchingPercent: number; matchingCountry: boolean; }[] | undefined.
     // 8. Set cookie with searchParams
     cookies().set({
       name: 'searchParams',

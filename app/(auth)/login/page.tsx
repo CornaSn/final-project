@@ -22,5 +22,5 @@ export default async function LoginPage(props: Props) {
     redirect(getSafeReturnToPath(props.searchParams.returnTo) || '/');
   }
 
-  return <LoginForm returnTo={props.searchParams.returnTo} />;
+  return <LoginForm />;
 }
