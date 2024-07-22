@@ -97,7 +97,7 @@ export default async function MatchExperts() {
                     </div>
                     <div className="flex items-center">
                       <div
-                        className={`w-28 h-28 rounded-full ${matchedExpert.matchingCountry ? 'bg-orange-300' : 'bg-slate-300'} flex items-center justify-center mr-4`}
+                        className={`w-28 h-28 rounded-full ${matchedExpert.matchingCountry ? 'bg-primary' : 'bg-accent'} flex items-center justify-center mr-4`}
                       >
                         <span className="text-[24px] font-bold">
                           {matchedExpert.matchingCountry

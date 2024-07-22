@@ -253,7 +253,7 @@ export default function CreateExpertProfileForm(props: Props) {
           </div>
 
           <div className="flex justify-center mt-8">
-            <button className="btn text-base w-full md:w-2/3 lg:w-1/2 xl:w-1/3">
+            <button className="btn bg-primary text-base w-full md:w-2/3 lg:w-1/2 xl:w-1/3">
               Upload
             </button>
           </div>
