@@ -3,7 +3,7 @@
 import { debounce } from 'lodash';
 import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Country } from '../../migrations/00004-createCountriesTable';
 import { Language } from '../../migrations/00006-createLanguagesTable';
 import { Expertise } from '../../migrations/00008-createExpertiseTable';
@@ -27,7 +27,7 @@ export default function SearchExpertsForm(props: Props) {
   const router = useRouter();
 
   // Function to update URL with chosen Options
-  const debouncedUpdateUrl = useRef(
+  const debouncedUpdateUrl = useCallback(
     debounce(() => {
       const query = {
         country: selectedCountry ? selectedCountry.toString() : '',
@@ -37,7 +37,8 @@ export default function SearchExpertsForm(props: Props) {
 
       router.push(`/searchExperts?${searchParams.toString()}`);
     }, 300),
-  ).current; // debounce time in milliseconds
+    [selectedCountry, selectedItemsExpertise],
+  );
 
   useEffect(() => {
     debouncedUpdateUrl();
