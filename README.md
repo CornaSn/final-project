@@ -83,3 +83,23 @@ pnpm migrate up
 ```
 pnpm dev
 ```
+
+## Run Tests
+
+To run unit tests with Jest, use the following command:
+
+```
+pnpm jest
+```
+
+To run end-to-end tests with Playwright, use the following command:
+
+```
+pnpm playwright test
+
+```
+
+## Deployment
+
+- fly.io
+- Docker

@@ -17,6 +17,9 @@ importers:
       cloudinary:
         specifier: ^2.2.0
         version: 2.2.0
+      daisyui:
+        specifier: ^4.12.10
+        version: 4.12.10(postcss@8.4.39)
       dotenv-safe:
         specifier: ^9.1.0
         version: 9.1.0(dotenv@16.4.5)
@@ -44,6 +47,9 @@ importers:
       server-only:
         specifier: ^0.0.1
         version: 0.0.1
+      tailwindcss:
+        specifier: ^3.4.4
+        version: 3.4.4
       tsx:
         specifier: ^4.16.2
         version: 4.16.2
@@ -84,9 +90,6 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.0
-      daisyui:
-        specifier: ^4.12.10
-        version: 4.12.10(postcss@8.4.39)
       eslint-config-upleveled:
         specifier: ^8.6.9
         version: 8.6.9(@babel/core@7.24.7)(@types/eslint@8.56.10)(@types/node@20.14.10)(@types/react-dom@18.3.0)(@types/react@18.3.3)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@8.0.0-alpha.45(eslint@9.5.0)(typescript@5.5.3))(eslint@9.5.0))(eslint@9.5.0)(globals@14.0.0)(typescript@5.5.3)
@@ -117,9 +120,6 @@ importers:
       stylelint-config-upleveled:
         specifier: ^1.1.3
         version: 1.1.3(postcss@8.4.39)(stylelint-scss@6.4.1(stylelint@16.6.1(typescript@5.5.3)))(stylelint@16.6.1(typescript@5.5.3))
-      tailwindcss:
-        specifier: ^3.4.4
-        version: 3.4.4
       typescript:
         specifier: ^5.5.3
         version: 5.5.3
