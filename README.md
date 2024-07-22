@@ -23,14 +23,14 @@ Travelgenius is a full-stack web application designed to match travel-experts wi
 
 - Cloudinary
 
-## Screenshot 📷
-
-tba
-
-## Prototyping
+### Prototyping
 
 - [Fimga](https://www.figma.com/design/79B5EEm3syK8xJVof2RdeS/Untitled?node-id=0-1&t=yedTwvahBEsAsF2x-0)
 - [DrawSQL](https://drawsql.app/teams/cornasns-team/diagrams/final-projekt)
+
+## Screenshot 📷
+
+tba
 
 ## Setup
 

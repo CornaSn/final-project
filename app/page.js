@@ -2,10 +2,10 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { getUser } from '../database/users';
 
-// TODO: Add Titel and Description
 export const metadata = {
-  title: { default: 'Home | travel genius', template: '%s | travel genius' },
-  description: 'Travel matching platform',
+  title: { default: 'Hero | Travel Genius', template: '%s | Travel Genius' },
+  description:
+    'Experience the best of travel with our tailored matching platform, Travel Genius.',
 };
 
 export default async function Home() {
@@ -16,6 +16,7 @@ export default async function Home() {
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <svg
+          className="w-full h-auto max-w-sm"
           width="800"
           height="800"
           viewBox="0 0 400 400"

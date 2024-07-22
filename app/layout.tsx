@@ -2,10 +2,10 @@ import './globals.css';
 import Footer from './components/footer';
 import Navbar from './components/Navbar';
 
-// TODO: Add Titel and Description
 export const metadata = {
-  title: { default: 'Home | travel genius', template: '%s | travel genius' },
-  description: 'Travel matching platform',
+  title: { default: 'Home | Travel Genius', template: '%s | Travel Genius' },
+  description:
+    'Discover your perfect travel experiences with Travel Genius, the ultimate travel matching platform.',
 };
 
 export default function RootLayout({

@@ -1,3 +1,12 @@
+export const metadata = {
+  title: {
+    default: 'Community | Travel Genius',
+    template: '%s | Travel Genius',
+  },
+  description:
+    'Join the Travel Genius community to connect with other travelers, share experiences, and get travel tips and advice.',
+};
+
 export default function communityPage() {
   return (
     <div className="bg-base-200 py-10">

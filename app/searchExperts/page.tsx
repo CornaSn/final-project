@@ -7,8 +7,12 @@ import { userWithValidSession } from '../../util/cookies';
 import SearchExpertsForm from './SearchExpertForm';
 
 export const metadata = {
-  title: 'All_experts',
-  description: 'experts',
+  title: {
+    default: 'Search Experts | Travel Genius',
+    template: '%s | Travel Genius',
+  },
+  description:
+    'Find and connect with travel experts on Travel Genius. Discover experts in various fields to enhance your travel experience.',
 };
 
 export default async function SearchExperts() {
@@ -58,13 +62,13 @@ export default async function SearchExperts() {
                         {expertUser.age}, {expertUser.city}
                       </div>
                       <ul className="flex flex-wrap mt-1 text-gray-600">
-                        {expertUser.languageName?.map((language) => (
+                        {expertUser.expertiseName?.map((expertiseArea) => (
                           <span
-                            key={`language-${language}`}
+                            key={`expertiseArea-${expertiseArea}`}
                             className="flex items-center mr-2 mb-2"
                           >
-                            {' '}
-                            {language},
+                            <i className="fas fa-star text-yellow-500 mr-2 " />
+                            {expertiseArea}
                           </span>
                         ))}
                       </ul>

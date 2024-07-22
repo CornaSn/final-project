@@ -10,6 +10,15 @@ import { getLanguageListInsecure } from '../../../database/languageList';
 import { getValidSessionById } from '../../../database/sessions';
 import UpdateExpertProfileForm from './UpdateExpertProfileForm';
 
+export const metadata = {
+  title: {
+    default: 'Update Profile | Travel Genius',
+    template: '%s | Travel Genius',
+  },
+  description:
+    'Update your personal information and preferences on Travel Genius to enhance your travel experience.',
+};
+
 export default async function CreateExpertProfilePage() {
   // 1. Checking if the sessionToken cookie exists
   const sessionCookie = cookies().get('sessionToken');

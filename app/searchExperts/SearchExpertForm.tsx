@@ -130,7 +130,7 @@ export default function SearchExpertsForm(props: Props) {
                 <button
                   key={`area-${areaId}`}
                   type="button"
-                  className="bg-primary text-white px-3 py-1 rounded-full"
+                  className="bg-primary btn px-3 py-1 rounded-full"
                   onClick={() => toggleSelection(areaId)}
                 >
                   {

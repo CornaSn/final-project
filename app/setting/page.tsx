@@ -1,8 +1,17 @@
 import DeleteAccountButton from '../(auth)/delete/DeleteAccountButton';
 import { userWithValidSession } from '../../util/cookies';
 
+export const metadata = {
+  title: {
+    default: 'Settings | Travel Genius',
+    template: '%s | Travel Genius',
+  },
+  description:
+    'Manage your account settings, notifications, and more on Travel Genius.',
+};
+
 export default async function Settings() {
-  const userId = await userWithValidSession();
+  await userWithValidSession();
 
   return (
     <div className="bg-base-100 py-10">

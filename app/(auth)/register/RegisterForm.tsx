@@ -118,7 +118,7 @@ export default function RegisterForm() {
           </label>
           <div className="flex flex-col gap-1">
             {' '}
-            <button className="btn">Register</button>
+            <button className="btn bg-primary">Register</button>
             {errors.map((error) => (
               <div className="error" key={`error-${error.message}`}>
                 <div className="text-lg text-red-600">

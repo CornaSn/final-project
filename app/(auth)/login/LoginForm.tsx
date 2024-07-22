@@ -85,7 +85,7 @@ export default function LoginForm() {
           </Link>
           <div className="flex flex-col gap-1">
             {' '}
-            <button className="btn">Login</button>
+            <button className="btn bg-primary">Login</button>
             {errors.map((error) => (
               <div className="error" key={`error-${error.message}`}>
                 <div className="text-lg text-red-600">

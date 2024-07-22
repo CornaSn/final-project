@@ -1,3 +1,9 @@
+export const metadata = {
+  title: { default: 'Help | Travel Genius', template: '%s | Travel Genius' },
+  description:
+    'Find answers to your questions and get assistance on Travel Genius. Explore our help resources and support options.',
+};
+
 export default function Help() {
   return (
     <div className="bg-base-200 py-10">

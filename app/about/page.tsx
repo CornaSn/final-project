@@ -1,3 +1,12 @@
+export const metadata = {
+  title: {
+    default: 'About Us | Travel Genius',
+    template: '%s | Travel Genius',
+  },
+  description:
+    'Learn more about Travel Genius, our mission, and the team behind the platform. Discover how we’re revolutionizing travel experiences.',
+};
+
 export default function About() {
   return (
     <div className="bg-base-200 py-10">

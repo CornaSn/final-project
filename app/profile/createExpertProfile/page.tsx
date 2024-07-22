@@ -6,6 +6,15 @@ import { getLanguageListInsecure } from '../../../database/languageList';
 import { getValidSessionById } from '../../../database/sessions';
 import CreateExpertProfileForm from './CreateExpertProfileForm';
 
+export const metadata = {
+  title: {
+    default: 'Create Profile | Travel Genius',
+    template: '%s | Travel Genius',
+  },
+  description:
+    'Create a new profile on Travel Genius to start connecting with users.',
+};
+
 export default async function CreateExpertProfilePage() {
   // 1. Checking if the sessionToken cookie exists
   const sessionCookie = cookies().get('sessionToken');

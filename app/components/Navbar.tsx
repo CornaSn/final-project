@@ -63,7 +63,7 @@ export default async function Navbar() {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
+                  alt="Placeholder Profile-Picture"
                   src={
                     typeof expert?.pictureUrl === 'string'
                       ? expert.pictureUrl

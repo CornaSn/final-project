@@ -7,6 +7,15 @@ import { getExpertByIdWithUserInfoInsecure } from '../../../database/experts';
 import { getExpertLanguagesInsecure } from '../../../database/languageList';
 import { userWithValidSession } from '../../../util/cookies';
 
+export const metadata = {
+  title: {
+    default: 'Expert Profile | Travel Genius',
+    template: '%s | Travel Genius',
+  },
+  description:
+    'View and manage your profile on Travel Genius. Access your personal details, expertise area, and more.',
+};
+
 type Props = {
   params: {
     expertId: number;
@@ -31,7 +40,7 @@ export default async function ExpertPage(props: Props) {
   const profileImg =
     typeof singleExpert.pictureUrl === 'string'
       ? singleExpert.pictureUrl
-      : 'https://res.cloudinary.com/dmntpv6mf/image/upload/v1719325127/samples/man-portrait.jpg';
+      : '/images/fotoplaceholder.webp';
 
   const profileVideo =
     typeof singleExpert.videoUrl === 'string'
@@ -42,7 +51,7 @@ export default async function ExpertPage(props: Props) {
 
   return (
     <div className="min-h-screen bg-base-200 flex items-center justify-center p-4">
-      <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-6 relative mt-10">
+      <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-6 relative">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="relative">
             <img
