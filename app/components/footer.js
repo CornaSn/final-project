@@ -6,25 +6,28 @@ export default function Footer() {
     <footer className="bg-base-200 text-base-content py-6">
       <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center">
         <div className="flex flex-col lg:flex-row items-center">
-          <Link href="/" className="btn btn-ghost font-amatic-sc text-4xl">
+          <Link
+            href="/"
+            className="font-amatic-sc font-bold text-4xl px-4 py-2 rounded-full hover:bg-primary transition-colors duration-300"
+          >
             Travel Genius
           </Link>
           <nav className="flex flex-col lg:flex-row lg:ml-6">
             <Link
               href="/about"
-              className="text-lg lg:text-xl font-light font-poppins px-3 py-2"
+              className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
             >
               About
             </Link>
             <Link
               href="/help"
-              className="text-lg lg:text-xl font-light font-poppins px-3 py-2"
+              className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
             >
               Help
             </Link>
             <Link
               href="/community"
-              className="text-lg lg:text-xl font-light font-poppins px-3 py-2"
+              className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
             >
               Community
             </Link>
@@ -35,7 +38,7 @@ export default function Footer() {
             href="https://facebook.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg hover:text-gray-600"
+            className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
           >
             Facebook
           </a>
@@ -43,7 +46,7 @@ export default function Footer() {
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg hover:text-gray-600"
+            className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
           >
             Twitter
           </a>
@@ -51,7 +54,7 @@ export default function Footer() {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg hover:text-gray-600"
+            className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
           >
             Instagram
           </a>
@@ -59,7 +62,7 @@ export default function Footer() {
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg hover:text-gray-600"
+            className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
           >
             LinkedIn
           </a>

@@ -80,9 +80,21 @@ export default function LoginForm() {
               }
             />
           </label>
-          <Link href="/login" className="label label-text-alt link link-hover">
-            Forgot password?
-          </Link>
+          <div className="flex justify-between">
+            <Link
+              href="/login"
+              className="label label-text-alt link link-hover"
+            >
+              Forgot password?
+            </Link>
+
+            <Link
+              href="/register"
+              className="label label-text-alt link link-hover"
+            >
+              No Account yet? Register{' '}
+            </Link>
+          </div>
           <div className="flex flex-col gap-1">
             {' '}
             <button className="btn bg-primary">Login</button>

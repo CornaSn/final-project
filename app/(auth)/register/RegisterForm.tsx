@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import ErrorMessage from '../../ErrorMessage';
@@ -94,8 +95,18 @@ export default function RegisterForm() {
               onChange={(event) => setLastName(event.currentTarget.value)}
             />
           </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-gray-700">Password:</span>
+
+          <label
+            className="flex flex-col gap-1 text-left tooltip tooltip-left"
+            data-tip="Password must contain at least 6 characters"
+          >
+            <span
+              className="text-sm font-medium text-gray-700"
+              data-tip="Password must contain at least 6 characters"
+            >
+              Password:
+            </span>
+
             <input
               className="input input-bordered grow"
               placeholder="Password"
@@ -103,7 +114,10 @@ export default function RegisterForm() {
               onChange={(event) => setPassword(event.currentTarget.value)}
             />
           </label>
-          <label className="flex flex-col gap-1">
+          <label
+            className="flex flex-col gap-1 text-left tooltip tooltip-left"
+            data-tip="Password must match the one above and contain at least 6 characters"
+          >
             <span className="text-sm font-medium text-gray-700">
               Retype your password:
             </span>
@@ -116,6 +130,9 @@ export default function RegisterForm() {
               }
             />
           </label>
+          <Link href="/login" className="label label-text-alt link link-hover">
+            Already have an Account? Login{' '}
+          </Link>
           <div className="flex flex-col gap-1">
             {' '}
             <button className="btn bg-primary">Register</button>

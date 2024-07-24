@@ -27,25 +27,40 @@ export default async function Navbar() {
   return (
     <div className="navbar bg-base-100 flex items-center justify-between px-4 py-2">
       <div className="flex-1">
-        <Link className="btn btn-ghost font-amatic-sc text-4xl" href="/">
+        <Link
+          className="font-amatic-sc font-bold text-4xl px-4 py-2 rounded-full hover:bg-primary transition-colors duration-300"
+          href="/"
+        >
           travel Genius
         </Link>
       </div>
       <div className="flex flex-1 justify-center space-x-4">
         <div className="flex space-x-4">
           {user ? (
-            <Link className="text-center font-bold" href="/searchExperts">
+            <Link
+              className="text-center font-bold px-4 py-2 rounded-full hover:bg-primary transition-colors duration-300"
+              href="/searchExperts"
+            >
               Search Experts
             </Link>
           ) : (
             <>
-              <Link className="text-center font-bold" href="/about">
+              <Link
+                className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
+                href="/about"
+              >
                 About
               </Link>
-              <Link className="text-center font-bold" href="/help">
+              <Link
+                className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
+                href="/help"
+              >
                 Help
               </Link>
-              <Link className="text-center font-bold" href="/community">
+              <Link
+                className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
+                href="/community"
+              >
                 Community
               </Link>
             </>

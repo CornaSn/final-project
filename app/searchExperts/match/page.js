@@ -205,6 +205,9 @@ export default async function MatchExperts() {
         ) : (
           <h1 className="text-4xl font-bold text-center mb-4">
             <strong>Unfortunately no match found !</strong>
+            <p className="text-xl font-semibold text-gray-800">
+              Please try again.
+            </p>
           </h1>
         )}
       </div>
