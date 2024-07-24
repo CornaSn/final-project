@@ -56,6 +56,8 @@ export default async function MatchExperts() {
   );
   combinedResults.sort((a, b) => b.matchingCountry - a.matchingCountry);
 
+  console.log(combinedResults);
+
   return (
     <div className="flex justify-center p-4 bg-base-200">
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl mt-10">
@@ -103,23 +105,39 @@ export default async function MatchExperts() {
                             </div>
                           </div>
                         </div>
+
                         <div className="flex items-center">
-                          <div
-                            className={`w-28 h-28 rounded-full ${matchedExpert.matchingCountry ? 'bg-primary' : 'bg-primary'} flex items-center justify-center mr-4`}
-                          >
-                            <span className="text-[24px] font-bold">
-                              {matchedExpert.matchingCountry
-                                ? Math.round(
-                                    (Number(matchedExpert.matchingPercent) +
-                                      100) /
-                                      2,
-                                  )
-                                : Math.round(
-                                    Number(matchedExpert.matchingPercent) / 2,
-                                  )}
-                              %
-                            </span>
+                          <div className="flex items-center">
+                            <div className="flex items-center">
+                              <div
+                                className={`tooltip tooltip-left w-28 h-28 rounded-full flex items-center justify-center mr-4 ${
+                                  matchedExpert.matchingCountry
+                                    ? 'bg-success'
+                                    : 'bg-red-200'
+                                }`}
+                                data-tip={
+                                  matchedExpert.matchingCountry
+                                    ? 'Country matched? YES'
+                                    : 'Country matched? NO'
+                                }
+                              >
+                                <span className="text-[24px] font-bold">
+                                  {matchedExpert.matchingCountry
+                                    ? Math.round(
+                                        (Number(matchedExpert.matchingPercent) +
+                                          100) /
+                                          2,
+                                      )
+                                    : Math.round(
+                                        Number(matchedExpert.matchingPercent) /
+                                          2,
+                                      )}
+                                  %
+                                </span>
+                              </div>
+                            </div>
                           </div>
+
                           <div className="ml-4">
                             <div className="relative right-1 text-red-500">
                               <i className="far fa-heart text-2xl" />
@@ -162,7 +180,7 @@ export default async function MatchExperts() {
                             <p className="text-base ml-4">
                               {matchedExpert.experts.bio &&
                               matchedExpert.experts.bio.length > 50
-                                ? `${matchedExpert.experts.bio.slice(0, 50)}...`
+                                ? `${matchedExpert.experts.bio.slice(0, 400)}...`
                                 : matchedExpert.experts.bio}
                             </p>
                           </div>
