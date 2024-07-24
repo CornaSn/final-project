@@ -155,7 +155,6 @@ export default async function ExpertPage(props: Props) {
           <div className="text-6xl font-amatic-sc text-gray-800 text-center">
             Rating & Reviews
           </div>
-
           <div className="flex justify-between items-center mt-4">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
@@ -171,7 +170,6 @@ export default async function ExpertPage(props: Props) {
               Leave a feedback
             </a>
           </div>
-
           <div className="flex justify-between mt-4 space-x-4">
             <div className="w-1/3">
               <h3 className="text-center">Communication</h3>
@@ -201,7 +199,6 @@ export default async function ExpertPage(props: Props) {
               <div className="text-right text-sm text-gray-500 mt-1">9.3</div>
             </div>
           </div>
-
           <div className="overflow-x-auto mt-8">
             <div className="space-y-4">
               <div className="p-4 bg-gray-100 rounded-lg shadow">
