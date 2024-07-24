@@ -105,7 +105,7 @@ export default function UpdateExpertProfileForm(props: Props) {
     <div>
       <form
         onSubmit={handleProfileCreation}
-        className="flex justify-center items-center min-h-screen bg-base-200"
+        className="flex justify-center items-center min-h-screen bg-base-200 mt-20"
       >
         <div className="w-full max-w-4xl p-8 bg-white rounded space-y-6 mr-5 mt-10">
           <h1 className="text-4xl font-bold text-center font-amatic-sc  mb-8">

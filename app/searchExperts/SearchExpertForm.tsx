@@ -98,7 +98,7 @@ export default function SearchExpertsForm(props: Props) {
   };
 
   return (
-    <div className="flex justify-center pt-12 min-h-screen bg-base-200">
+    <div className="flex justify-center pt-12 min-h-screen bg-base-200 mt-20">
       <form onSubmit={handleSearchExperts}>
         <div className="w-full max-w-7xl p-8 bg-white rounded shadow-md space-y-6">
           <h1 className="text-4xl font-bold text-center mb-4">

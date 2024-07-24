@@ -102,8 +102,7 @@ export async function POST(
 
         if (typeof countryId?.id === 'number') {
           try {
-            const returnFromExpertCountryInsert =
-              await insertExpertCountryInsecure(countryId.id, session.userId);
+            await insertExpertCountryInsecure(countryId.id, session.userId);
           } catch (error) {
             console.error('Error while inserting into DB', error);
           }

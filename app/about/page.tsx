@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function About() {
   return (
-    <div className="bg-base-200 py-10">
+    <div className="bg-base-200 py-10 mt-20">
       <div className="container mx-auto px-4">
         <h1 className="text-6xl font-bold text-center mb-8 font-amatic-sc">
           About Travel Genius

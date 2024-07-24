@@ -59,7 +59,7 @@ export default async function MatchExperts() {
   console.log(combinedResults);
 
   return (
-    <div className="flex justify-center p-4 bg-base-200">
+    <div className="flex justify-center p-4 bg-base-200 mt-20">
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 w-full max-w-6xl mt-10">
         {combinedResults.length > 0 ? (
           <>

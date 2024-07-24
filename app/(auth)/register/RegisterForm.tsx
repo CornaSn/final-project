@@ -49,7 +49,7 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={async (event) => await handleRegister(event)}>
-      <div className="flex justify-center items-center min-h-screen bg-base-200">
+      <div className="flex justify-center items-center min-h-screen bg-base-200 mt-8">
         <div className="w-full max-w-md p-6 bg-white rounded shadow-md space-y-4">
           <h1 className="text-2xl font-bold text-center mb-6">Registration</h1>
           <label htmlFor="shotFirst" className="flex flex-col gap-1">

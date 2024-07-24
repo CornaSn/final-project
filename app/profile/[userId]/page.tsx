@@ -27,7 +27,7 @@ export default async function UserProfile() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
+    <div className="min-h-screen flex items-center justify-center bg-base-200 mt-20">
       <div className="text-center text-black p-8">
         <h1 className="mb-5 text-8xl font-bold font-amatic-sc uppercase mt-10">
           Welcome, {user.firstName}

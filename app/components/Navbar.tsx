@@ -26,7 +26,7 @@ export default async function Navbar() {
 
   return (
     <div className="navbar bg-base-100 flex items-center justify-between px-4 py-2">
-      <div className="flex-1">
+      <div>
         <Link
           className="font-amatic-sc font-bold text-4xl px-4 py-2 rounded-full hover:bg-primary transition-colors duration-300"
           href="/"
@@ -34,8 +34,8 @@ export default async function Navbar() {
           travel Genius
         </Link>
       </div>
-      <div className="flex flex-1 justify-center space-x-4">
-        <div className="flex space-x-4">
+      <div className="flex flex-1 space-x-4">
+        <div className="flex space-x-4 justify-center">
           {user ? (
             <Link
               className="text-center font-bold px-4 py-2 rounded-full hover:bg-primary transition-colors duration-300"
@@ -66,7 +66,6 @@ export default async function Navbar() {
             </>
           )}
         </div>
-        <div className="flex-1" />
       </div>
       <div className="flex-none gap-2">
         {user ? (

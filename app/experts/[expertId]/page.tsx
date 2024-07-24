@@ -50,7 +50,7 @@ export default async function ExpertPage(props: Props) {
   const emailLink = `mailto:${singleExpert.email}`;
 
   return (
-    <div className="min-h-screen bg-base-200 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-base-200 flex items-center justify-center p-4 mt-20">
       <div className="max-w-4xl w-full bg-white shadow-md rounded-lg p-6 relative">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="relative">
