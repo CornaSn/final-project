@@ -150,6 +150,123 @@ export default async function ExpertPage(props: Props) {
             </Link>
           )}
         </div>
+
+        <div className="mt-24">
+          <div className="text-6xl font-amatic-sc text-gray-800 text-center">
+            Rating & Reviews
+          </div>
+
+          <div className="flex justify-between items-center mt-4">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <div className="text-4xl font-bold">8.7</div>
+                <div className="text-xl text-gray-500">Excellent</div>
+              </div>
+              <div className="text-gray-500">3 reviews</div>
+            </div>
+            <a
+              href="#leave-feedback"
+              className="text-blue-500 text-end hover:text-blue-700"
+            >
+              Leave a feedback
+            </a>
+          </div>
+
+          <div className="flex justify-between mt-4 space-x-4">
+            <div className="w-1/3">
+              <h3 className="text-center">Communication</h3>
+              <progress
+                className="progress progress-primary w-full h-4"
+                value="86"
+                max="100"
+              />
+              <div className="text-right text-sm text-gray-500 mt-1">8.6</div>
+            </div>
+            <div className="w-1/3">
+              <h3 className="text-center">Knowledge</h3>
+              <progress
+                className="progress progress-primary w-full h-4"
+                value="82"
+                max="100"
+              />
+              <div className="text-right text-sm text-gray-500 mt-1">8.2</div>
+            </div>
+            <div className="w-1/3">
+              <h3 className="text-center">Tips and Recommendations</h3>
+              <progress
+                className="progress progress-primary w-full h-4"
+                value="93"
+                max="100"
+              />
+              <div className="text-right text-sm text-gray-500 mt-1">9.3</div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto mt-8">
+            <div className="space-y-4">
+              <div className="p-4 bg-gray-100 rounded-lg shadow">
+                <div className="flex items-center">
+                  <div className="text-xl font-semibold">Anna M.</div>
+                  <div className="ml-auto text-sm text-gray-500">
+                    March 5, 2023
+                  </div>
+                </div>
+                <div className="flex items-center mt-2">
+                  <div className="thumbs">
+                    <i className="fas fa-thumbs-up text-green-500" />
+                  </div>
+                </div>
+                <div className="mt-2 text-gray-600">
+                  An exceptional expert in the field! {singleExpert.firstName}
+                  's insights and guidance were invaluable to our trip. Highly
+                  recommended!
+                </div>
+              </div>
+              <div className="p-4 bg-gray-100 rounded-lg shadow">
+                <div className="flex items-center">
+                  <div className="text-xl font-semibold">Clemens K.</div>
+                  <div className="ml-auto text-sm text-gray-500">
+                    February 19, 2023
+                  </div>
+                </div>
+                <div className="flex items-center mt-2">
+                  <div className="thumbs">
+                    <i className="fas fa-thumbs-up text-green-500" />
+                  </div>
+                </div>
+                <div className="mt-2 text-gray-600">
+                  {singleExpert.firstName} was fantastic! She provided
+                  incredibly relevant tips, helping me discover hidden gems away
+                  from the crowds. As a female solo traveler, I found her
+                  guidance and experiences truly inspiring. Her insights made my
+                  trip unforgettable and gave me the confidence to explore more
+                  freely. Highly recommend!
+                </div>
+              </div>
+              <div className="p-4 bg-gray-100 rounded-lg shadow">
+                <div className="flex items-center">
+                  <div className="text-xl font-semibold">Max R.</div>
+                  <div className="ml-auto text-sm text-gray-500">
+                    January 22, 2023
+                  </div>
+                </div>
+                <div className="flex items-center mt-2">
+                  <div className="thumbs">
+                    <i className="fas fa-thumbs-down text-red-500" />
+                  </div>
+                </div>
+                <div className="mt-2 text-gray-600">
+                  {singleExpert.firstName}’s expertise was generally solid, but
+                  some of her recommendations didn’t quite align with my needs.
+                  There were also times when communication was a bit slow. While
+                  I did receive some useful tips, I would have appreciated more
+                  detailed guidance and a better alignment with my specific
+                  requirements.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

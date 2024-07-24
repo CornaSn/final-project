@@ -192,7 +192,7 @@ export default function CreateExpertProfileForm(props: Props) {
                     return (
                       <button
                         onClick={() => open()}
-                        className="input input-bordered w-full py-3 px-4 text-left"
+                        className="input input-bordered w-full py-3 px-4 text-center"
                       >
                         Upload an image
                       </button>
@@ -236,7 +236,7 @@ export default function CreateExpertProfileForm(props: Props) {
                     return (
                       <button
                         onClick={() => open()}
-                        className="input input-bordered w-full py-3 px-4 text-left"
+                        className="input input-bordered w-full py-3 px-4 text-center"
                       >
                         Upload a Video
                       </button>
