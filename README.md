@@ -1,6 +1,6 @@
-# travelgenius 🗺️
+# Travel Genius 🗺️
 
-Travelgenius is a full-stack web application designed to match travel-experts with users based on the desired country and interest areas. It allows users to find their matches and get in touch with the experts.
+Travel Genius is a full-stack web application designed to match travel-experts with users based on the desired country and interest areas. It allows users to find their matches and get in touch with the experts.
 
 ## Features
 
@@ -30,7 +30,8 @@ Travelgenius is a full-stack web application designed to match travel-experts wi
 
 ## Screenshot 📷
 
-tba
+![Screenshots_Travel_Genius](https://github.com/user-attachments/assets/bc89a29b-e3ce-4465-a68d-8812a0d829b3)
+
 
 ## Setup
 
