@@ -38,7 +38,7 @@ export default async function Navbar() {
         <div className="flex space-x-4 justify-center">
           {user ? (
             <Link
-              className="text-center font-bold px-4 py-2 rounded-full hover:bg-primary transition-colors duration-300"
+              className="text-lg lg:text-xl font-light font-poppins px-3 py-2 rounded-full hover:bg-primary transition-colors duration-300"
               href="/searchExperts"
             >
               Search Experts
