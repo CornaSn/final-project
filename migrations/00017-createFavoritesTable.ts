@@ -3,13 +3,15 @@ import { Sql } from 'postgres';
 export type UserWithFavoriteExperts = {
   id: number;
   userId: number;
+  expertUserId: number;
 };
 
 export async function up(sql: Sql) {
   await sql`
     CREATE TABLE favorites (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-      user_id integer NOT NULL REFERENCES experts (user_id) ON DELETE cascade
+      user_id integer NOT NULL REFERENCES users (id) ON DELETE cascade,
+      expert_user_id integer NOT NULL REFERENCES experts (user_id) ON DELETE cascade
     )
   `;
 }
